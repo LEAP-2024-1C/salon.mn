@@ -22,9 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-<<<<<<< HEAD
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.mjs"],
-=======
   "include": [
     "next-env.d.ts",
     "**/*.ts",
@@ -32,6 +29,5 @@
     ".next/types/**/*.ts",
     "next.config.mjs"
   ],
->>>>>>> 7339bca0cb87a6af5c10aeb83a454adbcfe0f86e
   "exclude": ["node_modules"]
 }
