@@ -86,3 +86,21 @@ body {
     @apply bg-background text-foreground;
   }
 }
+.gradiant {
+  background: rgb(227, 227, 227);
+  background: linear-gradient(
+    90deg,
+    rgba(227, 227, 227, 0) 8%,
+    rgba(255, 255, 255, 0.6349133403361344) 20%,
+    rgba(183, 194, 209, 0.7329525560224089) 28%,
+    rgba(116, 132, 152, 0.7413559173669468) 35%,
+    rgba(60, 65, 72, 0.8169861694677871) 40%,
+    rgba(38, 45, 56, 0.8674063375350141) 44%,
+    rgba(16, 24, 40, 1) 60%,
+    rgba(16, 24, 40, 1) 100%,
+    rgba(8, 39, 248, 1) 100%
+  );
+}
+.heightcalc {
+  height: calc(100vh - 186px);
+}
