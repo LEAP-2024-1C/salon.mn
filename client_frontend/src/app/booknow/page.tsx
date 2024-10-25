@@ -30,13 +30,13 @@ const BookNow = () => {
   const [date, setDate] = React.useState<Date>();
   return (
     <div className="bg-[#101828]">
-      <div className="bg-[#101828] p-2 flex flex-col gap-20 md:m-auto md:container">
-        <div className="flex flex-col gap-3">
-          <p className="font-bold text-4xl text-white">Logo</p>
+      <div className="bg-[#101828] p-2 pt-10 flex flex-col gap-10 md:m-auto md:container">
+        <div className="flex flex-row gap-3">
+          <p className="font-bold text-4xl text-red-400">Logo</p>
 
           <p className="font-bold text-5xl text-white">Цаг захиалах</p>
         </div>
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-center">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-center lg:flex-row lg:items-center lg:justify-center">
           <Image
             src="/images/barbermodel.png"
             width={500}
@@ -66,7 +66,7 @@ const BookNow = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-3 md:w-[560px] md:flex md:m-auto">
+        <div className="flex flex-col gap-3 md:w-[560px] md:flex md:m-auto border border-red-500 p-4 rounded-lg">
           <div>
             <p className="text-white">Нэр</p>
             <Input type="text" placeholder="Нэр" />
