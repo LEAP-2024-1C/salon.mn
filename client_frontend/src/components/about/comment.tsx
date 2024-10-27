@@ -2,10 +2,8 @@
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import Image from "next/image";
-import React, { useState } from "react";
 
 const Comment = () => {
-  const [rating, setRating] = useState(3);
   return (
     <div className=" flex flex-col gap-5">
       <div className="flex relative gap-5 ">
