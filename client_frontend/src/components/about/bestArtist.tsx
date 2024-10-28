@@ -9,9 +9,9 @@ const BestArtist = () => {
     "https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/elementor/thumbs/a-man-with-crossed-arms-dressed-in-a-blue-fleece-2021-08-29-12-11-47-utc-e1663216195255-pus7etqzdi6bitkat4d87fikww3bd396nlyhljhzq0.jpg",
     "https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/elementor/thumbs/bearded-male-with-crossed-arms-2021-08-29-09-58-27-utc-e1663215777361-pus73wug0r8gptf0jej696nwltvvzlxdtl9izvojyw.jpg",
   ];
-  return img.map((i) => {
+  return img.map((i, key2) => {
     return (
-      <div className="flex flex-col gap-3">
+      <div key={key2} className="flex flex-col gap-3">
         <Image
           height={514}
           width={400}
