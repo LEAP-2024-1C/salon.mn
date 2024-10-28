@@ -4,7 +4,7 @@ import React from "react";
 import { TbArrowLeftFromArc } from "react-icons/tb";
 
 const BestArtist = () => {
-  const img = [
+  const img: string[] = [
     "https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/elementor/thumbs/portrait-of-handsome-caucasian-male-barber-with-fa-2021-09-03-20-46-18-utc-e1663215745876-pus732rly23aeampf1j41e95li055alz1gdzn0x5i0.jpg",
     "https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/elementor/thumbs/a-man-with-crossed-arms-dressed-in-a-blue-fleece-2021-08-29-12-11-47-utc-e1663216195255-pus7etqzdi6bitkat4d87fikww3bd396nlyhljhzq0.jpg",
     "https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/elementor/thumbs/bearded-male-with-crossed-arms-2021-08-29-09-58-27-utc-e1663215777361-pus73wug0r8gptf0jej696nwltvvzlxdtl9izvojyw.jpg",
