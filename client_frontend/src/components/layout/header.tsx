@@ -1,9 +1,9 @@
 "use client";
 import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 import { useTheme } from "next-themes";
-import { useState } from "react";
-import { RxCross2 } from "react-icons/rx";
-import { FiMenu } from "react-icons/fi";
+// import { useState } from "react";
+// import { RxCross2 } from "react-icons/rx";
+// import { FiMenu } from "react-icons/fi";
 import Image from "next/image";
 import PhoneMenu from "./phoneMenu";
 import { IMenu } from "@/utils/interface";
