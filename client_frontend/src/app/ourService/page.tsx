@@ -202,7 +202,7 @@ const OurServices = () => {
           <p className="text-[#F63D68]">Сормуус наах</p>
           <div className="flex-grow mx-4 border-b-4 gap-1 border-dotted border-gray-400"></div>
 
-          <p>8000₮</p>
+          <p>80000₮</p>
         </div>
       </div>
     </div>

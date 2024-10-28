@@ -11,7 +11,7 @@ import { IMenu } from "@/utils/interface";
 const menuList: IMenu = [
   { menuId: "Id01", label: "Home", link: "/" },
   { menuId: "Id02", label: "Бидний тухай", link: "#about" },
-  { menuId: "Id03", label: "Үйлчилгээ", link: "#service" },
+  { menuId: "Id03", label: "Үйлчилгээ", link: "ourService" },
   { menuId: "Id04", label: "Бүтээгдэхүүн", link: "#shop" },
   { menuId: "Id04", label: "Book now", link: "booknow" },
 ];
