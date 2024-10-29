@@ -2,7 +2,7 @@
 import Image from "next/image";
 import PhoneMenu from "./phoneMenu";
 import { IMenu } from "@/utils/interface";
-import { Button } from "../ui/button";
+import SigninModal from "../signin/signinModal";
 
 const menuList: IMenu = [
   { menuId: "Id01", label: "Home", link: "/" },
@@ -31,7 +31,10 @@ const Header = () => {
             ))}
           </ul>
         </div>
-        <Button className="max-sm:hidden">Нэвтрэх</Button>
+
+        <div className=" max-sm:hidden">
+          <SigninModal />
+        </div>
 
         {<PhoneMenu menuList={menuList} phoneStyle={phoneStyle} />}
       </header>
