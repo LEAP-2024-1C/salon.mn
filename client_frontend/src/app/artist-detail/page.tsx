@@ -73,7 +73,7 @@ const ArtistDetail = () => {
           </div>
         </div>
 
-        <div className="bg-[#101843] shadow-2xl p-5 rounded-md flex flex-col gap-5 md:w-1/3 md:bg-scroll md:fixed  md:right-5 md:top-20">
+        <div className="bg-[#101843] shadow-2xl p-5 rounded-md flex flex-col gap-5 md:w-1/3  md:fixed  md:right-5 md:top-30">
           <div className="flex relative gap-5 ">
             <div className=" rounded-lg flex relative w-20 h-20">
               <Image

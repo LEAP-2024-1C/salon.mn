@@ -1,6 +1,3 @@
-console.log("henloo");
-console.log("FDgdf");
-
 const express = require("express");
 import { Request, Response } from "express";
 const app = express();

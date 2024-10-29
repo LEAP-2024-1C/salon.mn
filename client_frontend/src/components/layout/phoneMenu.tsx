@@ -4,7 +4,7 @@ import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { FiMenu } from "react-icons/fi";
 import { IMenu } from "@/utils/interface";
-import { Button } from "../ui/button";
+import SigninModal from "../signin/signinModal";
 
 const PhoneMenu = ({
   menuList,
@@ -39,7 +39,7 @@ const PhoneMenu = ({
                   </li>
                 ))}
               </ul>
-              <Button className="mt-4">Нэвтрэх</Button>
+              <SigninModal />
             </div>
           </div>
         ) : (
