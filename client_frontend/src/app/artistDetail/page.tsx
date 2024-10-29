@@ -7,22 +7,23 @@ import { TbArrowLeftFromArc } from "react-icons/tb";
 import Comment from "@/components/about/comment";
 import { Button } from "@/components/ui/button";
 import { SlCalender } from "react-icons/sl";
-import DatePicker from "react-datepicker";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
-import { Divide } from "lucide-react";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/src/style.css";
 
 const ArtistDetail = () => {
-  const [step, SetStep] = useState(1);
-  //   const [isOpen, setIsOpen] = useState(false);
-  //   const openModal = () => {
-  //     return setIsOpen(true);
-  //   };
-
-  //   const closeModal = () => {
-  //     return setIsOpen(false);
-  //   };
-  //   const [startDate, setStartDate] = useState(new Date());
+  const [step, SetStep] = useState<number>(1);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [date, setDate] = useState<Date>();
+  const nowDate = new Date();
+  const openModal = () => {
+    if (isOpen === false) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
+  };
 
   return (
     <div className="flex flex-col bg-[#101828] text-[#FFFAF5] px-[15px] py-[30px] gap-10 ">
@@ -100,61 +101,76 @@ const ArtistDetail = () => {
           )}
 
           {step === 2 && (
-            <div className="flex flex-col gap-5">
-              <div className="flex gap-5 justify-between items-center text-xl font-extrabold">
+            <div className="flex  flex-col gap-5">
+              <div className="flex relative gap-5 justify-between items-center text-xl font-extrabold">
                 <p>Цаг сонгох </p>
-                <SlCalender />
-                {/* <DatePicker
-                selected={startDate}
-                onChange={() => setStartDate(startDate)}
-              /> */}
+                <button onClick={openModal} className="">
+                  <SlCalender />
+                </button>
+                {isOpen === true && (
+                  <DayPicker
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    className="rounded-md border absolute top-7 right-0  bg-white text-black  "
+                    footer={
+                      date
+                        ? `Selected: ${date.toLocaleDateString()}`
+                        : "Pick a day."
+                    }
+                  />
+                )}
+                {/*   className="rounded-md border absolute top-7 right-0  bg-white text-black  " */}
+
+                <p>{date?.toLocaleDateString()}</p>
               </div>
               <div className="flex justify-between items-center">
                 <p>October 2024</p>
                 <p>November 2024</p>
                 <div className="flex gap-1">
                   <Button className="rounded-full bg-slate-500 text-white">
-                    <FaChevronRight />
+                    <FaChevronLeft />
                   </Button>
                   <Button className="rounded-full bg-slate-500 text-white">
-                    <FaChevronLeft />
+                    <FaChevronRight />
                   </Button>
                 </div>
               </div>
               <div className="flex justify-between">
                 <div className=" flex flex-col gap-2  items-center">
                   <p className="border border-white rounded-full p-3 text-3xl hover:bg-black">
-                    21
+                    {date ? date.getDate() : `${nowDate.getDate()}`}
+                  </p>
+                  <p>Mon</p>
+                </div>
+
+                <div className=" flex flex-col gap-2  items-center">
+                  <p className="border border-white rounded-full p-3 text-3xl hover:bg-black">
+                    {date ? date.getDate() + 2 : `${nowDate.getDate() + 2}`}
                   </p>
                   <p>Mon</p>
                 </div>
                 <div className=" flex flex-col gap-2  items-center">
                   <p className="border border-white rounded-full p-3 text-3xl hover:bg-black">
-                    21
+                    {date ? date.getDate() + 3 : `${nowDate.getDate() + 3}`}
                   </p>
                   <p>Mon</p>
                 </div>
                 <div className=" flex flex-col gap-2  items-center">
                   <p className="border border-white rounded-full p-3 text-3xl hover:bg-black">
-                    22
+                    {date ? date.getDate() + 4 : `${nowDate.getDate() + 4}`}
                   </p>
                   <p>Mon</p>
                 </div>
                 <div className=" flex flex-col gap-2  items-center">
                   <p className="border border-white rounded-full p-3 text-3xl hover:bg-black">
-                    23
-                  </p>
-                  <p>Mon</p>
-                </div>
-                <div className=" flex flex-col gap-2  items-center">
-                  <p className="border border-white rounded-full p-3 text-3xl hover:bg-black">
-                    23
+                    {date ? date.getDate() + 5 : `${nowDate.getDate() + 5}`}
                   </p>
                   <p>Mon</p>
                 </div>
               </div>
-              <div className="grid grid-cols-5 gap-3 justify-between items-center">
-                <p className="rounded-lg border border-white p-3 hover:bg-black">
+              <div className="grid grid-cols-5 gap-3 justify-between text-center items-center">
+                <p className="rounded-lg border text-center border-white p-3 hover:bg-black">
                   09:00
                 </p>
                 <p className="rounded-lg border border-white p-3 hover:bg-black">
