@@ -104,3 +104,6 @@ body {
 .heightcalc {
   height: calc(100vh - 186px);
 }
+.footer {
+  background-color: "#101828";
+}
