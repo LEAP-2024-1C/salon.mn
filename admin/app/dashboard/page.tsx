@@ -133,6 +133,12 @@ export default function page() {
                 <RecentSales />
               </CardContent>
             </Card>
+            <Card className="col-span-4 md:col-span-3">
+              <p>Name</p>
+              <div className="h-[200px] w-[150px] bg-red-500">
+                Profile Picture
+              </div>
+            </Card>
           </div>
         </div>
       </div>

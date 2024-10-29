@@ -302,7 +302,7 @@ export const CreateProfileOne: React.FC<ProfileFormType> = ({
                       <FormControl>
                         <Input
                           type="number"
-                          placeholder="Enter you contact number"
+                          placeholder="Enter your contact number"
                           disabled={loading}
                           {...field}
                         />
