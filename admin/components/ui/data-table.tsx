@@ -32,9 +32,9 @@ export function DataTable({ data, searchKey }: DataTableProps) {
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>
-              <TableHead>Department</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>Status</TableHead>
+              <TableHead>Phonenumber</TableHead>
+              <TableHead>Захиалсан цаг</TableHead>
+              <TableHead>Үйлчилгээ</TableHead>
               <TableHead>Action</TableHead>
             </TableRow>
           </TableHeader>
