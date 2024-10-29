@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
   return (
     <footer style={styles.footer}>
       <div className="mb-[20px]">
-        <img className="w-28 m-auto" src="/logo.png" alt="Barber Logo" />
+        <img className="w-28 m-auto" src="/images/logo.png" alt="Barber Logo" />
       </div>
       <div className="mb-10 max-w-[500px] m-auto">
         <p className="text-sm">
@@ -20,14 +20,34 @@ const Footer: React.FC = () => {
       <div className="mb-8">
         <ul className="flex justify-center text-sm gap-10">
           <div>
-            <div className="flex p-1"><FaTwitter /><p>@twitter</p></div>
-            <div className="flex p-1"><FaTwitch /><li>Twitch</li></div>
-            <div className="flex p-1"> <FaHashtag /><li>#barbershop</li></div>
+            <div className="flex p-1">
+              <FaTwitter />
+              <p>@twitter</p>
+            </div>
+            <div className="flex p-1">
+              <FaTwitch />
+              <li>Twitch</li>
+            </div>
+            <div className="flex p-1">
+              {" "}
+              <FaHashtag />
+              <li>#barbershop</li>
+            </div>
           </div>
           <div>
-          <div className="flex p-1"> <IoMdMusicalNote /><li>@barber’s</li></div>
-          <div className="flex p-1"><AiOutlineGlobal /><li>@username</li> </div>
-          <div className="flex p-1"><AiOutlineGlobal /><li>@username</li> </div>
+            <div className="flex p-1">
+              {" "}
+              <IoMdMusicalNote />
+              <li>@barber’s</li>
+            </div>
+            <div className="flex p-1">
+              <AiOutlineGlobal />
+              <li>@username</li>{" "}
+            </div>
+            <div className="flex p-1">
+              <AiOutlineGlobal />
+              <li>@username</li>{" "}
+            </div>
           </div>
         </ul>
       </div>
@@ -46,7 +66,6 @@ const styles = {
     color: "#fff",
     padding: "40px 20px",
     textAlign: "center" as "center",
-    
   },
 };
 export default Footer;

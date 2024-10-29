@@ -6,7 +6,7 @@ const Artists = () => {
       <div className="h-screen relative">
         <div className="absolute -z-10">
           <Image
-            src="/images/testmodel1.jpg"
+            src="/images/testmodel1.png"
             layout="fill"
             objectFit="cover"
             quality={100}
