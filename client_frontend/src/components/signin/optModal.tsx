@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,14 +18,47 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { UserContext } from "@/context/user-booking-context";
 
-const OtpModal = () => {
+interface IOtp {
+  phoneNumber: string;
+  sendOtp: () => void;
+}
+const OtpModal = ({ phoneNumber, sendOtp }: IOtp) => {
+  const [otpNum, setOtpNum] = useState<string>("");
+  const { setToken } = useContext(UserContext);
+  const router = useRouter();
+
+  const verifyOtp = async (value: string) => {
+    setOtpNum(value);
+    try {
+      if (value.length === 4) {
+        const res = await axios.post(
+          "http://localhost:8008/api/v1/auth/verifyotp",
+          { otpNum: value, phoneNumber }
+        );
+        if (res.status === 200) {
+          toast.success("Amjilttai newterlee", { autoClose: 500 });
+          const { token } = res.data;
+          localStorage.setItem("token", token);
+          setToken(token);
+          router.push("/about");
+        }
+      }
+    } catch (error) {
+      toast.error("OTP taarahgui bn", { autoClose: 500 });
+    }
+  };
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button
           variant="outline"
           className="w-full text-white hover:bg-black bg-[#101828] "
+          onClick={sendOtp}
         >
           Код илгээх
         </Button>
@@ -35,14 +68,14 @@ const OtpModal = () => {
           <DialogTitle className="text-center">Баталгаажуулах</DialogTitle>
           <DialogDescription>
             {" "}
-            9999999 дугаарт илгээсэн баталгаажуулах кодыг оруулна уу
+            {phoneNumber} дугаарт илгээсэн баталгаажуулах кодыг оруулна уу
           </DialogDescription>
         </DialogHeader>
         <div className="flex justify-center">
           <InputOTP
             maxLength={4}
-            // onChange={handleConfirmOtp}
-            // value={otpValue}
+            onChange={verifyOtp}
+            value={otpNum}
             pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
           >
             <InputOTPGroup className="flex gap-3 ">
@@ -55,12 +88,12 @@ const OtpModal = () => {
         </div>
 
         <DialogFooter>
-          <Button
+          {/* <Button
             type="submit"
             className="w-full text-white hover:bg-black bg-[#101828] "
           >
             Нэвтрэх
-          </Button>
+          </Button> */}
         </DialogFooter>
       </DialogContent>
     </Dialog>

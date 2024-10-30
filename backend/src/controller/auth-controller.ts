@@ -42,7 +42,7 @@ export const verifyOtp = async (req: Request, res: Response) => {
       otp: otpNum,
     });
     if (!findUser) {
-      res.status(400).json({ message: "Хэрэглэгчийн OTP олдсонгүй" });
+      return res.status(400).json({ message: "Хэрэглэгчийн OTP олдсонгүй" });
     }
     const token = generateToken({ id: findUser?._id });
     res.status(200).json({ message: "Aмжилттай нэвтэрлээ", token });
