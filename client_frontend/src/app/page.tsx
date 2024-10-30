@@ -6,7 +6,7 @@ import About from "./about/page";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-[#101828]">
       <div className="w-full heightcalc relative ">
         <Image
           fill={true}
