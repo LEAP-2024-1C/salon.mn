@@ -47,12 +47,12 @@ const userSchema = new Schema<IUser>({
   },
   cart: {
     type: Schema.Types.ObjectId,
-    required: true,
+    required: false,
     ref: "Cart",
   },
   booking: {
     type: Schema.Types.ObjectId,
-    required: true,
+    required: false,
     ref: "Booking",
   },
 });

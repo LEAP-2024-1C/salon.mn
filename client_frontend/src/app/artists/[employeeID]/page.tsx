@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import Image from "next/image";
@@ -27,53 +27,43 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { EmployeesContext } from "@/context/employee-context";
 
 const ArtistDetail = () => {
   const [step, SetStep] = useState<number>(1);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const [date, setDate] = React.useState<Date>();
-  const nowDate = new Date();
-  const openModal = () => {
-    if (isOpen === false) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-  };
-
+  const { employee } = useContext(EmployeesContext);
+  console.log("img", employee?.profile_img);
   return (
     <div className="flex flex-col bg-[#101828] text-[#FFFAF5] px-[15px] py-[30px] gap-10 ">
       <div className="flex flex-col gap-10 md:flex-row md:w-full ">
         <div className="md:w-2/3">
           <h1 className="text-4xl font-extrabold pb-5 md:w-full">Barber men</h1>
+
           <div className="flex flex-col gap-10 md:flex-row ">
             <div className="">
               <Image
                 height={514}
                 width={400}
-                alt="Logo"
-                src="https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/elementor/thumbs/bearded-male-with-crossed-arms-2021-08-29-09-58-27-utc-e1663215777361-pus73wug0r8gptf0jej696nwltvvzlxdtl9izvojyw.jpg"
+                alt="Logo1"
+                src="https://images.unsplash.com/photo-1729850219812-45733c1c0acc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw5fHx8ZW58MHx8fHx8"
                 className="rounded-2xl"
               />
             </div>
             <div className="flex flex-col gap-5 md:w-1/2">
               <div className=" flex gap-5">
-                <h1>Enkhee barder</h1>
+                <h1>{employee?.name}</h1>
                 <div className="flex gap-1 items-center">
                   <Rating
                     style={{ maxWidth: 80, color: "red" }}
-                    value={4}
+                    value={5}
                     readOnly
                   />
                   <p className="text-sm">5.0</p>
                 </div>
               </div>
-              <p>
-                Mauris donec leo, gravida phasellus luctus. Adipiscing tellus in
-                odio sed. Nam ut quis mi nisl orci, vitae. Ligula commodo et
-                vitae.
-              </p>
+              <p>{employee?.discription}</p>
               <div className="flex gap-3 items-center">
                 <TbArrowLeftFromArc className="text-gray-600 text-lg" />
                 <p>Scelerisque nunc, at nisl non. Est.</p>
@@ -95,7 +85,7 @@ const ArtistDetail = () => {
             <div className=" rounded-lg flex relative w-20 h-20">
               <Image
                 fill={true}
-                src="https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/elementor/thumbs/bearded-male-with-crossed-arms-2021-08-29-09-58-27-utc-e1663215777361-pus73wug0r8gptf0jej696nwltvvzlxdtl9izvojyw.jpg"
+                src="https://images.unsplash.com/photo-1729850219812-45733c1c0acc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw5fHx8ZW58MHx8fHx8"
                 alt="Photo"
                 className="size-full object-cover rounded-lg"
               />
@@ -105,12 +95,12 @@ const ArtistDetail = () => {
               <div className="flex gap-1 items-center">
                 <Rating
                   style={{ maxWidth: 80, color: "red" }}
-                  value={4}
+                  value={5}
                   readOnly
                 />
                 <p className="text-sm">5.0</p>
               </div>
-              <p className="font-bold">Darlene Robertson</p>
+              <p className="font-bold">{employee?.name}</p>
             </div>
           </div>
           {step === 1 && (
@@ -236,8 +226,6 @@ const ArtistDetail = () => {
 
       <div className="flex flex-col gap-10 md:pr-10 md:w-2/3">
         <h1 className="text-4xl font-extrabold">Reviews</h1>
-        <Comment />
-        <Comment />
         <Comment />
       </div>
     </div>

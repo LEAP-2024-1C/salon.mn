@@ -6,6 +6,7 @@ import { generateToken } from "../utils/jwt";
 export const signin = async (req: Request, res: Response) => {
   try {
     const { phoneNumber } = req.body;
+
     if (!phoneNumber) {
       return res.status(404).json({ message: "Хоосон утга байж байна" });
     }
