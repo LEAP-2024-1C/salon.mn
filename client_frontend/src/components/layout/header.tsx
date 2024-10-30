@@ -9,7 +9,7 @@ const menuList: IMenu = [
   { menuId: "Id02", label: "Бидний тухай", link: "about" },
   { menuId: "Id03", label: "Үйлчилгээ", link: "ourService" },
   { menuId: "Id04", label: "artists", link: "artists" },
-  { menuId: "Id05", label: "Бүтээгдэхүүн", link: "shop" },
+  { menuId: "Id05", label: "Бүтээгдэхүүн", link: "products" },
   { menuId: "Id06", label: "Book now", link: "booknow" },
 ];
 const phoneStyle: string = "flex flex-col px-4 py-6 border-b";

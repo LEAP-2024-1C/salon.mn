@@ -1,3 +1,4 @@
+import EmployeesCard from "@/components/cards/employees-card";
 import Image from "next/image";
 
 const Artists = () => {
@@ -13,7 +14,8 @@ const Artists = () => {
             alt="photo1"
           />
         </div>
-        <div className="text-white"> Some overlay things go in here </div>
+
+        <EmployeesCard />
       </div>
     </div>
   );

@@ -11,9 +11,9 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 export function UserNav() {
-  const { data: session } = useSession();
+  const session = { user: { name: 'DS', image: 'd', email: 'df' } };
   if (session) {
     return (
       <DropdownMenu>
