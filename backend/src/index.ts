@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db";
 import proRoute from "./routes/product-route";
 import categoryRoutes from "./routes/categoryRoutes";
+import signinRoutes from "./routes/auth-router";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(express.json());
 
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/products", proRoute);
+app.use("/api/v1/auth", signinRoutes);
 connectDB(MONGO_URI);
 //server asaah
 app.listen(PORT, () => {
