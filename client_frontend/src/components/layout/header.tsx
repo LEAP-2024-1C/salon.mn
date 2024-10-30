@@ -30,7 +30,7 @@ const Header = () => {
   return (
     <div className="w-full bg-[#101828]">
       <header className="flex items-center justify-between w-9/12 m-auto  border-b-2 px-4 py-4 bg-[#101828] md:px-20 ">
-        <Image height={200} src="/images/logo.png" alt="photo" width={100} />
+        <Image height={200} src="/images/logo.png" alt="photo" width={150} />
 
         <div className="flex justify-between items-center max-sm:hidden">
           <ul

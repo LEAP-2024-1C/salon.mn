@@ -40,7 +40,7 @@ export default function Home() {
 
           <div className="flex flex-col gap-2 w-full">
             <Link
-              href="/artists"
+              href="/book-signin"
               className="relative rounded-3xl text-center text-white bg-[#101828] flex justify-center items-center py-2  hover:text-red-500"
             >
               <p>Цаг авах </p>
