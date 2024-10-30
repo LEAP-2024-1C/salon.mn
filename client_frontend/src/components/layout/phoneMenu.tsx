@@ -1,10 +1,14 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { FiMenu } from "react-icons/fi";
 import { IMenu } from "@/utils/interface";
 import SigninModal from "../signin/signinModal";
+import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
+import { CiPower } from "react-icons/ci";
+import { UserContext } from "@/context/user-booking-context";
 
 const PhoneMenu = ({
   menuList,
@@ -14,7 +18,13 @@ const PhoneMenu = ({
   phoneStyle: string;
 }) => {
   const [show, setShow] = useState(false);
-
+  const { token, setToken } = useContext(UserContext);
+  const router = useRouter();
+  const signout = () => {
+    localStorage.removeItem("token");
+    setToken(token);
+    router.push("/");
+  };
   return (
     <div>
       <section className="sm:hidden">
@@ -39,7 +49,20 @@ const PhoneMenu = ({
                   </li>
                 ))}
               </ul>
-              <SigninModal />
+              {token ? (
+                <div className="flex items-center gap-2 text-gray-500">
+                  <p>Name</p>
+                  <Button
+                    className="bg-black p-0 hover:bg-black text-lg"
+                    onClick={signout}
+                  >
+                    {" "}
+                    <CiPower className="text-gray-400 font-extrabold" />
+                  </Button>
+                </div>
+              ) : (
+                <SigninModal />
+              )}
             </div>
           </div>
         ) : (

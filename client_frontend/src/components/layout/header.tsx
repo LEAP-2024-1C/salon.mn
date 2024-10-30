@@ -3,6 +3,11 @@ import Image from "next/image";
 import PhoneMenu from "./phoneMenu";
 import { IMenu } from "@/utils/interface";
 import SigninModal from "../signin/signinModal";
+import { Button } from "../ui/button";
+import { CiPower } from "react-icons/ci";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { UserContext } from "@/context/user-booking-context";
 
 const menuList: IMenu = [
   { menuId: "Id01", label: "Home", link: "/" },
@@ -15,6 +20,13 @@ const menuList: IMenu = [
 const phoneStyle: string = "flex flex-col px-4 py-6 border-b";
 
 const Header = () => {
+  const { token, setToken } = useContext(UserContext);
+  const router = useRouter();
+  const signout = () => {
+    localStorage.removeItem("token");
+    setToken(token);
+    router.push("/");
+  };
   return (
     <div className="w-full bg-[#101828]">
       <header className="flex items-center justify-between w-9/12 m-auto  border-b-2 px-4 py-4 bg-[#101828] md:px-20 ">
@@ -33,7 +45,20 @@ const Header = () => {
         </div>
 
         <div className=" max-sm:hidden">
-          <SigninModal />
+          {token ? (
+            <div className="flex items-center gap-2 text-gray-500">
+              <p>Name</p>
+              <Button
+                className="bg-black p-0 hover:bg-black text-lg"
+                onClick={signout}
+              >
+                {" "}
+                <CiPower className="text-gray-400 font-extrabold" />
+              </Button>
+            </div>
+          ) : (
+            <SigninModal />
+          )}
         </div>
 
         {<PhoneMenu menuList={menuList} phoneStyle={phoneStyle} />}
