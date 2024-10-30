@@ -41,9 +41,9 @@ const Booking = () => {
   };
 
   return (
-    <div className="flex flex-col bg-[#101828] text-[#FFFAF5] px-[15px] py-[30px] gap-10 ">
-      <div className="bg-[#101843] shadow-2xl p-5 rounded-md flex flex-col gap-5">
-        <div className="flex relative gap-5 w-full ">
+    <div className="flex flex-col bg-[#101828] text-[#FFFAF5] px-[15px] py-[30px] gap-10 md:flex  md:justify-center  ">
+      <div className="bg-[#101843] shadow-2xl p-5 rounded-md flex flex-col gap-5 md:w-1/3  ">
+        <div className="flex relative gap-5 md:justify-center  w-full ">
           <div className=" rounded-lg flex relative w-1/2 h-20">
             <Image
               fill={true}
