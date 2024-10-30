@@ -13,6 +13,8 @@ interface IUser {
   created_at: Date;
   updated_at: Date;
   address: String;
+  cart: Schema.Types.ObjectId;
+  booking: Schema.Types.ObjectId;
 }
 
 const userSchema = new Schema<IUser>({
@@ -43,7 +45,17 @@ const userSchema = new Schema<IUser>({
     type: Date,
     default: Date.now,
   },
+  cart: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "Cart",
+  },
+  booking: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "Booking",
+  },
 });
 
-const User = model("user", userSchema);
+const User = model("User", userSchema);
 export default User;

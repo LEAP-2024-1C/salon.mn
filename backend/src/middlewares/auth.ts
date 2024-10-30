@@ -23,7 +23,6 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
       .json({ message: "Энэ үйлдэл хийхийг тулд нэвтэрнэ үү" });
   }
   const token = req.headers.authorization.split(" ")[1];
-  console.log("first", token);
 
   const user = decodeToken(token);
 

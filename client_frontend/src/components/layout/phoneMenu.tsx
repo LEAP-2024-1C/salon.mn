@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { CiPower } from "react-icons/ci";
 import { UserContext } from "@/context/user-booking-context";
+// import Link from "next/link";
+import Image from "next/image";
 
 const PhoneMenu = ({
   menuList,
@@ -50,8 +52,18 @@ const PhoneMenu = ({
                 ))}
               </ul>
               {token ? (
-                <div className="flex items-center gap-2 text-gray-500">
-                  <p>Name</p>
+                <div className="flex items-center gap-2 text-gray-500 pt-5">
+                  <a href="/profile" className="flex gap-3 items-center">
+                    <div className=" rounded-full flex relative w-11 h-11">
+                      <Image
+                        fill={true}
+                        src="https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/elementor/thumbs/smiling-group-of-ethnically-diverse-professional-E54D7RY-men_4-e1664418927667-pvgfq7a0bujrf701w6uuz2ok9twxgj1xph7uak9w5e.jpg"
+                        alt="Photo"
+                        className="size-full object-cover rounded-full "
+                      />
+                    </div>
+                    <p>Name</p>
+                  </a>
                   <Button
                     className="bg-black p-0 hover:bg-black text-lg"
                     onClick={signout}
