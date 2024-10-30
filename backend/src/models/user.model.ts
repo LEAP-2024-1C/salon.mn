@@ -5,6 +5,8 @@ interface IUser {
   _id: Schema.Types.ObjectId;
   firstname: string;
   phoneNumber: string;
+  date: Date;
+  time:String;
   role: String;
   profile_img: String;
   otp: String;
@@ -38,7 +40,14 @@ const userSchema = new Schema<IUser>({
     type: Date,
     default: Date.now,
   },
-
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  time: {
+    type: String,
+    default: true,
+  },
   updated_at: {
     type: Date,
     default: Date.now,
