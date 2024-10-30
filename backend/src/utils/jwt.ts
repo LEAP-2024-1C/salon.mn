@@ -1,10 +1,10 @@
-import jwt from "jsonwebtoken";
-const JWT_TOKEN_PASSWORD = process.env.JWT_TOKEN_PASSWORD || "";
+const jwt = require("jsonwebtoken");
 export const generateToken = (payload: object) => {
-  return jwt.sign(payload, JWT_TOKEN_PASSWORD, {
-    expiresIn: "1h",
+  return jwt.sign(payload, process.env.JWT_TOKEN_PASSWORD || "", {
+    expiresIn: "7d",
   });
 };
+
 export const decodeToken = (token: string) => {
-  return jwt.verify(token, "Pass1234@12");
+  return jwt.verify(token, process.env.JWT_TOKEN_PASSWORD || "");
 };

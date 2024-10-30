@@ -4,6 +4,9 @@ import "./globals.css";
 import Header from "@/components/layout/header";
 import { ThemeProvider } from "next-themes";
 import Footer from "@/components/layout/footer";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import UserProvider from "@/context/user-booking-context";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,11 +34,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <UserProvider>
         <ThemeProvider attribute="class">
           <Header />
           {children}
           <Footer />
+          <ToastContainer />
         </ThemeProvider>
+        </UserProvider>
+        
       </body>
     </html>
   );

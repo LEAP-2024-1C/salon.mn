@@ -5,7 +5,7 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilioNumber = process.env.TWILIO_PHONE_NUMBER;
 const client = twilio(accountSid, authToken);
 
-export const sendPhoneNum = async (phoneNumber: number, otp: number) => {
+export const sendPhoneNum = async (phoneNumber: number, otp: string) => {
   return await client.messages.create({
     body: `Taны баталгаажуулах код ${otp}`,
     from: twilioNumber,
