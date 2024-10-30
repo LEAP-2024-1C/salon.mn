@@ -4,11 +4,12 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db";
 import proRoute from "./routes/product-route";
 import categoryRoutes from "./routes/categoryRoutes";
+import adminRoute from "./routes/adminRoutes";
 import signinRoutes from "./routes/auth-router";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || "";
 const MONGO_URI = process.env.MONGO_URI || "";
 
 //express app object vvsgeh
@@ -20,6 +21,7 @@ app.use(express.json());
 
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/products", proRoute);
+app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/auth", signinRoutes);
 connectDB(MONGO_URI);
 //server asaah
