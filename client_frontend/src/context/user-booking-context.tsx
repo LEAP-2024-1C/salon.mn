@@ -7,14 +7,14 @@ interface IUser {
   _id: string;
   firstname: string;
   phoneNumber: string;
-  role: String;
-  profile_img: String;
-  otp: String;
-  passwordResetToken: String;
+  role: string;
+  profile_img: string;
+  otp: string;
+  passwordResetToken: string;
   passwordResetTokenExpire: Date;
   created_at: Date;
   updated_at: Date;
-  address: String;
+  address: string;
 }
 
 interface IContext {

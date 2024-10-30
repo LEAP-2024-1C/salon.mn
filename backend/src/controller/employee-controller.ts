@@ -15,13 +15,31 @@ export const createdEmloyee = async (req: Request, res: Response) => {
       password,
       category,
     });
-    res
-      .status(200)
-      .json({
-        messeage: "Ajiltain amjilttai uuzsee",
-        employee: createdEmployee,
-      });
+    res.status(200).json({
+      messeage: "Ajiltain amjilttai uuzsee",
+      employee: createdEmployee,
+    });
   } catch (error) {
     res.status(400).json({ messeage: "Ajiltan uuzehed aldaa garlaa" });
+  }
+};
+
+export const getAllEmployee = async (req: Request, res: Response) => {
+  try {
+    const getAll = await Employee.find({});
+    res.status(200).json({ message: "All employees", allEmployee: getAll });
+  } catch (error) {
+    res.status(400).json({ messeage: "Niit ajiltan harahad aldaa garlaa" });
+  }
+};
+export const getEmployee = async (req: Request, res: Response) => {
+  try {
+    const { employeeID } = req.params;
+    const employee = await Employee.findById(employeeID);
+    res
+      .status(200)
+      .json({ message: "Id aar employee harah amjilttai bolloo", employee });
+  } catch (error) {
+    res.status(400).json({ message: "Id aar employee harah amjiltgui bolloo" });
   }
 };

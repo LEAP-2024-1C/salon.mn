@@ -7,6 +7,13 @@ interface IEmployee {
   profile_img: String;
   discription: string;
   category: Schema.Types.ObjectId;
+  comment: [
+    {
+      user: Schema.Types.ObjectId;
+      description: string;
+      rate: number;
+    }
+  ];
 }
 
 const employeeSchema = new Schema<IEmployee>({
@@ -36,6 +43,25 @@ const employeeSchema = new Schema<IEmployee>({
     required: true,
     ref: "Category",
   },
+  comment: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        required: false,
+        ref: "User",
+      },
+
+      description: {
+        type: String,
+        required: false,
+      },
+      rate: {
+        type: Number,
+        required: false,
+        default: 5,
+      },
+    },
+  ],
 });
 employeeSchema.pre("save", function (next) {
   if (!this.isModified("password")) {

@@ -1,9 +1,13 @@
 "use client";
+
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import Image from "next/image";
 
+
 const Comment = () => {
+
+
   return (
     <div className=" flex flex-col gap-5">
       <div className="flex relative gap-5 ">
