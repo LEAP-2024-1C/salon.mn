@@ -19,6 +19,7 @@ app.use(express.json());
 
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/products", proRoute);
+
 connectDB(MONGO_URI);
 //server asaah
 app.listen(PORT, () => {
