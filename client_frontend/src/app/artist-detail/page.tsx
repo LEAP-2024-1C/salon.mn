@@ -11,6 +11,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/src/style.css";
+import Summary from "@/components/about/summary";
 
 const ArtistDetail = () => {
   const [step, SetStep] = useState<number>(1);
