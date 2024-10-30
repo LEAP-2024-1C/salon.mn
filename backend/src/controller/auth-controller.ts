@@ -44,9 +44,20 @@ export const verifyOtp = async (req: Request, res: Response) => {
     if (!findUser) {
       return res.status(400).json({ message: "Хэрэглэгчийн OTP олдсонгүй" });
     }
+
     const token = generateToken({ id: findUser?._id });
-    res.status(200).json({ message: "Aмжилттай нэвтэрлээ", token });
+    res.status(200).json({ message: "Aмжилттай нэвтэрлээ", token, findUser });
   } catch (error) {
     res.status(400).json({ message: "Нэвтрэхэд алдаа гарлаа" });
+  }
+};
+
+export const getCurrentUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.user;
+    const findUser = await User.findOne({ _id: id });
+    res.status(200).json({ message: "User finded", findUser });
+  } catch (error) {
+    res.status(401).json({ message: "User not  find" });
   }
 };

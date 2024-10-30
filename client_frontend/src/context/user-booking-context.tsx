@@ -1,11 +1,20 @@
 "use client";
 
+import axios from "axios";
 import React, { useContext, useState, createContext, useEffect } from "react";
 
 interface IUser {
-  firstname: string;
-  email: string;
   _id: string;
+  firstname: string;
+  phoneNumber: string;
+  role: String;
+  profile_img: String;
+  otp: String;
+  passwordResetToken: String;
+  passwordResetTokenExpire: Date;
+  created_at: Date;
+  updated_at: Date;
+  address: String;
 }
 
 interface IContext {
@@ -28,6 +37,17 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchUserData = async () => {
     try {
+      const res = await axios.get(
+        "http://localhost:8008/api/v1/auth/currentuser",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        setUser(res.data.findUser);
+      }
     } catch (error) {
       console.error(
         "User ийн датаагаа backend ээс авахад алдаа гарсан байна.",

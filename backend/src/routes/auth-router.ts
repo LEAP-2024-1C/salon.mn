@@ -1,7 +1,13 @@
 import { Router } from "express";
-import { signin, verifyOtp } from "../controller/auth-controller";
+import {
+  getCurrentUser,
+  signin,
+  verifyOtp,
+} from "../controller/auth-controller";
+import { auth } from "../middlewares/auth";
 
 const router = Router();
 router.route("/signin").post(signin);
 router.route("/verifyotp").post(verifyOtp);
+router.route("/currentuser").get(auth, getCurrentUser);
 export default router;
