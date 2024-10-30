@@ -15,12 +15,12 @@ const Artists = () => {
         return (
           <Link
             key={key1}
-            href={"/employee/" + employee._id}
+            href={employee._id}
             className="flex  relative gap-5 h-[300px]  bg-black"
           >
             <Image
               fill={true}
-              src={employee?.profile_img}
+              src="https://images.unsplash.com/photo-1729850219812-45733c1c0acc?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw5fHx8ZW58MHx8fHx8"
               alt="Photo"
               className=" size-full object-cover rounded-lg absolute  opacity-30"
             />
