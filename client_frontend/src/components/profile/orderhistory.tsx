@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { FaAngleDown } from "react-icons/fa";
 
 const OrderHistory = () => {
   return (

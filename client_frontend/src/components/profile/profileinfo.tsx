@@ -1,5 +1,7 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
+import { CldUploadWidget } from "next-cloudinary";
 
 const ProfileInfo = () => {
   return (
@@ -9,6 +11,13 @@ const ProfileInfo = () => {
       <input type="text" className="rounded-lg w-full py-1 px-3" />
       <p>Утасны дугаар:</p>
       <input type="text" className="rounded-lg w-full py-1 px-3" />
+      <div>
+        <CldUploadWidget uploadPreset="clientProfile">
+          {({ open }) => {
+            return <button onClick={() => open()}>my Upload an Image</button>;
+          }}
+        </CldUploadWidget>
+      </div>
 
       <div className="flex justify-end">
         <Button className="bg-blue-600 rounded-full py-1 px-5 text-xs">

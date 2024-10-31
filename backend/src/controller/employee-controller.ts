@@ -26,7 +26,7 @@ export const createdEmloyee = async (req: Request, res: Response) => {
 
 export const getAllEmployee = async (req: Request, res: Response) => {
   try {
-    const getAll = await Employee.find({});
+    const getAll = await Employee.find({}).populate("category");
     res.status(200).json({ message: "All employees", allEmployee: getAll });
   } catch (error) {
     res.status(400).json({ messeage: "Niit ajiltan harahad aldaa garlaa" });

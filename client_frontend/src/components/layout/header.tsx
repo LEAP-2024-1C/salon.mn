@@ -54,7 +54,7 @@ const Header = () => {
                     fill={true}
                     src="https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/elementor/thumbs/smiling-group-of-ethnically-diverse-professional-E54D7RY-men_4-e1664418927667-pvgfq7a0bujrf701w6uuz2ok9twxgj1xph7uak9w5e.jpg"
                     alt="Photo"
-                    className="size-full object-cover rounded-full "
+                    className="size-full object-cover rounded-full h-auto w-auto"
                   />
                 </div>
                 <p>Name</p>

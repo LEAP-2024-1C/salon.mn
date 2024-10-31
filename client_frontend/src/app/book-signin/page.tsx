@@ -28,17 +28,8 @@ import {
 
 const Booking = () => {
   const [step, SetStep] = useState<number>(1);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const [date, setDate] = React.useState<Date>();
-  const nowDate = new Date();
-  const openModal = () => {
-    if (isOpen === false) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-  };
 
   return (
     <div className="flex flex-col bg-[#101828] text-[#FFFAF5] px-[15px] py-[30px] gap-10 md:flex  md:justify-center  ">
@@ -49,7 +40,7 @@ const Booking = () => {
               fill={true}
               src="/images/logo.png"
               alt="Photo"
-              className="size-full object-fit rounded-lg"
+              className="size-full object-fit rounded-lg w-auto  h-auto"
             />
           </div>
 

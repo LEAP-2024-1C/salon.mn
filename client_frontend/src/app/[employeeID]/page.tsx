@@ -47,7 +47,10 @@ const ArtistDetail = () => {
                 height={514}
                 width={400}
                 alt="Logo1"
-                src="https://images.unsplash.com/photo-1729850219812-45733c1c0acc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw5fHx8ZW58MHx8fHx8"
+                src={
+                  employee?.profile_img ||
+                  "https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/2022/06/fashion-barber-with-mustache-dressed-in-a-black-sh-NT3C8MP_isolated.pngß"
+                }
                 className="rounded-2xl"
               />
             </div>
