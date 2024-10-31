@@ -4,11 +4,18 @@ import Link from "next/link";
 import { FaHashtag, FaTwitter, FaTwitch } from "react-icons/fa";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { IoMdMusicalNote } from "react-icons/io";
+import Image from "next/image";
 const Footer: React.FC = () => {
   return (
-    <footer style={styles.footer}>
+    <footer>
       <div className="mb-[20px]">
-        <img className="w-28 m-auto" src="/images/logo.png" alt="Barber Logo" />
+        <Image
+          width={100}
+          height={100}
+          className="w-auto m-auto h-auto"
+          src="/images/logo.png"
+          alt="Barber Logo"
+        />
       </div>
       <div className="mb-10 max-w-[500px] m-auto">
         <p className="text-sm">
@@ -60,12 +67,5 @@ const Footer: React.FC = () => {
     </footer>
   );
 };
-const styles = {
-  footer: {
-    backgroundColor: "#101828",
-    color: "#fff",
-    padding: "40px 20px",
-    textAlign: "center" as "center",
-  },
-};
+
 export default Footer;

@@ -1,6 +1,6 @@
 "use client";
 import { IProduct } from "@/utils/interface";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { Heart } from "lucide-react";
 import { formattedPrice } from "@/lib/utils";
