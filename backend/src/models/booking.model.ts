@@ -1,26 +1,33 @@
 import { model, Schema } from "mongoose";
 
 interface IBooking {
-  _id: Schema.Types.ObjectId;
   time: string;
-  employee: Schema.Types.ObjectId;
   user: Schema.Types.ObjectId;
+  date: Date;
+  firstname: String;
+  phoneNumber: Number;
 }
 
 const bookingSchema = new Schema<IBooking>({
-  _id: Schema.Types.ObjectId,
   time: {
     type: String,
-    required: true,
-  },
-  employee: {
-    type: Schema.Types.ObjectId,
-    ref: "Employee",
     required: true,
   },
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: false,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+    required: true,
+  },
+  firstname: {
+    type: String,
+  },
+  phoneNumber: {
+    type: Number,
     required: true,
   },
 });

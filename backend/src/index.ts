@@ -7,6 +7,7 @@ import categoryRoutes from "./routes/categoryRoutes";
 import adminRoute from "./routes/adminRoutes";
 import signinRoutes from "./routes/auth-router";
 import employeeRoutes from "./routes/employee-route";
+import bookingRoute from "./routes/booking-route";
 
 dotenv.config();
 
@@ -24,7 +25,9 @@ app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/products", proRoute);
 app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/auth", signinRoutes);
+
 app.use("/api/v1/employee", employeeRoutes);
+app.use("/api/v1/booking", bookingRoute);
 
 connectDB(MONGO_URI);
 //server asaah
