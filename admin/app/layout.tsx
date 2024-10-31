@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import NextTopLoader from 'nextjs-toploader';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import EmployeesProvider from '@/app/context/employee-context';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,10 +24,12 @@ export default async function RootLayout({
         className={`${inter.className} overflow-hidden `}
         suppressHydrationWarning={true}
       >
-        <NextTopLoader showSpinner={false} />
+        <EmployeesProvider>
+          <NextTopLoader showSpinner={false} />
 
-        <Toaster />
-        {children}
+          <Toaster />
+          {children}
+        </EmployeesProvider>
       </body>
     </html>
   );

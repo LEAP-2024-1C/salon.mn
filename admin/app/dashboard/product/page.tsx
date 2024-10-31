@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/dashboard' },
-  { title: 'Product', link: '/dashboard/product' }
+  { title: 'Бүтээгдэхүүн', link: '/dashboard/product' }
 ];
 
 export default async function page() {

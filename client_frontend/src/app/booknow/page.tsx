@@ -2,37 +2,37 @@
 import { Input } from "@/components/ui/input";
 import { RxScissors } from "react-icons/rx";
 import * as React from "react";
-import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
+// import { format } from "date-fns";
+// import { Calendar as CalendarIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+// import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+// import {
+//   Popover,
+//   PopoverContent,
+//   PopoverTrigger,
+// } from "@/components/ui/popover";
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+// import {
+//   Select,
+//   SelectContent,
+//   SelectGroup,
+//   SelectItem,
+//   SelectLabel,
+//   SelectTrigger,
+//   SelectValue,
+// } from "@/components/ui/select";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import axios from "axios";
 
 const BookNow = () => {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const [date, setDate] = React.useState<Date>();
+  // const [date, setDate] = React.useState<Date>();
   const [booking, setBooking] = useState({
     firstname: "",
     phoneNumber: "",
