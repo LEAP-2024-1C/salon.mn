@@ -212,25 +212,25 @@ export const navItems: NavItem[] = [
     label: 'Dashboard'
   },
   {
-    title: 'User',
-    href: '/dashboard/user',
+    title: 'Ажилтан',
+    href: '/dashboard/employee',
     icon: 'user',
     label: 'user'
   },
   {
-    title: 'Product',
+    title: 'Бүтээгдэхүүн',
     href: '/dashboard/product',
     icon: 'product',
     label: 'product'
   },
   {
-    title: 'Profile',
+    title: 'Бидний тухай',
     href: '/dashboard/profile',
     icon: 'profile',
     label: 'profile'
   },
   {
-    title: 'Login',
+    title: 'Гарах',
     href: '/',
     icon: 'login',
     label: 'login'

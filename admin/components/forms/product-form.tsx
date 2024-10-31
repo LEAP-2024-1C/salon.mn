@@ -166,7 +166,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             name="imgUrl"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Images</FormLabel>
+                <FormLabel>Зураг</FormLabel>
                 <FormControl>
                   <FileUpload
                     onChange={field.onChange}
