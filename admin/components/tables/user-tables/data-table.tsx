@@ -10,16 +10,14 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table';
-// import { Input } from './input';
-// import { Button } from './button';
-// import { ScrollArea, ScrollBar } from './scroll-area';
-// import { User } from '@/constants/data';
-// import { CellAction } from '../tables/employee-tables/cell-action';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { CellAction } from './cell-action';
 import { Button } from '@/components/ui/button';
+import { useContext } from 'react';
+import { EmployeesContext } from '@/app/context/employee-context';
 
 export function EmployeeDataTable() {
+  const { employees } = useContext(EmployeesContext);
   return (
     <>
       <Input placeholder={`Search ...`} className="w-full md:max-w-sm" />
@@ -35,21 +33,19 @@ export function EmployeeDataTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {/* {employees.map((user, key2) => ( */}
-            <TableRow>
-              <TableCell>dfnjs</TableCell>
-              <TableCell>dfnjs</TableCell>
-              <TableCell>dfnjs</TableCell>
-              <TableCell>dfnjs</TableCell>
-              <TableCell>dfnjs</TableCell>
-              {/* <TableCell>{user?.discription}</TableCell>
+            {employees.map((user) => (
+              <TableRow key={user._id}>
+                <TableCell>{user?.name}</TableCell>
+                <TableCell>999999</TableCell>
+                <TableCell>{user?.category?.name}</TableCell>
                 <TableCell>{user?.discription}</TableCell>
-                <TableCell>{user?.category}</TableCell> */}
-              <TableCell>
-                <CellAction id={1 + 1} />
-              </TableCell>
-            </TableRow>
-            {/* ))} */}
+                <TableCell>{user?.email}</TableCell>
+
+                <TableCell>
+                  <CellAction id={user._id} />
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
         <ScrollBar orientation="horizontal" />

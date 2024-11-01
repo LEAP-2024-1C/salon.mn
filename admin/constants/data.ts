@@ -213,7 +213,7 @@ export const navItems: NavItem[] = [
   },
   {
     title: 'Ажилтан',
-    href: '/dashboard/employee',
+    href: '/dashboard/employees',
     icon: 'user',
     label: 'user'
   },

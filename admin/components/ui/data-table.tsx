@@ -12,7 +12,7 @@ import { Input } from './input';
 import { Button } from './button';
 import { ScrollArea, ScrollBar } from './scroll-area';
 import { User } from '@/constants/data';
-import { CellAction } from '../tables/employee-tables/cell-action';
+import { CellAction } from '../tables/user-tables/cell-action';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
 interface DataTableProps {
