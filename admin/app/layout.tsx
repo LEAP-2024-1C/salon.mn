@@ -5,6 +5,7 @@ import NextTopLoader from 'nextjs-toploader';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import EmployeesProvider from '@/app/context/employee-context';
+import { ToastContainer } from 'react-toastify';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,6 +30,7 @@ export default async function RootLayout({
 
           <Toaster />
           {children}
+          <ToastContainer />
         </EmployeesProvider>
       </body>
     </html>

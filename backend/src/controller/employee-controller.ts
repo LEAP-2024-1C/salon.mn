@@ -3,9 +3,17 @@ import Employee from "../models/employees.model";
 
 export const createdEmloyee = async (req: Request, res: Response) => {
   try {
-    const { name, email, password, category } = req.body;
-    if (!name || !email || !password || !category) {
-      res.status(400).json({ message: "Хоосон утга байж болохгүй" });
+    const {
+      name,
+      email,
+      password,
+      category,
+      profile_img,
+      phoneNumber,
+      discription,
+    } = req.body;
+    if (!name || !email || !category || !phoneNumber) {
+      res.status(401).json({ message: "Хоосон утга байж болохгүй" });
       return;
     }
 
@@ -14,6 +22,9 @@ export const createdEmloyee = async (req: Request, res: Response) => {
       email,
       password,
       category,
+      profile_img,
+      phoneNumber,
+      discription,
     });
     res.status(200).json({
       messeage: "Ajiltain amjilttai uuzsee",

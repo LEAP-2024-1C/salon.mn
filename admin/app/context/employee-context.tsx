@@ -1,17 +1,23 @@
 'use client';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { useParams } from 'next/navigation';
 import React, { useContext, useState, createContext, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export interface IEmployee {
   _id: string;
   name: string;
   email: string;
+  phoneNumber: number;
   password: string;
   profile_img: string;
   discription: string;
-  category: string;
+  category: {
+    name: string;
+    _id: string;
+  };
   comment: [
     {
       user: string;
@@ -21,25 +27,47 @@ export interface IEmployee {
   ];
 }
 
+interface ICreateEm {
+  name: string;
+  email: string;
+  phoneNumber: number;
+  password: string;
+  profile_img: string;
+  discription: string;
+  category: string;
+}
 interface IContext {
-  employee: IEmployee | null;
-  setEmployee: React.Dispatch<React.SetStateAction<IEmployee | null>>;
   employees: IEmployee[];
   setEmployees: React.Dispatch<React.SetStateAction<IEmployee[]>>;
+
+  employee: ICreateEm;
+  setEmployee: React.Dispatch<React.SetStateAction<ICreateEm>>;
+  createdEmployee: () => void;
 }
 
 export const EmployeesContext = createContext<IContext>({
   employees: [],
   setEmployees: () => {},
-  employee: null,
-  setEmployee: () => {}
+
+  employee: {} as ICreateEm,
+  setEmployee: () => {},
+  createdEmployee: () => {}
 });
 
 const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
   const [employees, setEmployees] = useState<IEmployee[]>([]);
-  const [employee, setEmployee] = useState<IEmployee | null>(null);
+  const [employee, setEmployee] = useState<ICreateEm>({} as ICreateEm);
+  // {
+  //   name: '',
+  //   email: '',
+  //   phoneNumber: 0,
+  //   password: '',
+  //   profile_img: '',
+  //   discription: '',
+  //   category: ''
+  // },
 
-  const { employeeID } = useParams();
+  const router = useRouter();
 
   const fetchEmployeeData = async () => {
     try {
@@ -52,37 +80,60 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
         setEmployees(res.data.allEmployee);
       }
     } catch (error) {
-      console.log(
-        'Emloyees ийн датаагаа backend ээс авахад алдаа гарсан байна.',
-        error
-      );
+      toast.error('Ажилтны дата татахад алдаа гарлаа.');
     }
   };
 
-  const getEmployee = async (employeeID: string | string[]) => {
+  const createdEmployee = async () => {
     try {
+      const {
+        name,
+        email,
+        password,
+        category,
+        profile_img,
+        phoneNumber,
+        discription
+      } = employee;
+
       const res = await axios({
-        method: 'get',
-        url: `http://localhost:8008/api/v1/employee/get-employee/${employeeID}`
+        method: 'post',
+        url: 'http://localhost:8008/api/v1/employee/created-employee',
+        headers: {},
+        data: {
+          name,
+          email,
+          password,
+          category,
+          profile_img,
+          phoneNumber,
+          discription
+        }
       });
+
       if (res.status === 200) {
-        setEmployee(res.data.employee);
+        await fetchEmployeeData();
+        toast.success('Aжилтан амжилттай үүслээ', { autoClose: 0.8 });
+        router.push('/dashboard/employees');
       }
     } catch (error) {
-      console.log('Params employee harahad aldaa garlaa', error);
+      toast.error('Ажилтан үүсгэхэд алдаа гарлаа.');
     }
   };
 
   useEffect(() => {
     fetchEmployeeData();
   }, []);
-  useEffect(() => {
-    getEmployee(employeeID);
-  }, [employeeID]);
 
   return (
     <EmployeesContext.Provider
-      value={{ employees, setEmployees, employee, setEmployee }}
+      value={{
+        employees,
+        setEmployees,
+        employee,
+        setEmployee,
+        createdEmployee
+      }}
     >
       {children}
     </EmployeesContext.Provider>

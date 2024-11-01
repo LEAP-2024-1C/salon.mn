@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 interface IEmployee {
   name: string;
   email: string;
+  phoneNumber: number;
   password: string;
   profile_img: String;
   discription: string;
@@ -27,16 +28,21 @@ const employeeSchema = new Schema<IEmployee>({
   },
   password: {
     type: String,
-    required: true,
+    required: false,
+    default: "Pass12345",
   },
   profile_img: {
     type: String,
     default:
-      "https://images.unsplash.com/photo-1726591383725-59f0d79a6a5d?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw0OXx8fGVufDB8fHx8fA%3D%3D",
+      "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=",
   },
   discription: {
     type: String,
     default: "Олон улсын аварга шалгаруулах тэмцээний 3 р байрны шагналт",
+  },
+  phoneNumber: {
+    type: Number,
+    required: true,
   },
   category: {
     type: Schema.Types.ObjectId,

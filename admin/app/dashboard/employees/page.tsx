@@ -1,20 +1,19 @@
 'use client';
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import { EmployeeForm } from '@/components/forms/employee-form';
 import PageContainer from '@/components/layout/page-container';
-import React from 'react';
+import { UserClient } from '@/components/tables/user-tables/client';
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/dashboard' },
-  { title: 'Ажилтан', link: '/dashboard/employee' },
-  { title: 'Ажилтан үүсгэх', link: '/dashboard/employees/create' }
+  { title: 'Ажилтан', link: '/dashboard/employees' }
 ];
-export default function Page() {
+export default function page() {
   return (
-    <PageContainer scrollable={true}>
+    <PageContainer>
       <div className="space-y-4">
         <Breadcrumbs items={breadcrumbItems} />
-        <EmployeeForm />
+
+        <UserClient />
       </div>
     </PageContainer>
   );

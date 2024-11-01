@@ -10,13 +10,13 @@ import { EmployeesContext } from '@/app/context/employee-context';
 
 export const UserClient = () => {
   const { employees } = useContext(EmployeesContext);
-  // console.log('first', employees);
+
   return (
     <>
       <div className="flex items-start justify-between">
         <p className="text-3xl font-bold">{`Ажилчдын мэдээлэл (${employees.length})`}</p>
         <Link
-          href={'/dashboard/employee/create'}
+          href={'/dashboard/employees/create'}
           className={cn(buttonVariants({ variant: 'default' }))}
         >
           <Plus className="mr-2 h-4 w-4" /> Шинэ
