@@ -1,8 +1,10 @@
 'use client';
-import 'react-toastify/dist/ReactToastify.css';
+
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import React, { useContext, useState, createContext, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export interface IEmployee {
   _id: string;
@@ -40,28 +42,21 @@ interface IContext {
 
   employee: ICreateEm;
   setEmployee: React.Dispatch<React.SetStateAction<ICreateEm>>;
+  createdEmployee: () => void;
 }
 
 export const EmployeesContext = createContext<IContext>({
   employees: [],
   setEmployees: () => {},
 
-  employee: {
-    name: '',
-    email: '',
-    phoneNumber: 0,
-    password: '',
-    profile_img: '',
-    discription: '',
-    category: ''
-  },
-  setEmployee: () => {}
+  employee: {} as ICreateEm,
+  setEmployee: () => {},
+  createdEmployee: () => {}
 });
 
 const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
   const [employees, setEmployees] = useState<IEmployee[]>([]);
   const [employee, setEmployee] = useState<ICreateEm>({} as ICreateEm);
-
   // {
   //   name: '',
   //   email: '',
@@ -70,7 +65,9 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
   //   profile_img: '',
   //   discription: '',
   //   category: ''
-  // }
+  // },
+
+  const router = useRouter();
 
   const fetchEmployeeData = async () => {
     try {
@@ -89,15 +86,36 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
 
   const createdEmployee = async () => {
     try {
+      const {
+        name,
+        email,
+        password,
+        category,
+        profile_img,
+        phoneNumber,
+        discription
+      } = employee;
+
       const res = await axios({
         method: 'post',
         url: 'http://localhost:8008/api/v1/employee/created-employee',
-        data: employees
+        headers: {},
+        data: {
+          name,
+          email,
+          password,
+          category,
+          profile_img,
+          phoneNumber,
+          discription
+        }
       });
+
       if (res.status === 200) {
-        toast.success('Aжилтан амжилттай үүслээв');
+        await fetchEmployeeData();
+        toast.success('Aжилтан амжилттай үүслээ', { autoClose: 0.8 });
+        router.push('/dashboard/employees');
       }
-      // await fetchEmployeeData()
     } catch (error) {
       toast.error('Ажилтан үүсгэхэд алдаа гарлаа.');
     }
@@ -109,7 +127,13 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <EmployeesContext.Provider
-      value={{ employees, setEmployees, employee, setEmployee }}
+      value={{
+        employees,
+        setEmployees,
+        employee,
+        setEmployee,
+        createdEmployee
+      }}
     >
       {children}
     </EmployeesContext.Provider>

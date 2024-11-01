@@ -30,16 +30,18 @@ export function EmployeeDataTable() {
               <TableHead>Category</TableHead>
               <TableHead>Тайлбар</TableHead>
               <TableHead>Имэйл</TableHead>
+              <TableHead>Password</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {employees.map((user) => (
               <TableRow key={user._id}>
                 <TableCell>{user?.name}</TableCell>
-                <TableCell>999999</TableCell>
+                <TableCell>{user?.password}</TableCell>
                 <TableCell>{user?.category?.name}</TableCell>
                 <TableCell>{user?.discription}</TableCell>
                 <TableCell>{user?.email}</TableCell>
+                <TableCell>{user?.password}</TableCell>
 
                 <TableCell>
                   <CellAction id={user._id} />

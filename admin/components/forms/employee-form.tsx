@@ -16,19 +16,27 @@ import {
 import { Button } from '../ui/button';
 import { useParams } from 'next/navigation';
 import { EmployeesContext } from '@/app/context/employee-context';
-import { Value } from '@radix-ui/react-select';
 
 export const EmployeeForm = () => {
   const { employeeId } = useParams();
-  const { employee, setEmployee } = useContext(EmployeesContext);
-  console.log('first', employee);
+  const { employee, setEmployee, createdEmployee } =
+    useContext(EmployeesContext);
+
   return (
     <div className=" flex flex-col gap-10">
       <div>
         <div className="flex justify-between">
           {' '}
           <p>Зураг оруулах</p>
-          <CldUploadWidget uploadPreset="employeeAdmin">
+          <CldUploadWidget
+            uploadPreset="employeeAdmin "
+            onSuccess={(result: any) => {
+              setEmployee({
+                ...employee,
+                profile_img: result?.info?.secure_url
+              });
+            }}
+          >
             {({ open }) => {
               return (
                 <Button className="" onClick={() => open()}>
@@ -42,7 +50,11 @@ export const EmployeeForm = () => {
         <div className="relative h-60 w-full rounded-lg border">
           <Image
             fill={true}
-            src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
+            src={
+              employee.profile_img
+                ? employee.profile_img
+                : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+            }
             alt="employeeIMG"
             className="h-auto w-auto object-cover"
           />
@@ -81,6 +93,16 @@ export const EmployeeForm = () => {
           />
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label>Password</Label>
+          <Input
+            type="password"
+            onChange={(e) =>
+              setEmployee({ ...employee, password: e.target.value })
+            }
+            placeholder="Email"
+          />
+        </div>
+        <div className="grid w-full max-w-sm items-center gap-1.5">
           <Label>Category select</Label>
           <Select
             onValueChange={(value) =>
@@ -113,7 +135,13 @@ export const EmployeeForm = () => {
           />
         </div>
       </div>
-      <Button>{employeeId === 'create' ? 'create' : 'edit'}</Button>
+      <Button
+        onClick={
+          employeeId === 'create' ? createdEmployee : () => console.log('first')
+        }
+      >
+        {employeeId === 'create' ? 'create' : 'edit'}
+      </Button>
     </div>
   );
 };

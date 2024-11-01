@@ -28,7 +28,8 @@ const employeeSchema = new Schema<IEmployee>({
   },
   password: {
     type: String,
-    required: true,
+    required: false,
+    default: "Pass12345",
   },
   profile_img: {
     type: String,
