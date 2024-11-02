@@ -1,13 +1,13 @@
 'use client';
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import { ProductForm } from '@/components/tables/product-tables/product-form';
+import { ServiceForm } from '@/components/tables/service-tables/service-form';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import React from 'react';
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/dashboard' },
-  { title: 'Бүтээгдэхүүн', link: '/dashboard/product' },
-  { title: 'Бүтээгдэхүүн үүсгэх', link: '/dashboard/product/create' }
+  { title: 'Үйлчилгээ', link: '/dashboard/service' },
+  { title: 'Үйлчилгээ үүсгэх', link: '/dashboard/service/create' }
 ];
 
 export default function Page() {
@@ -15,7 +15,7 @@ export default function Page() {
     <ScrollArea className="h-full">
       <div className="flex-1 space-y-4 p-8">
         <Breadcrumbs items={breadcrumbItems} />
-        <ProductForm />
+        <ServiceForm />
       </div>
     </ScrollArea>
   );

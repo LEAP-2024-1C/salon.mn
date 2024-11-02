@@ -1,6 +1,6 @@
 'use client';
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import { EmployeeForm } from '@/components/forms/employee-form';
+import { EmployeeForm } from '@/components/tables/employee-tables/employee-form';
 import PageContainer from '@/components/layout/page-container';
 import React from 'react';
 

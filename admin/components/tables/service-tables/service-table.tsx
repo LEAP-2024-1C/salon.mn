@@ -14,12 +14,11 @@ import {
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { CellAction } from './cell-action';
-import { ProductContext } from '@/app/context/product-context';
 import { useContext } from 'react';
-import Image from 'next/image';
+import { ServiceContext } from '@/app/context/service-context';
 
-export function ProductTable() {
-  const { products } = useContext(ProductContext);
+export function ServiceTable() {
+  const { services } = useContext(ServiceContext);
   return (
     <>
       <Input placeholder={`Search ...`} className="w-full md:max-w-sm" />
@@ -27,32 +26,23 @@ export function ProductTable() {
         <Table className="relative">
           <TableHeader>
             <TableRow>
-              <TableHead>Зураг</TableHead>
-              <TableHead>Name</TableHead>
+              <TableHead>Нэр</TableHead>
               <TableHead>Category</TableHead>
-              <TableHead>Price</TableHead>
-              <TableHead>Quantity</TableHead>
-              <TableHead>Description</TableHead>
+              <TableHead>Үнийн дүн</TableHead>
+              <TableHead>Хугацаа</TableHead>
+              <TableHead>Тайлбар</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {products.map((product) => (
-              <TableRow key={product?._id}>
+            {services?.map((service) => (
+              <TableRow key={service?._id}>
+                <TableCell>{service?.name}</TableCell>
+                <TableCell>{service?.category?.name}</TableCell>
+                <TableCell>{service?.price}₮</TableCell>
+                <TableCell>{service?.time}</TableCell>
+                <TableCell>{service?.description}</TableCell>
                 <TableCell>
-                  <Image
-                    alt="Profile_img"
-                    src={product?.images[0]}
-                    width={40}
-                    height={40}
-                  />
-                </TableCell>
-                <TableCell>{product?.name}</TableCell>
-                <TableCell>{product?.category?.name}</TableCell>
-                <TableCell>{product?.price}$</TableCell>
-                <TableCell>{product?.quantity}</TableCell>
-                <TableCell>{product?.description}</TableCell>
-                <TableCell>
-                  <CellAction id={product?._id} />
+                  <CellAction id={service?._id} />
                 </TableCell>
               </TableRow>
             ))}

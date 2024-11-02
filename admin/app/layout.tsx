@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import { Suspense } from 'react';
 import ProductProvider from './context/product-context';
 import 'react-toastify/dist/ReactToastify.css';
+import ServiceProvider from './context/service-context';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -30,11 +31,13 @@ export default async function RootLayout({
       >
         <EmployeesProvider>
           <ProductProvider>
-            <NextTopLoader showSpinner={false} />
-            <Suspense>{children}</Suspense>
-            <Toaster />
+            <ServiceProvider>
+              <NextTopLoader showSpinner={false} />
+              <Suspense>{children}</Suspense>
+              <Toaster />
 
-            <ToastContainer />
+              <ToastContainer />
+            </ServiceProvider>
           </ProductProvider>
         </EmployeesProvider>
       </body>
