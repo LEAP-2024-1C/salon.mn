@@ -1,7 +1,7 @@
 'use client';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import PageContainer from '@/components/layout/page-container';
-import { UserClient } from '@/components/tables/user-tables/client';
+import { UserClient } from '@/components/tables/employee-tables/client';
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/dashboard' },

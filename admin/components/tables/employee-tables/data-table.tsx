@@ -15,6 +15,7 @@ import { CellAction } from './cell-action';
 import { Button } from '@/components/ui/button';
 import { useContext } from 'react';
 import { EmployeesContext } from '@/app/context/employee-context';
+import Image from 'next/image';
 
 export function EmployeeDataTable() {
   const { employees } = useContext(EmployeesContext);
@@ -25,6 +26,7 @@ export function EmployeeDataTable() {
         <Table className="relative">
           <TableHeader>
             <TableRow>
+              <TableHead>Зураг</TableHead>
               <TableHead>Нэр</TableHead>
               <TableHead>Утсны дугаар</TableHead>
               <TableHead>Category</TableHead>
@@ -36,8 +38,17 @@ export function EmployeeDataTable() {
           <TableBody>
             {employees.map((user) => (
               <TableRow key={user._id}>
+                <TableCell>
+                  {' '}
+                  <Image
+                    alt="Profile_img"
+                    src={user?.profile_img}
+                    width={40}
+                    height={40}
+                  />
+                </TableCell>
                 <TableCell>{user?.name}</TableCell>
-                <TableCell>{user?.password}</TableCell>
+                <TableCell>{user?.phoneNumber}</TableCell>
                 <TableCell>{user?.category?.name}</TableCell>
                 <TableCell>{user?.discription}</TableCell>
                 <TableCell>{user?.email}</TableCell>
