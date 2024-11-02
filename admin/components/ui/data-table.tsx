@@ -12,7 +12,7 @@ import { Input } from './input';
 import { Button } from './button';
 import { ScrollArea, ScrollBar } from './scroll-area';
 import { User } from '@/constants/data';
-import { CellAction } from '../tables/user-tables/cell-action';
+// import { CellAction } from '../tables/user-tables/cell-action';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
 interface DataTableProps {
@@ -45,9 +45,7 @@ export function DataTable({ data, searchKey }: DataTableProps) {
                 <TableCell>{user.company}</TableCell>
                 <TableCell>{user.role}</TableCell>
                 <TableCell>{user.status}</TableCell>
-                <TableCell>
-                  <CellAction id={user.id} />
-                </TableCell>
+                <TableCell>{/* <CellAction id={user.id} /> */}</TableCell>
               </TableRow>
             ))}
           </TableBody>
