@@ -5,7 +5,7 @@ import {
   getProducts,
   getRelProducts,
   getHeroProduct,
-} from "../controller/product-controller";
+} from "../controllers/product-controller";
 
 const router = Router();
 
