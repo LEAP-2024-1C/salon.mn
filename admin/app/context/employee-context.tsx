@@ -43,6 +43,7 @@ interface IContext {
   employee: ICreateEm;
   setEmployee: React.Dispatch<React.SetStateAction<ICreateEm>>;
   createdEmployee: () => void;
+  fetchEmployeeData: () => void;
 }
 
 export const EmployeesContext = createContext<IContext>({
@@ -51,7 +52,8 @@ export const EmployeesContext = createContext<IContext>({
 
   employee: {} as ICreateEm,
   setEmployee: () => {},
-  createdEmployee: () => {}
+  createdEmployee: () => {},
+  fetchEmployeeData: () => {}
 });
 
 const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
@@ -114,6 +116,7 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
       if (res.status === 200) {
         await fetchEmployeeData();
         toast.success('Aжилтан амжилттай үүслээ', { autoClose: 0.8 });
+
         router.push('/dashboard/employees');
       }
     } catch (error) {
@@ -132,7 +135,8 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
         setEmployees,
         employee,
         setEmployee,
-        createdEmployee
+        createdEmployee,
+        fetchEmployeeData
       }}
     >
       {children}

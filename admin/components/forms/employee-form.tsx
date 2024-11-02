@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { CldUploadWidget } from 'next-cloudinary';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -14,13 +14,76 @@ import {
   SelectValue
 } from '@/components/ui/select';
 import { Button } from '../ui/button';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { EmployeesContext } from '@/app/context/employee-context';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export const EmployeeForm = () => {
-  const { employeeId } = useParams();
-  const { employee, setEmployee, createdEmployee } =
+  const { employeeID } = useParams();
+  const router = useRouter();
+
+  const { employee, setEmployee, createdEmployee, fetchEmployeeData } =
     useContext(EmployeesContext);
+
+  const getEmployee = async () => {
+    try {
+      const res = await axios({
+        method: 'get',
+        url: `http://localhost:8008/api/v1/employee/get-employee/${employeeID}`
+      });
+      if (res.status === 200) {
+        setEmployee(res.data.employee);
+      }
+    } catch (error) {
+      console.log(' Aжилтны мэдээлэл татахад алдаа гарлаа');
+    }
+  };
+
+  const updateEmployee = async () => {
+    try {
+      const {
+        name,
+        email,
+        password,
+        category,
+        profile_img,
+        phoneNumber,
+        discription
+      } = employee;
+
+      const res = await axios({
+        method: 'put',
+        url: `http://localhost:8008/api/v1/employee/update-employee/${employeeID}`,
+        headers: {},
+        data: {
+          name,
+          email,
+          password,
+          category,
+          profile_img,
+          phoneNumber,
+          discription
+        }
+      });
+
+      if (res.status === 200) {
+        await fetchEmployeeData();
+        toast.success('Aжилтны мэдээлэл амжилттай шинэчлэгдлээ.', {
+          autoClose: 0.8
+        });
+        router.push('/dashboard/employees');
+      }
+    } catch (error) {
+      toast.error('Ажилтны мэдээлэл засахад алдаа гарлаа.');
+    }
+  };
+
+  useEffect(() => {
+    {
+      employeeID === 'create' ? '' : getEmployee();
+    }
+  }, [employeeID]);
 
   return (
     <div className=" flex flex-col gap-10">
@@ -67,6 +130,7 @@ export const EmployeeForm = () => {
             onChange={(e) => setEmployee({ ...employee, name: e.target.value })}
             type="text"
             placeholder="Нэр"
+            value={employee?.name}
           />
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -79,6 +143,7 @@ export const EmployeeForm = () => {
                 phoneNumber: Math.floor(Number(e.target.value))
               })
             }
+            value={employee?.phoneNumber}
             placeholder="Number"
           />
         </div>
@@ -90,6 +155,7 @@ export const EmployeeForm = () => {
               setEmployee({ ...employee, email: e.target.value })
             }
             placeholder="Email"
+            value={employee?.email}
           />
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -99,7 +165,8 @@ export const EmployeeForm = () => {
             onChange={(e) =>
               setEmployee({ ...employee, password: e.target.value })
             }
-            placeholder="Email"
+            placeholder="Password"
+            value={employee?.password}
           />
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -108,6 +175,7 @@ export const EmployeeForm = () => {
             onValueChange={(value) =>
               setEmployee({ ...employee, category: value })
             }
+            defaultValue={employee?.category}
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Category" />
@@ -116,9 +184,11 @@ export const EmployeeForm = () => {
               <SelectGroup>
                 <SelectItem value="6721a4727300f88d42793b76">Barber</SelectItem>
                 <SelectItem value="6720654be0eb8fa8d9b935c8">
-                  Manicur
+                  Nail art
                 </SelectItem>
-                <SelectItem value="6721a4837300f88d42793b78">Beuaty</SelectItem>
+                <SelectItem value="6721a4837300f88d42793b78">
+                  Beauty artist
+                </SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -130,17 +200,16 @@ export const EmployeeForm = () => {
               setEmployee({ ...employee, discription: e.target.value })
             }
             type="text"
-            placeholder="Ajliin turshalag"
+            placeholder="Ajliin turshalag geh met"
             className="h-full "
+            value={employee?.discription}
           />
         </div>
       </div>
       <Button
-        onClick={
-          employeeId === 'create' ? createdEmployee : () => console.log('first')
-        }
+        onClick={employeeID === 'create' ? createdEmployee : updateEmployee}
       >
-        {employeeId === 'create' ? 'create' : 'edit'}
+        {employeeID === 'create' ? 'create' : 'edit'}
       </Button>
     </div>
   );
