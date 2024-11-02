@@ -1,270 +1,209 @@
 'use client';
-import * as z from 'zod';
-import { useState } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { Trash } from 'lucide-react';
-import { useParams, useRouter } from 'next/navigation';
+import Image from 'next/image';
+import React, { useContext, useEffect } from 'react';
+import { CldUploadWidget } from 'next-cloudinary';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from '@/components/ui/form';
-import { Separator } from '@/components/ui/separator';
-import { Heading } from '@/components/ui/heading';
+import { Label } from '@/components/ui/label';
+
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
-// import FileUpload from "@/components/FileUpload";
-import { useToast } from '../ui/use-toast';
-// import FileUpload from '../file-upload';
-const ImgSchema = z.object({
-  fileName: z.string(),
-  name: z.string(),
-  fileSize: z.number(),
-  size: z.number(),
-  fileKey: z.string(),
-  key: z.string(),
-  fileUrl: z.string(),
-  url: z.string()
-});
-export const IMG_MAX_LIMIT = 3;
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(3, { message: 'Product Name must be at least 3 characters' }),
-  imgUrl: z
-    .array(ImgSchema)
-    .max(IMG_MAX_LIMIT, { message: 'You can only add up to 3 images' })
-    .min(1, { message: 'At least one image must be added.' }),
-  description: z
-    .string()
-    .min(3, { message: 'Product description must be at least 3 characters' }),
-  price: z.coerce.number(),
-  category: z.string().min(1, { message: 'Please select a category' })
-});
+import { Button } from '../ui/button';
+import { useParams, useRouter } from 'next/navigation';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { ProductContext } from '@/app/context/product-context';
 
-type ProductFormValues = z.infer<typeof formSchema>;
-
-interface ProductFormProps {
-  initialData: any | null;
-  categories: any;
-}
-
-export const ProductForm: React.FC<ProductFormProps> = ({
-  initialData,
-  categories
-}) => {
-  const params = useParams();
+export const ProductForm = () => {
+  const { productID } = useParams();
   const router = useRouter();
-  const { toast } = useToast();
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [imgLoading, setImgLoading] = useState(false);
-  const title = initialData ? 'Edit product' : 'Create product';
-  const description = initialData ? 'Edit a product.' : 'Add a new product';
-  const toastMessage = initialData ? 'Product updated.' : 'Product created.';
-  const action = initialData ? 'Save changes' : 'Create';
 
-  const defaultValues = initialData
-    ? initialData
-    : {
-        name: '',
-        description: '',
-        price: 0,
-        imgUrl: [],
-        category: ''
-      };
+  const { product, setProduct, fetchProductData, createdProduct } =
+    useContext(ProductContext);
 
-  const form = useForm<ProductFormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues
-  });
-
-  const onSubmit = async (data: ProductFormValues) => {
+  const getProduct = async () => {
     try {
-      setLoading(true);
-      if (initialData) {
-        // await axios.post(`/api/products/edit-product/${initialData._id}`, data);
-      } else {
-        // const res = await axios.post(`/api/products/create-product`, data);
-        // console.log("product", res);
+      if (productID === 'create') {
+        return;
       }
-      router.refresh();
-      router.push(`/dashboard/products`);
-      toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
-        description: 'There was a problem with your request.'
+      const res = await axios({
+        method: 'get',
+        url: `http://localhost:8008/api/v1/products/${productID}`
       });
-    } catch (error: any) {
-      toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
-        description: 'There was a problem with your request.'
-      });
-    } finally {
-      setLoading(false);
+
+      if (res.status === 200) {
+        setProduct(res.data.product);
+      }
+    } catch (error) {
+      console.log(' Aжилтны мэдээлэл татахад алдаа гарлаа');
     }
   };
 
-  const onDelete = async () => {
+  const updateProduct = async () => {
     try {
-      setLoading(true);
-      //   await axios.delete(`/api/${params.storeId}/products/${params.productId}`);
-      router.refresh();
-      router.push(`/${params.storeId}/products`);
-    } catch (error: any) {
-    } finally {
-      setLoading(false);
-      setOpen(false);
+      const { name, price, images, description, quantity, category } = product;
+
+      const res = await axios({
+        method: 'put',
+        url: `http://localhost:8008/api/v1/products/updated-product/${productID}`,
+        headers: {},
+        data: {
+          name,
+          price,
+          images,
+          description,
+          quantity,
+          category
+        }
+      });
+      console.log('ypdate');
+      if (res.status === 200) {
+        await fetchProductData();
+        toast.success('Aжилтны мэдээлэл амжилттай шинэчлэгдлээ.', {
+          autoClose: 0.8
+        });
+        router.push('/dashboard/product');
+      }
+    } catch (error) {
+      toast.error('Ажилтны мэдээлэл засахад алдаа гарлаа.');
     }
   };
 
-  const triggerImgUrlValidation = () => form.trigger('imgUrl');
+  useEffect(() => {
+    getProduct();
+  }, [productID]);
 
   return (
-    <>
-      {/* <AlertModal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-        onConfirm={onDelete}
-        loading={loading}
-      /> */}
-      <div className="flex items-center justify-between">
-        <Heading title={title} description={description} />
-        {initialData && (
-          <Button
-            disabled={loading}
-            variant="destructive"
-            size="sm"
-            onClick={() => setOpen(true)}
+    <div className=" flex flex-col gap-10">
+      <div>
+        <div className="flex justify-between">
+          {' '}
+          <p>Зураг оруулах</p>
+          {/* <CldUploadWidget
+            uploadPreset="employeeAdmin "
+            onSuccess={(result: any) => {
+              setProduct({
+                ...product,
+                images: result?.info?.secure_url
+              });
+            }}
           >
-            <Trash className="h-4 w-4" />
-          </Button>
-        )}
-      </div>
-      <Separator />
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full space-y-8"
-        >
-          <FormField
-            control={form.control}
-            name="imgUrl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Зураг</FormLabel>
-                <FormControl>
-                  {/* <FileUpload
-                    onChange={field.onChange}
-                    value={field.value}
-                    onRemove={field.onChange}
-                  /> */}
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            {({ open }) => {
+              return (
+                <Button className="" onClick={() => open()}>
+                  Upload an Image
+                </Button>
+              );
+            }}
+          </CldUploadWidget> */}
+        </div>
+
+        <div className="relative h-60 w-full rounded-lg border">
+          <Image
+            fill={true}
+            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+            alt="productIMG"
+            className="h-auto w-auto object-cover"
           />
-          <div className="gap-8 md:grid md:grid-cols-3">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={loading}
-                      placeholder="Product name"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={loading}
-                      placeholder="Product description"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="price"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Price</FormLabel>
-                  <FormControl>
-                    <Input type="number" disabled={loading} {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="category"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Category</FormLabel>
-                  <Select
-                    disabled={loading}
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          defaultValue={field.value}
-                          placeholder="Select a category"
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {/* @ts-ignore  */}
-                      {categories.map((category) => (
-                        <SelectItem key={category._id} value={category._id}>
-                          {category.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <Button disabled={loading} className="ml-auto" type="submit">
-            {action}
-          </Button>
-        </form>
-      </Form>
-    </>
+        </div>
+      </div>
+      <div className="grid-row-3 grid   grid-flow-col gap-5 ">
+        <div className="grid w-full max-w-sm items-center gap-1.5 ">
+          <Label>Нэр</Label>
+          <Input
+            onChange={(e) => setProduct({ ...product, name: e.target.value })}
+            type="text"
+            placeholder="Нэр"
+            value={product?.name}
+          />
+        </div>
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label>Утсны дугаар</Label>
+          <Input
+            type="number"
+            onChange={(e) =>
+              setProduct({
+                ...product,
+                price: Math.floor(Number(e.target.value))
+              })
+            }
+            value={product?.price}
+            placeholder="Number"
+          />
+        </div>
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label>Тоо ширхэг</Label>
+          <Input
+            type="number"
+            onChange={(e) =>
+              setProduct({
+                ...product,
+                quantity: Math.floor(Number(e.target.value))
+              })
+            }
+            placeholder="Quantity"
+            value={product?.quantity}
+          />
+        </div>
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label>Хямдрал</Label>
+          <Input
+            type="number"
+            onChange={(e) =>
+              setProduct({
+                ...product,
+                discount: Math.floor(Number(e.target.value))
+              })
+            }
+            placeholder="Discount"
+            value={product?.discount}
+          />
+        </div>
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label>Category select</Label>
+          <Select
+            onValueChange={(value) =>
+              setProduct({ ...product, category: value })
+            }
+            defaultValue={product?.category}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="6721a4727300f88d42793b76">Barber</SelectItem>
+                <SelectItem value="6720654be0eb8fa8d9b935c8">
+                  Nail art
+                </SelectItem>
+                <SelectItem value="6721a4837300f88d42793b78">
+                  Beauty artist
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className=" row-span-4 w-full max-w-sm  items-start gap-1.5">
+          <Label>Тайлбар</Label>
+          <Input
+            onChange={(e) =>
+              setProduct({ ...product, description: e.target.value })
+            }
+            type="text"
+            placeholder="Ajliin turshalag geh met"
+            className="h-full "
+            value={product?.description}
+          />
+        </div>
+      </div>
+      <Button onClick={productID === 'create' ? createdProduct : updateProduct}>
+        {productID === 'create' ? 'create' : 'edit'}
+      </Button>
+    </div>
   );
 };
