@@ -29,7 +29,7 @@ export const EmployeeForm = () => {
   const getEmployee = async () => {
     try {
       if (employeeID === 'create') {
-        return console.log('first');
+        return;
       }
       const res = await axios({
         method: 'get',

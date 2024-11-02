@@ -38,7 +38,6 @@ export const ProductForm = () => {
 
       if (res.status === 200) {
         setProduct(res.data.product);
-        console.log('first', res.data.product);
       }
     } catch (error) {
       console.log(' Aжилтны мэдээлэл татахад алдаа гарлаа');

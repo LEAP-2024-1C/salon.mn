@@ -121,7 +121,7 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
       }
     } catch (error) {
       toast.error('Ажилтан үүсгэхэд алдаа гарлаа.');
-      console.log('Ажилтан үүсгэхэд алдаа гарлаа.', error);
+      
     }
   };
 

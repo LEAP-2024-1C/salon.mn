@@ -101,10 +101,8 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
 
         router.push('/dashboard/product');
       }
-      console.log('first Бүтээгдэхүүн');
     } catch (error) {
       toast.error('Бүтээгдэхүүн үүсгэхэд алдаа гарлаа.');
-      console.log('Бүтээгдэхүүн үүсгэхэд алдаа гарлаа.', error);
     }
   };
 
