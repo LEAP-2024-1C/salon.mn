@@ -3,7 +3,7 @@ import {
   createdEmloyee,
   getAllEmployee,
   getEmployee,
-} from "../controller/employee-controller";
+} from "../controllers/employee-controller";
 
 const router = Router();
 router.route("/created-employee").post(createdEmloyee);

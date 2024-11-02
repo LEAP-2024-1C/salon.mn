@@ -3,7 +3,7 @@ import {
   getCurrentUser,
   signin,
   verifyOtp,
-} from "../controller/auth-controller";
+} from "../controllers/auth-controller";
 import { auth } from "../middlewares/auth";
 
 const router = Router();
