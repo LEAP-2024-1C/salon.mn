@@ -38,10 +38,10 @@ export const getHeroProduct = async (req: Request, res: Response) => {
 };
 
 export const getProduct = async (req: Request, res: Response) => {
-  const { productId } = req.params;
+  const { productID } = req.params;
   try {
-    const product = await Product.findById({ _id: productId });
-    res.status(200).json(product);
+    const product = await Product.findById({ _id: productID });
+    res.status(200).json({ product: product });
   } catch (error) {
     console.error(error);
     res.status(400).json({ message: "failed to get product" });
@@ -56,5 +56,51 @@ export const getRelProducts = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     res.status(400).json({ message: "failed to get product" });
+  }
+};
+
+export const updateProduct = async (req: Request, res: Response) => {
+  try {
+    const { productID } = req.params;
+    const { name, price, images, description, quantity, category } = req.body;
+
+    const findedProduct = await Product.findById(productID);
+    if (!findedProduct) {
+      return res.status(401).json({ message: "Product олдсонгүй" });
+    }
+    findedProduct.name = name;
+    findedProduct.price = price;
+    findedProduct.images = images;
+    findedProduct.category = category;
+    findedProduct.description = description;
+    findedProduct.quantity = quantity;
+
+    await findedProduct.save();
+
+    res
+      .status(200)
+      .json({ message: "Product: Update success ", product: findedProduct });
+  } catch (error) {
+    res.status(400).json({ message: "Product update hiihed aldaa garlaa" });
+  }
+};
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    const { productID } = req.params;
+
+    const find = await Product.findOne({ _id: productID });
+
+    if (!find) {
+      return res.status(401).json({ message: "Product oldsongui" });
+    }
+
+    await find.deleteOne();
+
+    res.status(200).json({
+      message: "Product deleted success",
+    });
+  } catch (error) {
+    res.status(400).json({ message: "Product ustgahad aldaa garlaa" });
   }
 };

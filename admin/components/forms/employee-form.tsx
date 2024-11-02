@@ -28,6 +28,9 @@ export const EmployeeForm = () => {
 
   const getEmployee = async () => {
     try {
+      if (employeeID === 'create') {
+        return console.log('first');
+      }
       const res = await axios({
         method: 'get',
         url: `http://localhost:8008/api/v1/employee/get-employee/${employeeID}`
@@ -80,9 +83,7 @@ export const EmployeeForm = () => {
   };
 
   useEffect(() => {
-    {
-      employeeID === 'create' ? '' : getEmployee();
-    }
+    getEmployee();
   }, [employeeID]);
 
   return (

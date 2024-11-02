@@ -7,6 +7,8 @@ import './globals.css';
 import EmployeesProvider from '@/app/context/employee-context';
 import { ToastContainer } from 'react-toastify';
 import { Suspense } from 'react';
+import ProductProvider from './context/product-context';
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,11 +29,13 @@ export default async function RootLayout({
         suppressHydrationWarning={true}
       >
         <EmployeesProvider>
-          <NextTopLoader showSpinner={false} />
-          <Suspense>{children}</Suspense>
-          <Toaster />
+          <ProductProvider>
+            <NextTopLoader showSpinner={false} />
+            <Suspense>{children}</Suspense>
+            <Toaster />
 
-          <ToastContainer />
+            <ToastContainer />
+          </ProductProvider>
         </EmployeesProvider>
       </body>
     </html>

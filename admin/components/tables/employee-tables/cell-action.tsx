@@ -1,7 +1,7 @@
 'use client';
 
 import { EmployeesContext } from '@/app/context/employee-context';
-import { AlertModal } from '@/components/modal/alert-modal';
+import { AlertModal } from '@/components/tables/employee-tables/alert-modal';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
