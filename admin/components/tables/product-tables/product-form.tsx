@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -61,7 +61,7 @@ export const ProductForm = () => {
           category
         }
       });
-      console.log('ypdate');
+
       if (res.status === 200) {
         await fetchProductData();
         toast.success('Aжилтны мэдээлэл амжилттай шинэчлэгдлээ.', {
@@ -89,7 +89,7 @@ export const ProductForm = () => {
             onSuccess={(result: any) => {
               setProduct({
                 ...product,
-                images: result?.info?.secure_url
+                images: [result?.info?.secure_url]
               });
             }}
           >
@@ -103,13 +103,37 @@ export const ProductForm = () => {
           </CldUploadWidget> */}
         </div>
 
-        <div className="relative h-60 w-full rounded-lg border">
-          <Image
-            fill={true}
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-            alt="productIMG"
-            className="h-auto w-auto object-cover"
-          />
+        <div className="flex w-full gap-3 ">
+          {productID === 'create' ? (
+            <div className="relative  h-60 w-full  rounded-lg border bg-black">
+              <Image
+                fill={true}
+                src={
+                  'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNoYW1wb298ZW58MHx8MHx8fDA%3D'
+                }
+                alt="productIMG"
+                className="h-auto w-auto object-cover opacity-35"
+              />
+            </div>
+          ) : (
+            product?.images?.map((image, key1) => (
+              <div
+                key={key1}
+                className="relative  h-60 w-1/3  rounded-lg border"
+              >
+                <Image
+                  fill={true}
+                  src={
+                    image
+                      ? image
+                      : 'https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNoYW1wb298ZW58MHx8MHx8fDA%3D'
+                  }
+                  alt="productIMG"
+                  className="h-auto w-auto object-cover"
+                />
+              </div>
+            ))
+          )}
         </div>
       </div>
       <div className="grid-row-3 grid   grid-flow-col gap-5 ">
@@ -195,7 +219,7 @@ export const ProductForm = () => {
               setProduct({ ...product, description: e.target.value })
             }
             type="text"
-            placeholder="Ajliin turshalag geh met"
+            placeholder="Бүтээгдэхүүний дэлгэрэнгүйг бичнэ үү"
             className="h-full "
             value={product?.description}
           />
