@@ -8,11 +8,8 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import { AdminContext } from '../context/admin-context';
-import { useContext } from 'react';
 
 export default function page() {
-  const { admin } = useContext(AdminContext);
   return (
     <PageContainer scrollable={true}>
       <div className="space-y-8">
@@ -137,12 +134,6 @@ export default function page() {
                 <RecentSales />
               </CardContent>
             </Card>
-            <div className="col-span-4 md:col-span-3">
-              <p>{admin?.name}</p>
-              <div className="h-[200px] w-[150px] bg-red-500">
-                Profile Picture
-              </div>
-            </div>
           </div>
         </div>
       </div>

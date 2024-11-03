@@ -1,4 +1,5 @@
 'use client';
+import { AdminContext } from '@/app/context/admin-context';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,8 +13,12 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { signOut } from 'next-auth/react';
+import { useContext } from 'react';
 export function UserNav() {
-  const session = { user: { name: 'DS', image: 'd', email: 'df' } };
+  const { admin } = useContext(AdminContext);
+  const session = {
+    user: { name: `${admin?.name}`, image: 'd', email: `${admin?.email}` }
+  };
   if (session) {
     return (
       <DropdownMenu>

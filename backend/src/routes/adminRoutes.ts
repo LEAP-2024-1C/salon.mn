@@ -3,7 +3,7 @@ import {
   createAdmin,
   getCurrentUser,
   login,
-} from "../controller/admin-controller";
+} from "../controllers/admin-controller";
 
 const router = Router();
 
