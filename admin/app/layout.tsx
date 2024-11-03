@@ -5,7 +5,7 @@ import NextTopLoader from 'nextjs-toploader';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import EmployeesProvider from '@/app/context/employee-context';
-import { UserProvider } from './context/admin-context';
+import { AdminProvider } from './context/admin-context';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ['latin'] });
@@ -30,7 +30,7 @@ export default async function RootLayout({
           <NextTopLoader showSpinner={false} />
           <ToastContainer />
           <Toaster />
-          <UserProvider>{children}</UserProvider>
+          <AdminProvider>{children}</AdminProvider>
         </EmployeesProvider>
       </body>
     </html>

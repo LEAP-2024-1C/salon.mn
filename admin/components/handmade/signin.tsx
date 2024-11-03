@@ -5,9 +5,9 @@ import { Button } from '../ui/button';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import { UserContext } from '@/app/context/admin-context';
+import { AdminContext } from '@/app/context/admin-context';
 function Signin() {
-  const { setToken } = useContext(UserContext);
+  const { setToken } = useContext(AdminContext);
   const router = useRouter();
   const [userData, setUserData] = useState({
     email: '',
@@ -27,7 +27,7 @@ function Signin() {
         toast.success('Амжилттай нэвтэрлээ', { autoClose: 1000 });
         const { token } = res.data;
         localStorage.setItem('token', token);
-
+        setToken(token);
         router.push('/dashboard');
       }
     } catch (error: any) {

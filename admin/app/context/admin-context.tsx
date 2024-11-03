@@ -8,66 +8,66 @@ import React, {
   useEffect,
   useState
 } from 'react';
+import { toast } from 'react-toastify';
 
-interface IUserCOntext {
-  user: {
+interface IAdminCOntext {
+  admin: {
     _id: string;
     name: string;
 
     email: string;
     phonenumber: string;
   } | null;
-  fetchUserData: () => void;
+  fetchAdminData: () => void;
   setToken: Dispatch<SetStateAction<string | null>>;
-  setUser: Dispatch<SetStateAction<null>>;
+  setAdmin: Dispatch<SetStateAction<null>>;
 }
 
-export const UserContext = createContext<IUserCOntext>({
-  user: {
+export const AdminContext = createContext<IAdminCOntext>({
+  admin: {
     _id: '',
     name: '',
     email: '',
     phonenumber: ''
   },
-  fetchUserData: () => {},
+  fetchAdminData: () => {},
   setToken: () => {},
-  setUser: () => {}
+  setAdmin: () => {}
 });
 
-export const UserProvider = ({ children }: { children: React.ReactNode }) => {
+export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
-  const [user, setUser] = useState(null);
-  const fetchUserData = async () => {
+  const [admin, setAdmin] = useState(null);
+  const fetchAdminData = async () => {
     try {
       console.log('user user');
 
       console.log('token', token);
-      const res = await axios.get(`http://localhost:8008/api/v1/admin/login`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const res = await axios.get(`http://localhost:8008/api/v1/admin/get`);
 
       if (res.status === 200) {
-        setUser(res.data.user);
-        console.log('USER', user);
+        setAdmin(res.data.user);
+        console.log('USER', admin);
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
+      toast.error('gg ez');
     }
   };
 
   useEffect(() => {
     if (token) {
-      fetchUserData();
+      fetchAdminData();
     } else {
       setToken(localStorage.getItem('token'));
     }
   }, [token]);
 
   return (
-    <UserContext.Provider value={{ user, fetchUserData, setToken, setUser }}>
+    <AdminContext.Provider
+      value={{ admin, fetchAdminData, setToken, setAdmin }}
+    >
       {children}
-    </UserContext.Provider>
+    </AdminContext.Provider>
   );
 };
