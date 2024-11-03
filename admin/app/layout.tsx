@@ -8,6 +8,11 @@ import EmployeesProvider from '@/app/context/employee-context';
 import { AdminProvider } from './context/admin-context';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Suspense } from 'react';
+import ProductProvider from './context/product-context';
+import 'react-toastify/dist/ReactToastify.css';
+import ServiceProvider from './context/service-context';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -31,6 +36,15 @@ export default async function RootLayout({
           <ToastContainer />
           <Toaster />
           <AdminProvider>{children}</AdminProvider>
+          <ProductProvider>
+            <ServiceProvider>
+              <NextTopLoader showSpinner={false} />
+              <Suspense>{children}</Suspense>
+              <Toaster />
+
+              <ToastContainer />
+            </ServiceProvider>
+          </ProductProvider>
         </EmployeesProvider>
       </body>
     </html>

@@ -13,43 +13,46 @@ import {
 } from '@/components/ui/table';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { Product } from '@/constants/data';
 import { CellAction } from './cell-action';
+import { ProductContext } from '@/app/context/product-context';
+import { useContext } from 'react';
+import Image from 'next/image';
 
-interface DataTableProps {
-  data: Product[];
-  searchKey: string;
-}
-
-export function ProductTable({ data, searchKey }: DataTableProps) {
+export function ProductTable() {
+  const { products } = useContext(ProductContext);
   return (
     <>
-      <Input
-        placeholder={`Search ${searchKey}...`}
-        className="w-full md:max-w-sm"
-      />
+      <Input placeholder={`Search ...`} className="w-full md:max-w-sm" />
       <ScrollArea className="h-[calc(80vh-220px)] rounded-md border">
         <Table className="relative">
           <TableHeader>
             <TableRow>
+              <TableHead>Зураг</TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Category</TableHead>
               <TableHead>Price</TableHead>
               <TableHead>Quantity</TableHead>
               <TableHead>Description</TableHead>
-              <TableHead>Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((product) => (
-              <TableRow key={product.id}>
-                <TableCell>{product.productName}</TableCell>
-                <TableCell>{product.category}</TableCell>
-                <TableCell>{product.price}$</TableCell>
-                <TableCell>{product.qty}</TableCell>
-                <TableCell>{product.description}</TableCell>
+            {products.map((product) => (
+              <TableRow key={product?._id}>
                 <TableCell>
-                  <CellAction id={product.id} />
+                  <Image
+                    alt="Profile_img"
+                    src={product?.images[0]}
+                    width={40}
+                    height={40}
+                  />
+                </TableCell>
+                <TableCell>{product?.name}</TableCell>
+                <TableCell>{product?.category?.name}</TableCell>
+                <TableCell>{product?.price}$</TableCell>
+                <TableCell>{product?.quantity}</TableCell>
+                <TableCell>{product?.description}</TableCell>
+                <TableCell>
+                  <CellAction id={product?._id} />
                 </TableCell>
               </TableRow>
             ))}

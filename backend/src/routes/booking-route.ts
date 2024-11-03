@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {createBooking} from "../controller/booking-controller";
+import { createBooking } from "../controllers/booking-controller";
 
 const router = Router();
 router.route("/").post(createBooking);

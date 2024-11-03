@@ -9,6 +9,144 @@ export type User = {
   status: string;
 };
 export const users: User[] = [
+  //   {
+  //     id: 1,
+  //     name: 'Candice Schiner',
+  //     company: 'Dell',
+  //     role: 'Frontend Developer',
+  //     verified: false,
+  //     status: 'Active'
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'John Doe',
+  //     company: 'TechCorp',
+  //     role: 'Backend Developer',
+  //     verified: true,
+  //     status: 'Active'
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Alice Johnson',
+  //     company: 'WebTech',
+  //     role: 'UI Designer',
+  //     verified: true,
+  //     status: 'Active'
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'David Smith',
+  //     company: 'Innovate Inc.',
+  //     role: 'Fullstack Developer',
+  //     verified: false,
+  //     status: 'Inactive'
+  //   },
+  //   {
+  //     id: 5,
+  //     name: 'Emma Wilson',
+  //     company: 'TechGuru',
+  //     role: 'Product Manager',
+  //     verified: true,
+  //     status: 'Active'
+  //   },
+  //   {
+  //     id: 6,
+  //     name: 'James Brown',
+  //     company: 'CodeGenius',
+  //     role: 'QA Engineer',
+  //     verified: false,
+  //   {
+  //     id: 1,
+  //     name: 'Candice Schiner',
+  //     company: 'Dell',
+  //     role: 'Frontend Developer',
+  //     verified: false,
+  //     status: 'Active'
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'John Doe',
+  //     company: 'TechCorp',
+  //     role: 'Backend Developer',
+  //     verified: true,
+  //     status: 'Active'
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Alice Johnson',
+  //     company: 'WebTech',
+  //     role: 'UI Designer',
+  //     verified: true,
+  //     status: 'Active'
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'David Smith',
+  //     company: 'Innovate Inc.',
+  //     role: 'Fullstack Developer',
+  //     verified: false,
+  //     status: 'Inactive'
+  //   },
+  //   {
+  //     id: 5,
+  //     name: 'Emma Wilson',
+  //     company: 'TechGuru',
+  //     role: 'Product Manager',
+  //     verified: true,
+  //     status: 'Active'
+  //   },
+  //   {
+  //     id: 6,
+  //     name: 'James Brown',
+  //     company: 'CodeGenius',
+  //     role: 'QA Engineer',
+  //     verified: false,
+  //   {
+  //     id: 1,
+  //     name: 'Candice Schiner',
+  //     company: 'Dell',
+  //     role: 'Frontend Developer',
+  //     verified: false,
+  //     status: 'Active'
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'John Doe',
+  //     company: 'TechCorp',
+  //     role: 'Backend Developer',
+  //     verified: true,
+  //     status: 'Active'
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Alice Johnson',
+  //     company: 'WebTech',
+  //     role: 'UI Designer',
+  //     verified: true,
+  //     status: 'Active'
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'David Smith',
+  //     company: 'Innovate Inc.',
+  //     role: 'Fullstack Developer',
+  //     verified: false,
+  //     status: 'Inactive'
+  //   },
+  //   {
+  //     id: 5,
+  //     name: 'Emma Wilson',
+  //     company: 'TechGuru',
+  //     role: 'Product Manager',
+  //     verified: true,
+  //     status: 'Active'
+  //   },
+  //   {
+  //     id: 6,
+  //     name: 'James Brown',
+  //     company: 'CodeGenius',
+  //     role: 'QA Engineer',
+  //     verified: false,
   {
     id: 1,
     name: 'Candice Schiner',
@@ -213,8 +351,14 @@ export const navItems: NavItem[] = [
   },
   {
     title: 'Ажилтан',
-    href: '/dashboard/employee',
+    href: '/dashboard/employees',
     icon: 'user',
+    label: 'user'
+  },
+  {
+    title: 'Үйлчилгээ',
+    href: '/dashboard/service',
+    icon: 'page',
     label: 'user'
   },
   {
