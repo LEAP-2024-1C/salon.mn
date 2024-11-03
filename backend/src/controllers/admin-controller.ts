@@ -2,6 +2,16 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import Admin from "../models/admin.model";
 import { generateToken } from "../utils/jwt";
+export const getCurrentUser = async (req: Request, res: Response) => {
+  try {
+    const findUser = await Admin.find({});
+    console.log("user", findUser);
+    res.status(200).json({ message: "success", user: findUser });
+  } catch (error: any) {
+    console.log(error.message);
+    res.status(404).json({ message: "aldaa garlaa", error: error.message });
+  }
+};
 export const createAdmin = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body;
