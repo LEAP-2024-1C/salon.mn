@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/layout/header";
-import { ThemeProvider } from "next-themes";
+
 import Footer from "@/components/layout/footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -37,12 +37,12 @@ export default function RootLayout({
       >
         <EmployeesProvider>
           <UserProvider>
-            {/* <ThemeProvider attribute="class"> */}
+            
             <Header />
             {children}
             <Footer />
             <ToastContainer />
-            {/* </ThemeProvider> */}
+            
           </UserProvider>
         </EmployeesProvider>
       </body>
