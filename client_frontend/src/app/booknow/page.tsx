@@ -44,11 +44,10 @@ const BookNow = () => {
     phoneNumber: "",
     date: "",
     time: "",
-    employee: "",
   });
   console.log(booking);
   const bookNow = async () => {
-    const { firstname, phoneNumber, time, date, employee } = booking;
+    const { firstname, phoneNumber, time, date } = booking;
     try {
       const response = await axios.post(
         `http://localhost:8008/api/v1/booking`,
@@ -156,9 +155,9 @@ const BookNow = () => {
           </Button>
         </div>
         <div className="text-white">
-          {allbooking?.map((booking) => {
+          {allbooking?.map((booking, idx) => {
             return (
-              <div className="flex flex-col gap-4">
+              <div key={`allbooking` + idx} className="flex flex-col gap-4">
                 <p>{booking.date}</p>
                 <p>{booking.time}</p>
                 <p>{booking.firstname}</p>
