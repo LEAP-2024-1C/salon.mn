@@ -33,20 +33,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#101828]`}
       >
         <EmployeesProvider>
-        <UserProvider>
-        <ThemeProvider attribute="class">
-          <Header />
-          {children}
-          <Footer />
-          <ToastContainer />
-        </ThemeProvider>
-        </UserProvider>
+          <UserProvider>
+            {/* <ThemeProvider attribute="class"> */}
+            <Header />
+            {children}
+            <Footer />
+            <ToastContainer />
+            {/* </ThemeProvider> */}
+          </UserProvider>
         </EmployeesProvider>
-        
-        
       </body>
     </html>
   );
