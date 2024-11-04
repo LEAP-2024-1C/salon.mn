@@ -14,6 +14,7 @@ export default function Page() {
     <PageContainer scrollable={true}>
       <div className="space-y-4">
         <Breadcrumbs items={breadcrumbItems} />
+
         <EmployeeForm />
       </div>
     </PageContainer>
