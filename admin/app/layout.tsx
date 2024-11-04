@@ -32,19 +32,17 @@ export default async function RootLayout({
         suppressHydrationWarning={true}
       >
         <EmployeesProvider>
-          <NextTopLoader showSpinner={false} />
-          <ToastContainer />
-          <Toaster />
-          <AdminProvider>{children}</AdminProvider>
-          <ProductProvider>
-            <ServiceProvider>
-              <NextTopLoader showSpinner={false} />
-              <Suspense>{children}</Suspense>
-              <Toaster />
+          <AdminProvider>
+            <ProductProvider>
+              <ServiceProvider>
+                <NextTopLoader showSpinner={false} />
+                <Suspense>{children}</Suspense>
+                <Toaster />
 
-              <ToastContainer />
-            </ServiceProvider>
-          </ProductProvider>
+                <ToastContainer />
+              </ServiceProvider>
+            </ProductProvider>
+          </AdminProvider>
         </EmployeesProvider>
       </body>
     </html>
