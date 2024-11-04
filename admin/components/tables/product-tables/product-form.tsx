@@ -20,7 +20,8 @@ import { toast } from 'react-toastify';
 import { ProductContext } from '@/app/context/product-context';
 
 export const ProductForm = () => {
-  const { productID } = useParams();
+  const { productId } = useParams();
+  const productID = productId;
   const router = useRouter();
 
   const { product, setProduct, fetchProductData, createdProduct } =
