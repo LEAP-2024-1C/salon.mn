@@ -16,7 +16,7 @@ const Artists = () => {
       console.error("Error fetching user data:", error);
     }
   };
-
+  console.log("product", products);
   useEffect(() => {
     fetchProductsData();
   }, []);

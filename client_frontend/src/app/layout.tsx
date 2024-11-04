@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/layout/header";
-import { ThemeProvider } from "next-themes";
+
 import Footer from "@/components/layout/footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,20 +33,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#101828]`}
       >
         <EmployeesProvider>
-        <UserProvider>
-        <ThemeProvider attribute="class">
-          <Header />
-          {children}
-          <Footer />
-          <ToastContainer />
-        </ThemeProvider>
-        </UserProvider>
+          <UserProvider>
+            
+            <Header />
+            {children}
+            <Footer />
+            <ToastContainer />
+            
+          </UserProvider>
         </EmployeesProvider>
-        
-        
       </body>
     </html>
   );

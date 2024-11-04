@@ -29,7 +29,7 @@ const PhoneMenu = ({
   };
   return (
     <div>
-      <section className="sm:hidden">
+      <section className="sm:hidden text-white">
         {show ? (
           <div className="bg-gray-800 absolute z-20 top-0 left-0 w-full h-screen">
             <div className="bg-[#101828] w-10/12 h-screen ml-auto text-white  px-4 py-6">

@@ -36,9 +36,10 @@ const Products = ({ name, price, images, discount, _id }: IProduct) => {
   const handleClick = (id: string) => {
     SaveProduct(id);
   };
+  console.log("name", name);
   return (
     <div>
-      <div className=" w-9/12 m-auto container grid grid-cols-4  gap-5 my-10 ">
+      <div className="text-white w-9/12 m-auto container grid grid-cols-4  gap-5 my-10 ">
         <div className="relative w-[245px] h-[391px]">
           <Link href={"/detail/" + _id} className="w-full h-full">
             <div className=" row-span-2 col-span-2  ">
@@ -46,7 +47,7 @@ const Products = ({ name, price, images, discount, _id }: IProduct) => {
                 <img src={images[0]} alt="" className="w-full h-full" />
               </div>
 
-              <p>{name}</p>
+              <p className="">{name}</p>
               <PriceWithDiscount price={price} discount={discount} />
             </div>
           </Link>

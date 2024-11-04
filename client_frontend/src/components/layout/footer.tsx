@@ -7,7 +7,7 @@ import { IoMdMusicalNote } from "react-icons/io";
 import Image from "next/image";
 const Footer: React.FC = () => {
   return (
-    <footer>
+    <footer className="text-white border-t-2">
       <div className="mb-[20px]">
         <Image
           width={100}
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
         </ul>
       </div>
 
-      <div className="border-t-2 p-4 text-xs">
+      <div className="w-9/12  m-auto border-t-2 p-4 text-xs">
         <Link href="/terms">Terms of Service</Link>
         <p>Copyright © {new Date().getFullYear()}. All rights reserved</p>
         <Link href="/privacy">Privacy policy</Link>
