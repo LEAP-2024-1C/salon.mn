@@ -30,16 +30,22 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 const BookNow = () => {
-  // const router = useRouter();
-
-  // const [date, setDate] = React.useState<Date>();
+  const [allbooking, setAllbooking] = useState([
+    {
+      firstname: "",
+      phoneNumber: "",
+      date: "",
+      time: "",
+      employee: "",
+    },
+  ]);
   const [booking, setBooking] = useState({
     firstname: "",
     phoneNumber: "",
     date: "",
     time: "",
   });
-
+  console.log(booking);
   const bookNow = async () => {
     const { firstname, phoneNumber, time, date } = booking;
     try {
@@ -50,7 +56,7 @@ const BookNow = () => {
           phoneNumber,
           date,
           time,
-          // user: "672253bff787da7d82ca0b42",
+          employee: "6726365aa711ec62596d2cf9",
         }
       );
       if (response.status === 201) {
@@ -61,7 +67,21 @@ const BookNow = () => {
       toast.error("failed to book now");
     }
   };
-
+  const getBook = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8008/api/v1/booking`);
+      if (response.status === 201) {
+        toast.success("successfull to book now");
+        setAllbooking(response.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("failed to book now");
+    }
+  };
+  React.useEffect(() => {
+    getBook();
+  }, []);
   return (
     <div className="bg-[#101828]">
       <div className="bg-[#101828] p-2 pt-10 flex flex-col gap-10 md:m-auto md:container">
@@ -130,58 +150,21 @@ const BookNow = () => {
             type="time"
             onChange={(e) => setBooking({ ...booking, time: e.target.value })}
           />
-          {/* <div>
-            <p className="text-white">Цаг сонголт</p>
-            <div className="flex gap-1">
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant={"outline"}
-                    className={cn(
-                      "w-[280px] justify-start text-left font-normal",
-                      !date && "text-muted-foreground"
-                    )}
-                  >
-                    <CalendarIcon />
-                    {date ? format(date, "PPP") : <span>Pick a date</span>}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <Select>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Цаг сонголт" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Цагууд</SelectLabel>
-                    <SelectItem value="9:00">9:00</SelectItem>
-                    <SelectItem value="10:00">10:00</SelectItem>
-                    <SelectItem value="11:00">11:00</SelectItem>
-                    <SelectItem value="12:00">12:00</SelectItem>
-                    <SelectItem value="13:00">13:00</SelectItem>
-                    <SelectItem value="14:00">14:00</SelectItem>
-                    <SelectItem value="15:00">15:00</SelectItem>
-                    <SelectItem value="16:00">16:00</SelectItem>
-                    <SelectItem value="17:00">17:00</SelectItem>
-                    <SelectItem value="18:00">18:00</SelectItem>
-                    <SelectItem value="19:00">19:00</SelectItem>
-                    <SelectItem value="20:00">20:00</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-          </div> */}
           <Button variant="secondary" onClick={bookNow}>
             Цаг захиалах
           </Button>
+        </div>
+        <div className="text-white">
+          {allbooking?.map((booking, idx) => {
+            return (
+              <div key={`allbooking` + idx} className="flex flex-col gap-4">
+                <p>{booking.date}</p>
+                <p>{booking.time}</p>
+                <p>{booking.firstname}</p>
+                <p>{booking.phoneNumber}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
