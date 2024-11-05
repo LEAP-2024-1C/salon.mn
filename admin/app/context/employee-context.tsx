@@ -25,6 +25,7 @@ export interface IEmployee {
       rate: number;
     }
   ];
+  availableDates: [{ startDate: string; endDate: string; _id: string }];
 }
 
 interface ICreateEm {
@@ -121,7 +122,6 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
       }
     } catch (error) {
       toast.error('Ажилтан үүсгэхэд алдаа гарлаа.');
-      
     }
   };
 

@@ -15,6 +15,7 @@ interface IEmployee {
       rate: number;
     }
   ];
+  availableDates: [{ startDate: Date; endDate: Date }];
 }
 
 const employeeSchema = new Schema<IEmployee>({
@@ -68,7 +69,22 @@ const employeeSchema = new Schema<IEmployee>({
       },
     },
   ],
+  availableDates: [
+    {
+      startDate: {
+        type: Date,
+        required: true,
+        default: new Date(),
+      },
+      endDate: {
+        type: Date,
+        required: true,
+        default: new Date(),
+      },
+    },
+  ],
 });
+
 employeeSchema.pre("save", function (next) {
   if (!this.isModified("password")) {
     next();
