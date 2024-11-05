@@ -134,65 +134,16 @@ export const ProfileForm = () => {
             value={employee?.name}
           />
         </div>
-        {/* <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label>Утсны дугаар</Label>
-          <Input
-            type="number"
-            onChange={(e) =>
-              setEmployee({
-                ...employee,
-                phoneNumber: Math.floor(Number(e.target.value))
-              })
-            }
-            value={employee?.phoneNumber}
-            placeholder="Number"
-          />
-        </div> */}
         <div className="grid w-full max-w-sm items-center gap-1.5">
           <Label>Email</Label>
           <Input
-            type="email"
+            type="text"
             onChange={(e) =>
               setEmployee({ ...employee, email: e.target.value })
             }
-            placeholder="Email"
+            placeholder="Text"
             value={employee?.email}
           />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label>Password</Label>
-          <Input
-            type="password"
-            onChange={(e) =>
-              setEmployee({ ...employee, password: e.target.value })
-            }
-            placeholder="Password"
-            value={employee?.password}
-          />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label>Category select</Label>
-          <Select
-            onValueChange={(value) =>
-              setEmployee({ ...employee, category: value })
-            }
-            defaultValue={employee?.category}
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Category" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="6721a4727300f88d42793b76">Barber</SelectItem>
-                <SelectItem value="6720654be0eb8fa8d9b935c8">
-                  Nail art
-                </SelectItem>
-                <SelectItem value="6721a4837300f88d42793b78">
-                  Beauty artist
-                </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
         </div>
         <div className=" row-span-4 w-full max-w-sm  items-start gap-1.5">
           <Label>Тайлбар</Label>
@@ -201,7 +152,7 @@ export const ProfileForm = () => {
               setEmployee({ ...employee, discription: e.target.value })
             }
             type="text"
-            placeholder="Ajliin turshalag geh met"
+            placeholder=""
             className="h-full "
             value={employee?.discription}
           />

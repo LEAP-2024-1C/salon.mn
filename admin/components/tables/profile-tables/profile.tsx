@@ -8,7 +8,6 @@ import { EmployeeDataTable } from '../employee-tables/employee-data-table';
 import { useContext } from 'react';
 import { ProfileTable } from './profile-table';
 
-
 export const Profile = () => {
   // const { employees } = useContext(EmployeesContext);
 
@@ -16,14 +15,14 @@ export const Profile = () => {
     <>
       <div className="flex items-start justify-between">
         <Link
-          href={'/dashboard/employees/create'}
+          href={'/dashboard/profile/create'}
           className={cn(buttonVariants({ variant: 'default' }))}
         >
-          <Plus className="mr-2 h-4 w-4" /> Шинэ
+          <Plus className="mr-2 h-4 w-4" /> Өөрчлөх
         </Link>
       </div>
       {/* <Separator /> */}
-      <ProfileTable/>
+      <ProfileTable />
     </>
   );
 };
