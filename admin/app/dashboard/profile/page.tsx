@@ -1,11 +1,12 @@
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { CreateProfileOne } from '@/components/forms/user-profile-stepper/create-profile';
 import PageContainer from '@/components/layout/page-container';
-import { Profile } from '@/components/tables/employee-tables/profile';
+import { Profile } from '@/components/tables/profile-tables/profile';
+
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/dashboard' },
-  { title: 'Profile', link: '/dashboard/profile' }
+  { title: 'Бидний тухай', link: '/dashboard/profile' }
 ];
 export default function page() {
   return (

@@ -4,12 +4,13 @@ import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
-import { EmployeeDataTable } from './employee-data-table';
+import { EmployeeDataTable } from '../employee-tables/employee-data-table';
 import { useContext } from 'react';
-import { EmployeesContext } from '@/app/context/employee-context';
+import { ProfileTable } from './profile-table';
+
 
 export const Profile = () => {
-  const { employees } = useContext(EmployeesContext);
+  // const { employees } = useContext(EmployeesContext);
 
   return (
     <>
@@ -22,7 +23,7 @@ export const Profile = () => {
         </Link>
       </div>
       {/* <Separator /> */}
-      <EmployeeDataTable />
+      <ProfileTable/>
     </>
   );
 };
