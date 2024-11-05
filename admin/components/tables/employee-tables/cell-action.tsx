@@ -40,6 +40,7 @@ export const CellAction: React.FC<CellActionProps> = ({ id }) => {
         toast.success('Ажилтны мэдээлэл амжилттай устгалаа.');
         // router.push('/dashboard/employees');
         setOpen(true);
+        setLoading(true)
       }
     } catch (error) {
       toast.error('Ажилтны утгахад алдаа гарлаа.');

@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import axios from "axios";
-import React, { useContext, useState, createContext, useEffect } from "react";
+import axios from 'axios';
+import React, { useContext, useState, createContext, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 interface IUser {
   _id: string;
@@ -28,7 +29,7 @@ export const UserContext = createContext<IContext>({
   user: null,
   setUser: () => {},
   token: null,
-  setToken: () => {},
+  setToken: () => {}
 });
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -38,21 +39,18 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const fetchUserData = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8008/api/v1/auth/currentuser",
+        'http://localhost:8008/api/v1/auth/currentuser',
         {
           headers: {
-            Authorization: `Bearer ${token}`,
-          },
+            Authorization: `Bearer ${token}`
+          }
         }
       );
       if (res.status === 200) {
         setUser(res.data.findUser);
       }
     } catch (error) {
-      console.error(
-        "User ийн датаагаа backend ээс авахад алдаа гарсан байна.",
-        error
-      );
+      toast.error('User ийн датаагаа backend ээс авахад алдаа гарсан байна.');
     }
   };
 
@@ -60,7 +58,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     if (token) {
       fetchUserData();
     } else {
-      setToken(localStorage.getItem("token"));
+      setToken(localStorage.getItem('token'));
     }
   }, [token]);
 

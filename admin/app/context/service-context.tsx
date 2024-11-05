@@ -65,7 +65,7 @@ const ServiceProvider = ({ children }: { children: React.ReactNode }) => {
         setServices(res.data.services);
       }
     } catch (error) {
-      console.error('Үйлчилгээ дата татахад алдаа гарлаа.');
+      toast.error('Үйлчилгээ дата татахад алдаа гарлаа.');
     }
   };
 
