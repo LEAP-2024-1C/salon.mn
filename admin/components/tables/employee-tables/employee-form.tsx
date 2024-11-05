@@ -41,7 +41,7 @@ export const EmployeeForm = () => {
         setEmployee(res.data.employee);
       }
     } catch (error) {
-      console.log(' Aжилтны мэдээлэл татахад алдаа гарлаа');
+      toast.error(' Aжилтны мэдээлэл татахад алдаа гарлаа');
     }
   };
 

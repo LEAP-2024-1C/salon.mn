@@ -39,16 +39,15 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
   const [admin, setAdmin] = useState(null);
   const fetchAdminData = async () => {
     try {
-      console.log('token', token);
       const res = await axios.get(`http://localhost:8008/api/v1/admin/get`);
-      console.log(res);
+
       if (res.status === 200) {
         toast.success('fetchin data done');
         setAdmin(res.data.user[0]);
       }
-    } catch (error: any) {
-      console.error('Error fetching user data:', error.message);
-      toast.error('gg ez');
+    } catch (error) {
+      // console.error('Error fetching user data:', error.message);
+      toast.error('Error fetching user data');
     }
   };
   useEffect(() => {

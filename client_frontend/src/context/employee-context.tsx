@@ -58,7 +58,7 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const getEmployee = async (employeeID: string | string[]) => {
+  const getEmployee = async () => {
     try {
       const res = await axios({
         method: "get",
@@ -76,7 +76,7 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
     fetchEmployeeData();
   }, []);
   useEffect(() => {
-    getEmployee(employeeID);
+    getEmployee();
   }, [employeeID]);
 
   return (

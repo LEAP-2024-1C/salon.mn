@@ -40,6 +40,7 @@ export default function UserAuthForm() {
       email: data.email,
       callbackUrl: callbackUrl ?? '/dashboard'
     });
+    setLoading(true)
   };
 
   return (

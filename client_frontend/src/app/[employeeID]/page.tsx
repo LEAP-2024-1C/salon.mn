@@ -34,7 +34,7 @@ const ArtistDetail = () => {
 
   const [date, setDate] = React.useState<Date>();
   const { employee } = useContext(EmployeesContext);
-  console.log("img", employee?.profile_img);
+
   return (
     <div className="flex flex-col bg-[#101828] text-[#FFFAF5] px-[15px] py-[30px] gap-10 ">
       <div className="flex flex-col gap-10 md:flex-row md:w-full ">
