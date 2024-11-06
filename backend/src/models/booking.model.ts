@@ -7,6 +7,7 @@ interface IBooking {
   date: Date;
   firstname: String;
   phoneNumber: Number;
+  service: String; //uschin => eregtei emegtei ys zasal
 }
 
 const bookingSchema = new Schema<IBooking>({

@@ -30,20 +30,13 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 const BookNow = () => {
-  const [allbooking, setAllbooking] = useState([
-    {
-      firstname: "",
-      phoneNumber: "",
-      date: "",
-      time: "",
-      employee: "",
-    },
-  ]);
   const [booking, setBooking] = useState({
     firstname: "",
     phoneNumber: "",
     date: "",
     time: "",
+    service: "",
+    empID: "",
   });
   console.log(booking);
   const bookNow = async () => {
@@ -67,21 +60,26 @@ const BookNow = () => {
       toast.error("failed to book now");
     }
   };
-  const getBook = async () => {
+  //
+  const handleTime = async () => {
+    const { empID, time, date } = booking;
     try {
-      const response = await axios.get(`http://localhost:8008/api/v1/booking`);
+      const response = await axios.post(
+        `http://localhost:8008/api/v1/employee/controlTime`,
+        {
+          date,
+          time,
+          employee: "6726365aa711ec62596d2cf9",
+        }
+      );
       if (response.status === 201) {
-        toast.success("successfull to book now");
-        setAllbooking(response.data.data);
+        toast.success("successfull to add time");
       }
     } catch (error) {
       console.log(error);
-      toast.error("failed to book now");
+      toast.error("failed to add time");
     }
   };
-  React.useEffect(() => {
-    getBook();
-  }, []);
   return (
     <div className="bg-[#101828]">
       <div className="bg-[#101828] p-2 pt-10 flex flex-col gap-10 md:m-auto md:container">
@@ -119,52 +117,6 @@ const BookNow = () => {
               Гоо сайхан
             </div>
           </div>
-        </div>
-        <div className="flex flex-col gap-3 md:w-[560px] md:flex md:m-auto border border-red-500 p-4 rounded-lg">
-          <div>
-            <p className="text-white">Нэр</p>
-            <Input
-              type="text"
-              placeholder="Нэр"
-              onChange={(e) =>
-                setBooking({ ...booking, firstname: e.target.value })
-              }
-            />
-          </div>
-          <div>
-            <p className="text-white">Утас</p>
-            <Input
-              type="text"
-              placeholder="Утасны дугаар"
-              onChange={(e) =>
-                setBooking({ ...booking, phoneNumber: e.target.value })
-              }
-            />
-          </div>
-          <input
-            type="date"
-            placeholder="date"
-            onChange={(e) => setBooking({ ...booking, date: e.target.value })}
-          />
-          <input
-            type="time"
-            onChange={(e) => setBooking({ ...booking, time: e.target.value })}
-          />
-          <Button variant="secondary" onClick={bookNow}>
-            Цаг захиалах
-          </Button>
-        </div>
-        <div className="text-white">
-          {allbooking?.map((booking, idx) => {
-            return (
-              <div key={`allbooking` + idx} className="flex flex-col gap-4">
-                <p>{booking.date}</p>
-                <p>{booking.time}</p>
-                <p>{booking.firstname}</p>
-                <p>{booking.phoneNumber}</p>
-              </div>
-            );
-          })}
         </div>
       </div>
     </div>

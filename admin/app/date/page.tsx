@@ -22,7 +22,6 @@ import {
   setSeconds
 } from 'date-fns';
 import { format } from 'date-fns';
-import DatePicker from 'react-datepicker';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import { Label } from '@/components/ui/label';
@@ -107,7 +106,8 @@ const EmployeeTime = () => {
   >([{ startDate: new Date(), endDate: new Date() }]);
 
   const [bookedDates, setBookedDates] = useState<Date[]>([
-    new Date('2024-11-08T11:00')
+    new Date('2024-11-08T11:00'),
+    new Date('2024-11-08T12:00')
   ]);
 
   const changeDateInput = (e: ChangeEvent<HTMLInputElement>) => {

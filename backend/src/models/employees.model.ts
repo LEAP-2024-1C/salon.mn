@@ -16,6 +16,7 @@ interface IEmployee {
     }
   ];
   availableDates: [{ startDate: Date; endDate: Date }];
+  unAvailableTime: [Date];
 }
 
 const employeeSchema = new Schema<IEmployee>({
@@ -83,6 +84,7 @@ const employeeSchema = new Schema<IEmployee>({
       },
     },
   ],
+  unAvailableTime: [Date],
 });
 
 employeeSchema.pre("save", function (next) {

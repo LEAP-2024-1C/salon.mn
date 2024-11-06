@@ -112,3 +112,17 @@ export const createAvailableDates = async (req: Request, res: Response) => {
       .json({ message: "Ажилтаны цагийн хуваар үүсгэхэд алдаа гарлаа " });
   }
 };
+export const addunAvailableTime = async (req: Request, res: Response) => {
+  const { date, empID } = req.body;
+  try {
+    const employee = await Employee.findById(empID);
+    console.log("TM", typeof Date.now());
+    console.log("TM", date);
+    employee?.unAvailableTime.push(new Date(Date.now()));
+    const updatedTime = await employee?.save();
+    res.status(200).json({ message: "success", updatedTime });
+  } catch (error: any) {
+    console.log("====> comment section aldaa", error);
+    res.status(400).json({ message: "aldaa garlaa", error: error.message });
+  }
+};
