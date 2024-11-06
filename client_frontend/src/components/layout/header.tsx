@@ -9,14 +9,15 @@ import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { UserContext } from "@/context/user-booking-context";
 import Link from "next/link";
+import { TbArrowLeftFromArc } from "react-icons/tb";
 
 const menuList: IMenu = [
-  { menuId: "Id01", label: "Home", link: "/" },
-  { menuId: "Id02", label: "Бидний тухай", link: "about" },
+  // { menuId: "Id01", label: "Home", link: "/" },
+  { menuId: "Id02", label: "Бидний тухай", link: "/" },
   { menuId: "Id03", label: "Үйлчилгээ", link: "ourService" },
   { menuId: "Id04", label: "Артист", link: "artists" },
-  { menuId: "Id05", label: "Бүтээгдэхүүн", link: "products" },
   { menuId: "Id06", label: "Book now", link: "booknow" },
+  { menuId: "Id05", label: "Бүтээгдэхүүн", link: "products" },
 ];
 const phoneStyle: string = "flex flex-col px-4 py-6 border-b";
 
@@ -29,17 +30,18 @@ const Header = () => {
     router.push("/");
   };
   return (
-    <div className="w-full bg-[#101828]">
-      <header className="flex items-center justify-between w-9/12 m-auto  border-b-2 px-4 py-4 bg-[#101828] md:px-20 ">
-        <Image height={200} src="/images/logo.png" alt="photo" width={150} />
+    <div className="w-full bg-[#101828] border-b-2">
+      <header className="flex items-center justify-between w-[90%] m-auto   px-4 py-4 bg-[#101828] md:px-20 ">
+        <Image height={250} src="/images/logo.png" alt="photo" width={200} />
 
         <div className="flex justify-between items-center max-sm:hidden">
-          <ul
-            className={` flex gap-4 font-medium text-[16px] text-gray-600 dark:text-white`}
-          >
+          <ul className={` flex gap-4 font-medium text-[16px] text-white `}>
             {menuList.map((menu) => (
-              <li key={menu.menuId}>
-                <a href={menu.link}>{menu.label}</a>
+              <li key={menu.menuId} className="flex items-center gap-1">
+                <TbArrowLeftFromArc className=" text-lg text-gray-400" />
+                <a className="text-lg" href={menu.link}>
+                  {menu.label}
+                </a>
               </li>
             ))}
           </ul>
