@@ -67,21 +67,6 @@ const BookNow = () => {
       toast.error("failed to book now");
     }
   };
-  const getBook = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8008/api/v1/booking`);
-      if (response.status === 201) {
-        toast.success("successfull to book now");
-        setAllbooking(response.data.data);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("failed to book now");
-    }
-  };
-  React.useEffect(() => {
-    getBook();
-  }, []);
   return (
     <div className="bg-[#101828]">
       <div className="bg-[#101828] p-2 pt-10 flex flex-col gap-10 md:m-auto md:container">
