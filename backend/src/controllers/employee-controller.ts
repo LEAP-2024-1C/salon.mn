@@ -100,7 +100,7 @@ export const createAvailableDates = async (req: Request, res: Response) => {
       return res.status(401).json({ message: "Ажилтан олдсонгүй" });
     }
 
-    findEmployee.availableDates = availableDates;
+    findEmployee.availableDates.push(...availableDates);
     const changeEmployee = await findEmployee?.save();
 
     res
@@ -116,9 +116,7 @@ export const addunAvailableTime = async (req: Request, res: Response) => {
   const { date, empID } = req.body;
   try {
     const employee = await Employee.findById(empID);
-    console.log("TM", typeof Date.now());
-    console.log("TM", date);
-    employee?.unAvailableTime.push(new Date(Date.now()));
+    employee?.unAvailableTime.push(date);
     const updatedTime = await employee?.save();
     res.status(200).json({ message: "success", updatedTime });
   } catch (error: any) {

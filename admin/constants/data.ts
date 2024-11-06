@@ -365,9 +365,9 @@ export const navItems: NavItem[] = [
   },
 
   {
-    title: 'Захиалга харах',
+    title: 'Booking',
     href: '/dashboard/booking',
-    icon: 'kanban',
+    icon: 'post',
     label: 'user'
   },
   {

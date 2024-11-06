@@ -5,7 +5,10 @@ import Booking from "../models/booking.model";
 
 export const getBooking = async (req: Request, res: Response) => {
   try {
-    const allBooking = await Booking.find({});
+    const allBooking = await Booking.find({})
+      .populate("service")
+      .populate("employee")
+      .populate("user");
     res.status(201).json({ message: "success", data: allBooking });
   } catch (error) {
     res.status(400).json("aldaa garlaa booking data fetch");
@@ -13,19 +16,20 @@ export const getBooking = async (req: Request, res: Response) => {
 };
 export const createBooking = async (req: Request, res: Response) => {
   try {
-    const { firstname, phoneNumber, time, date, user, employee } = req.body;
+    const { firstname, phoneNumber, date, user, employee, service } = req.body;
 
-    if (!firstname || !phoneNumber || !time || !date || !employee) {
+    if (!firstname || !phoneNumber || !date || !employee || !service) {
       return res.status(400).json({ message: "Fields cannot be empty." });
     }
 
     const newBook = await Booking.create({
       firstname,
       phoneNumber,
-      time,
+
       date,
       employee,
       user,
+      service,
     });
     res.status(201).json({ message: "Success", booking: newBook });
   } catch (error) {
