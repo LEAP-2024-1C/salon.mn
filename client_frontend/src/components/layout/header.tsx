@@ -10,10 +10,11 @@ import { useContext } from "react";
 import { UserContext } from "@/context/user-booking-context";
 import Link from "next/link";
 import { TbArrowLeftFromArc } from "react-icons/tb";
+import { GoDotFill } from "react-icons/go";
 
 const menuList: IMenu = [
   // { menuId: "Id01", label: "Home", link: "/" },
-  { menuId: "Id02", label: "Бидний тухай", link: "/" },
+  { menuId: "Id02", label: "Бидний тухай", link: "about" },
   { menuId: "Id03", label: "Үйлчилгээ", link: "ourService" },
   { menuId: "Id04", label: "Артист", link: "artists" },
   { menuId: "Id06", label: "Book now", link: "booknow" },
@@ -38,7 +39,7 @@ const Header = () => {
           <ul className={` flex gap-4 font-medium text-[16px] text-white `}>
             {menuList.map((menu) => (
               <li key={menu.menuId} className="flex items-center gap-1">
-                <TbArrowLeftFromArc className=" text-lg text-gray-400" />
+                <GoDotFill className="text-lg text-green-500" />
                 <a className="text-lg" href={menu.link}>
                   {menu.label}
                 </a>
