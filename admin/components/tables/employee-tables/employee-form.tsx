@@ -213,7 +213,7 @@ export const EmployeeForm = () => {
         </div>
 
         <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label>Category select</Label>
+          <Label>Sub Category select</Label>
           <Select
             onValueChange={(value) =>
               setEmployee({ ...employee, subCategory: value })
