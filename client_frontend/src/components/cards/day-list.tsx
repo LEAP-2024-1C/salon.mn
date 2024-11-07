@@ -53,7 +53,7 @@ const CalendarList: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-4 text-sm text-gray-500">*Та үйлчилгэний өдрөө сонгоно уу.</div>
+      <div className="mt-4 text-sm text-gray-500">*Та үйлчилгээний өдрөө сонгоно уу.</div>
     </div>
   );
 };
