@@ -1,13 +1,13 @@
 'use client';
 import { Breadcrumbs } from '@/components/breadcrumbs';
-import { EmployeeForm } from '@/components/tables/employee-tables/employee-form';
 import PageContainer from '@/components/layout/page-container';
 import React from 'react';
+import { ProfileForm } from '@/components/tables/profile-tables/profile-form';
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/dashboard' },
-  { title: 'Ажилтан', link: '/dashboard/employees' },
-  { title: 'Ажилтан үүсгэх', link: '/dashboard/employees/create' }
+  { title: 'Бидний тухай', link: '/dashboard/profile' },
+  { title: 'Ажилтан үүсгэх', link: '/dashboard/profile/create' }
 ];
 export default function Page() {
   return (
@@ -15,7 +15,7 @@ export default function Page() {
       <div className="space-y-4">
         <Breadcrumbs items={breadcrumbItems} />
 
-        <EmployeeForm />
+        <ProfileForm/>
       </div>
     </PageContainer>
   );

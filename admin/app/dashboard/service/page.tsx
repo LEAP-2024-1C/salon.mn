@@ -26,7 +26,7 @@ export default async function page() {
           <Heading title={`Service`} description="Manage service" />
 
           <Link
-            href={'/dashboard/service/create'}
+            href={'/dashboard/profile/create'}
             className={cn(buttonVariants({ variant: 'default' }))}
           >
             <Plus className="mr-2 h-4 w-4" /> Add New

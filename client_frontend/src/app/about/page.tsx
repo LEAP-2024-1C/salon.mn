@@ -65,7 +65,7 @@ const AboutUs = () => {
           amet. Tortor velit.
         </p>
       </div>
-      <div className="grid gap-16 md:flex md:gap-10">
+      <div className="grid justify-center gap-16 md:flex md:gap-10">
         <BestArtist />
       </div>
 
