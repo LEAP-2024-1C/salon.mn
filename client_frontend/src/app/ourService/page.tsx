@@ -157,8 +157,8 @@ const OurServices = () => {
         </div>
 
         <div className="w-[300px] h-[500px] bg-[#ECE8DE] border border-gray-300 rounded-xl">
-        <p className="text-center text-2xl text-red-600">Гоо сайхан </p>
-         
+          <p className="text-center text-2xl text-red-600">Гоо сайхан </p>
+
           <div className="flex items-center justify-between w-[270px] mx-auto mt-6 text-xl text-white px-4">
             <p className="font-semibold text-black">Усан массаж </p>
             <div className="flex-grow mx-2 border-b-2 border-dotted  border-red-400 pt-2"></div>
@@ -178,6 +178,63 @@ const OurServices = () => {
             <p className="font-semibold text-black">Сормуус суулгах</p>
             <div className="flex-grow mx-2 border-b-2 border-dotted  border-red-400 pt-2"></div>
             <p className="text-[#F63D68]">70000₮</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p className="text-4xl text-center">Our tools set</p>
+        <div className="flex gap-3 my-8 ml-4">
+          <div>
+            <Image
+              className="overflow-hidden"
+              src="https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/2022/06/hair-nose-ear-and-shaving-wireless-clipper-2021-08-26-16-25-43-utc_isolated.png"
+              width={240}
+              height={300}
+              alt="Picture of the author"
+            />
+            <p className="text-2xl w-80">
+              Package Hair Cutting Machine by Barber 97 Aliquet blandit eget
+              dolor.
+            </p>
+          </div>
+          <div>
+            <Image
+              className="overflow-hidden"
+              src="https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/2022/06/professional-haircutting-scissors-isolated-2021-08-26-17-07-22-utc_isolated.png"
+              width={240}
+              height={150}
+              alt="Picture of the author"
+            />
+            <p className="text-2xl w-80">
+              Package Hair Cutting Machine by Barber 97 Aliquet blandit eget
+              dolor.
+            </p>
+          </div>
+          <div>
+            <Image
+              className="overflow-hidden"
+              src="https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/2022/06/hairclipper-on-white-background-2021-08-26-18-17-31-utc_isolated.png"
+              width={240}
+              height={150}
+              alt="Picture of the author"
+            />
+            <p className="text-2xl w-80">
+              Package Hair Cutting Machine by Barber 97 Aliquet blandit eget
+              dolor.
+            </p>
+          </div>
+          <div>
+            <Image
+              className="overflow-hidden"
+              src="https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/2022/06/hairdresser-tool-set-in-open-bag-2021-09-03-21-13-00-utc_isolated.png"
+              width={240}
+              height={300}
+              alt="Picture of the author"
+            />
+            <p className="text-2xl w-80">
+              Package Hair Cutting Machine by Barber 97 Aliquet blandit eget
+              dolor.
+            </p>
           </div>
         </div>
       </div>

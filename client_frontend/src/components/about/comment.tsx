@@ -4,12 +4,9 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import Image from "next/image";
 
-
 const Comment = () => {
-
-
   return (
-    <div className=" flex flex-col gap-5">
+    <div className=" flex flex-col gap-5 text-white">
       <div className="flex relative gap-5 ">
         <div className="border border-pink-600 rounded-full flex relative w-11 h-11">
           <Image

@@ -20,7 +20,9 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 export const EmployeeForm = () => {
-  const { employeeID } = useParams();
+  const { employeeId } = useParams();
+  const employeeID = employeeId;
+
   const router = useRouter();
 
   const { employee, setEmployee, createdEmployee, fetchEmployeeData } =
@@ -39,7 +41,7 @@ export const EmployeeForm = () => {
         setEmployee(res.data.employee);
       }
     } catch (error) {
-      console.log(' Aжилтны мэдээлэл татахад алдаа гарлаа');
+      toast.error(' Aжилтны мэдээлэл татахад алдаа гарлаа');
     }
   };
 

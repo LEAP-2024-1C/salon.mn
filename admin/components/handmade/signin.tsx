@@ -13,16 +13,15 @@ function Signin() {
     email: '',
     password: ''
   });
-  console.log(userData);
+
   const signin = async () => {
     const { email, password } = userData;
     try {
-      console.log('first');
       const res = await axios.post(`http://localhost:8008/api/v1/admin/login`, {
         email,
         password
       });
-      console.log(res);
+
       if (res.status === 200) {
         toast.success('Амжилттай нэвтэрлээ', { autoClose: 1000 });
         const { token } = res.data;
@@ -31,7 +30,7 @@ function Signin() {
         router.push('/dashboard');
       }
     } catch (error: any) {
-      console.log('There was an error signing in:', error.message);
+      // console.log('There was an error signing in:', error.message);
       toast.error('nevtrehed aldaa garlaa');
     }
   };

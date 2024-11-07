@@ -73,7 +73,7 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
         setProducts(res.data.products);
       }
     } catch (error) {
-      console.error('Бүтээгдэхүүний дата татахад алдаа гарлаа.');
+      toast.error('Бүтээгдэхүүний дата татахад алдаа гарлаа.');
     }
   };
 

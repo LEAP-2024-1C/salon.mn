@@ -349,16 +349,31 @@ export const navItems: NavItem[] = [
     icon: 'dashboard',
     label: 'Dashboard'
   },
+
   {
     title: 'Ажилтан',
     href: '/dashboard/employees',
-    icon: 'user',
+    icon: 'employee',
+    label: 'user'
+  },
+
+  {
+    title: 'Цагийн хуваарь',
+    href: '/dashboard/time-table',
+    icon: 'logo',
+    label: 'user'
+  },
+
+  {
+    title: 'Booking',
+    href: '/dashboard/booking',
+    icon: 'post',
     label: 'user'
   },
   {
     title: 'Үйлчилгээ',
     href: '/dashboard/service',
-    icon: 'page',
+    icon: 'post',
     label: 'user'
   },
   {
@@ -370,7 +385,7 @@ export const navItems: NavItem[] = [
   {
     title: 'Бидний тухай',
     href: '/dashboard/profile',
-    icon: 'profile',
+    icon: 'page',
     label: 'profile'
   },
   {

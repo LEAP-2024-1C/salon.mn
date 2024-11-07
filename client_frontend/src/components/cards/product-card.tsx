@@ -7,6 +7,7 @@ import { formattedPrice } from "@/lib/utils";
 import axios from "axios";
 import { apiURL } from "@/utils/apiHome";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 const Products = ({ name, price, images, discount, _id }: IProduct) => {
   const SaveProduct = async (product_id: string) => {
@@ -36,17 +37,23 @@ const Products = ({ name, price, images, discount, _id }: IProduct) => {
   const handleClick = (id: string) => {
     SaveProduct(id);
   };
+  console.log("name", name);
   return (
     <div>
-      <div className=" w-9/12 m-auto container grid grid-cols-4  gap-5 my-10 ">
+      <div className="text-white w-9/12 m-auto container grid grid-cols-4  gap-5 my-10 ">
         <div className="relative w-[245px] h-[391px]">
           <Link href={"/detail/" + _id} className="w-full h-full">
             <div className=" row-span-2 col-span-2  ">
-              <div className="  w-full rounded-2xl overflow-hidden">
-                <img src={images[0]} alt="" className="w-full h-full" />
+              <div className=" relative w-full rounded-2xl overflow-hidden">
+                <Image
+                  fill={true}
+                  src={images[0]}
+                  alt="Photo product card"
+                  className="w-auto h-auto"
+                />
               </div>
 
-              <p>{name}</p>
+              <p className="">{name}</p>
               <PriceWithDiscount price={price} discount={discount} />
             </div>
           </Link>

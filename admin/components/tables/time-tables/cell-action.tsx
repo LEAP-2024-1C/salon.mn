@@ -1,7 +1,5 @@
 'use client';
 
-import { EmployeesContext } from '@/app/context/employee-context';
-import { AlertModal } from '@/components/tables/employee-tables/alert-modal';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -10,11 +8,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import axios from 'axios';
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useContext, useState } from 'react';
+
+import axios from 'axios';
+
 import { toast } from 'react-toastify';
+
+import { ServiceContext } from '@/app/context/service-context';
+import { TimeTableModal } from './time-alert-modal';
 
 interface CellActionProps {
   id: string;
@@ -24,35 +27,35 @@ export const CellAction: React.FC<CellActionProps> = ({ id }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const { fetchEmployeeData } = useContext(EmployeesContext);
+  const { fetchServiceData } = useContext(ServiceContext);
 
-  const onDelete = async () => {
-    const employeeID = id;
+  const onConfirm = async () => {
+    const serviceID = id;
 
     try {
       const res = await axios({
         method: 'delete',
-        url: `http://localhost:8008/api/v1/employee/delete-employee/${employeeID}`
+        url: `http://localhost:8008/api/v1/service/delete-service/${serviceID}`
       });
 
       if (res.status === 200) {
-        await fetchEmployeeData();
-        toast.success('Ажилтны мэдээлэл амжилттай устгалаа.');
-        // router.push('/dashboard/employees');
+        await fetchServiceData();
+        toast.success('Үйлчилгээний мэдээлэл амжилттай устгалаа.', {
+          autoClose: 0.7
+        });
         setOpen(true);
-        setLoading(true)
       }
     } catch (error) {
-      toast.error('Ажилтны утгахад алдаа гарлаа.');
+      toast.error('Үйлчилгээний утгахад алдаа гарлаа.');
     }
   };
 
   return (
     <>
-      <AlertModal
+      <TimeTableModal
         isOpen={open}
         onClose={() => setOpen(false)}
-        onConfirm={onDelete}
+        onConfirm={onConfirm}
         loading={loading}
       />
       <DropdownMenu modal={false}>
@@ -64,9 +67,8 @@ export const CellAction: React.FC<CellActionProps> = ({ id }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-
           <DropdownMenuItem
-            onClick={() => router.push(`/dashboard/employees/${id}`)}
+            onClick={() => router.push(`/dashboard/time-table/${id}`)}
           >
             <Edit className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>

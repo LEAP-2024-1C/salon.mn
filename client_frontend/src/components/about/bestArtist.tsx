@@ -11,7 +11,7 @@ const BestArtist = () => {
   ];
   return img.map((i, key2) => {
     return (
-      <div key={key2} className="flex flex-col gap-3">
+      <div key={key2} className="flex flex-col gap-3 text-white">
         <Image
           height={514}
           width={400}
@@ -19,21 +19,21 @@ const BestArtist = () => {
           src={i}
           className="rounded-2xl"
         />
-        <p>
+        <p className="text-wrap">
           Mauris donec leo, gravida phasellus luctus. Adipiscing tellus in odio
           sed. Nam ut quis mi nisl orci, vitae. Ligula commodo et vitae.
         </p>
 
         <div className="flex gap-3 items-center">
-          <TbArrowLeftFromArc className="text-gray-600 text-lg" />
+          <TbArrowLeftFromArc className=" text-lg" />
           <p>Scelerisque nunc, at nisl non. Est.</p>
         </div>
         <div className="flex gap-3">
-          <TbArrowLeftFromArc className="text-gray-600 text-lg" />
+          <TbArrowLeftFromArc className=" text-lg" />
           <p>Scelerisque nunc, at nisl non. Est.</p>
         </div>
         <div className="flex gap-3">
-          <TbArrowLeftFromArc className="text-gray-600 text-lg" />
+          <TbArrowLeftFromArc className=" text-lg" />
           <p>Scelerisque nunc, at nisl non. Est.</p>
         </div>
       </div>

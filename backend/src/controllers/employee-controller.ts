@@ -11,7 +11,9 @@ export const createdEmloyee = async (req: Request, res: Response) => {
       profile_img,
       phoneNumber,
       discription,
+      availableDates,
     } = req.body;
+
     if (!name || !email || !category || !phoneNumber) {
       res.status(401).json({ message: "Хоосон утга байж болохгүй" });
       return;
@@ -25,6 +27,7 @@ export const createdEmloyee = async (req: Request, res: Response) => {
       profile_img,
       phoneNumber,
       discription,
+      availableDates,
     });
     res.status(200).json({
       messeage: "Ajiltain amjilttai uuzsee",
@@ -59,29 +62,11 @@ export const getEmployee = async (req: Request, res: Response) => {
 export const updateEmployee = async (req: Request, res: Response) => {
   try {
     const { employeeID } = req.params;
-    const {
-      name,
-      email,
-      password,
-      category,
-      profile_img,
-      phoneNumber,
-      discription,
-    } = req.body;
 
-    const findedEmployee = await Employee.findById(employeeID);
-    if (!findedEmployee) {
-      return res.status(401).json({ message: "Ажилтан олдсонгүй" });
-    }
-    findedEmployee.name = name;
-    findedEmployee.email = email;
-    findedEmployee.password = password;
-    findedEmployee.category = category;
-    findedEmployee.profile_img = profile_img;
-    findedEmployee.phoneNumber = phoneNumber;
-    findedEmployee.discription = discription;
-
-    await findedEmployee.save();
+    const findedEmployee = await Employee.findByIdAndUpdate(
+      employeeID,
+      ...req.body
+    );
 
     res
       .status(200)
@@ -95,18 +80,47 @@ export const deleteEmployee = async (req: Request, res: Response) => {
   try {
     const { employeeID } = req.params;
 
-    const find = await Employee.findOne({ _id: employeeID });
-
-    if (!find) {
-      return res.status(401).json({ message: "Ajiltan oldsongui" });
-    }
-
-    await find.deleteOne();
+    const find = await Employee.findByIdAndDelete(employeeID);
 
     res.status(200).json({
       message: "Employee deleted success",
     });
   } catch (error) {
     res.status(400).json({ message: "Ajiltan ustgahad aldaa garlaa" });
+  }
+};
+
+export const createAvailableDates = async (req: Request, res: Response) => {
+  try {
+    const { employeeID } = req.params;
+    const { availableDates } = req.body;
+    const findEmployee = await Employee.findOne({ _id: employeeID });
+
+    if (!findEmployee) {
+      return res.status(401).json({ message: "Ажилтан олдсонгүй" });
+    }
+
+    findEmployee.availableDates.push(...availableDates);
+    const changeEmployee = await findEmployee?.save();
+
+    res
+      .status(200)
+      .json({ message: "Employee: Update success ", employee: changeEmployee });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "Ажилтаны цагийн хуваар үүсгэхэд алдаа гарлаа " });
+  }
+};
+export const addunAvailableTime = async (req: Request, res: Response) => {
+  const { date, empID } = req.body;
+  try {
+    const employee = await Employee.findById(empID);
+    employee?.unAvailableTime.push(date);
+    const updatedTime = await employee?.save();
+    res.status(200).json({ message: "success", updatedTime });
+  } catch (error: any) {
+    console.log("====> comment section aldaa", error);
+    res.status(400).json({ message: "aldaa garlaa", error: error.message });
   }
 };
