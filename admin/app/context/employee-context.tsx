@@ -31,9 +31,14 @@ export interface IEmployee {
 
 interface IBooking {
   employee: { _id: string };
+<<<<<<< Updated upstream
   time: string;
   user: string;
   date: Date;
+=======
+  user: string;
+  date: string;
+>>>>>>> Stashed changes
   firstname: String;
   phoneNumber: Number;
   service: String;
@@ -151,8 +156,13 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
         url: 'http://localhost:8008/api/v1/booking'
       });
 
+<<<<<<< Updated upstream
       if (res.status === 200) {
         setBooking(res.data.data);
+=======
+      if (res.status === 201) {
+        setBooking(res.data.booking);
+>>>>>>> Stashed changes
       }
     } catch (error) {
       toast.error('Booking дата татахад алдаа гарлаа.');
@@ -161,6 +171,7 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     fetchEmployeeData();
+    getBooking();
   }, []);
 
   return (
