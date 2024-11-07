@@ -53,7 +53,7 @@ export const ServiceForm = () => {
 
   const updateService = async () => {
     try {
-      const { name, price, time, description, category } = service;
+      const { name, price, time, description, category, subCategory } = service;
       const res = await axios({
         method: 'put',
         url: `http://localhost:8008/api/v1/service/update-service/${serviceID}`,
@@ -63,7 +63,8 @@ export const ServiceForm = () => {
           price,
           time,
           description,
-          category
+          category,
+          subCategory
         }
       });
 
