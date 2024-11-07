@@ -1,12 +1,12 @@
 "use client";
-import { Input } from "@/components/ui/input";
+
 import { RxScissors } from "react-icons/rx";
 import * as React from "react";
 // import { format } from "date-fns";
 // import { Calendar as CalendarIcon } from "lucide-react";
 
 // import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+
 // import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 // import {
@@ -26,11 +26,12 @@ import { useState } from "react";
 // } from "@/components/ui/select";
 import Image from "next/image";
 // import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
-import axios from "axios";
+
+// import { toast } from "react-toastify";
+// import axios from "axios";
 
 const BookNow = () => {
-  const [booking, setBooking] = useState({
+  const [booking] = useState({
     firstname: "",
     phoneNumber: "",
     date: "",
@@ -39,47 +40,48 @@ const BookNow = () => {
     empID: "",
   });
   console.log(booking);
-  const bookNow = async () => {
-    const { firstname, phoneNumber, time, date } = booking;
-    try {
-      const response = await axios.post(
-        `http://localhost:8008/api/v1/booking`,
-        {
-          firstname,
-          phoneNumber,
-          date,
-          time,
-          employee: "6726365aa711ec62596d2cf9",
-        }
-      );
-      if (response.status === 201) {
-        toast.success("successfull to book now");
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("failed to book now");
-    }
-  };
+
+  // const bookNow = async () => {
+  //   const { firstname, phoneNumber, time, date } = booking;
+  //   try {
+  //     const response = await axios.post(
+  //       `http://localhost:8008/api/v1/booking`,
+  //       {
+  //         firstname,
+  //         phoneNumber,
+  //         date,
+  //         time,
+  //         employee: "6726365aa711ec62596d2cf9",
+  //       }
+  //     );
+  //     if (response.status === 201) {
+  //       toast.success("successfull to book now");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("failed to book now");
+  //   }
+  // };
   //
-  const handleTime = async () => {
-    const { empID, time, date } = booking;
-    try {
-      const response = await axios.post(
-        `http://localhost:8008/api/v1/employee/controlTime`,
-        {
-          date,
-          time,
-          employee: "6726365aa711ec62596d2cf9",
-        }
-      );
-      if (response.status === 201) {
-        toast.success("successfull to add time");
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("failed to add time");
-    }
-  };
+  // const handleTime = async () => {
+  //   const { empID, time, date } = booking;
+  //   try {
+  //     const response = await axios.post(
+  //       `http://localhost:8008/api/v1/employee/controlTime`,
+  //       {
+  //         date,
+  //         time,
+  //         employee: "6726365aa711ec62596d2cf9",
+  //       }
+  //     );
+  //     if (response.status === 201) {
+  //       toast.success("successfull to add time");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("failed to add time");
+  //   }
+  // };
   return (
     <div className="bg-[#101828]">
       <div className="bg-[#101828] p-2 pt-10 flex flex-col gap-10 md:m-auto md:container">
