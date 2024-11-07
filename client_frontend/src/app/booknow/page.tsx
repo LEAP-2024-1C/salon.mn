@@ -2,13 +2,8 @@
 
 import { RxScissors } from "react-icons/rx";
 import * as React from "react";
-// import { format } from "date-fns";
-// import { Calendar as CalendarIcon } from "lucide-react";
-
-// import { cn } from "@/lib/utils";
-
-// import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
+
 // import {
 //   Popover,
 //   PopoverContent,
@@ -25,13 +20,16 @@ import { useState } from "react";
 //   SelectValue,
 // } from "@/components/ui/select";
 import Image from "next/image";
-// import { useRouter } from "next/navigation";
-
-// import { toast } from "react-toastify";
-// import axios from "axios";
-
+import { toast } from "react-toastify";
+import axios from "axios";
+import BarberCard from "@/components/cards/barber-card";
+import { EmployeesContext } from "@/context/employee-context";
+import { Calendar } from "@/components/ui/calendar";
+import { format } from "date-fns";
 const BookNow = () => {
-  const [booking] = useState({
+  const [isTrue, setIsTrue] = useState("");
+  const { employees } = React.useContext(EmployeesContext);
+  const [booking, setBooking] = useState({
     firstname: "",
     phoneNumber: "",
     date: "",
@@ -41,47 +39,29 @@ const BookNow = () => {
   });
   console.log(booking);
 
-  // const bookNow = async () => {
-  //   const { firstname, phoneNumber, time, date } = booking;
-  //   try {
-  //     const response = await axios.post(
-  //       `http://localhost:8008/api/v1/booking`,
-  //       {
-  //         firstname,
-  //         phoneNumber,
-  //         date,
-  //         time,
-  //         employee: "6726365aa711ec62596d2cf9",
-  //       }
-  //     );
-  //     if (response.status === 201) {
-  //       toast.success("successfull to book now");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     toast.error("failed to book now");
-  //   }
-  // };
-  //
-  // const handleTime = async () => {
-  //   const { empID, time, date } = booking;
-  //   try {
-  //     const response = await axios.post(
-  //       `http://localhost:8008/api/v1/employee/controlTime`,
-  //       {
-  //         date,
-  //         time,
-  //         employee: "6726365aa711ec62596d2cf9",
-  //       }
-  //     );
-  //     if (response.status === 201) {
-  //       toast.success("successfull to add time");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     toast.error("failed to add time");
-  //   }
-  // };
+  const bookNow = async () => {
+    const { firstname, phoneNumber, time, date, service, empID } = booking;
+
+    try {
+      const response = await axios.post(
+        `http://localhost:8008/api/v1/booking`,
+        {
+          firstname,
+          phoneNumber,
+          date,
+          time,
+          empID,
+          service,
+        }
+      );
+      if (response.status === 201) {
+        toast.success("successfull to book now");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("failed to book now");
+    }
+  };
   return (
     <div className="bg-[#101828]">
       <div className="bg-[#101828] p-2 pt-10 flex flex-col gap-10 md:m-auto md:container">
@@ -119,6 +99,35 @@ const BookNow = () => {
               Гоо сайхан
             </div>
           </div>
+        </div>
+        <div className="flex justify-center gap-10">
+          {employees?.map((emp, idx) => {
+            return (
+              <div
+                key={`barbercard ${idx}`}
+                onClick={() => {
+                  setIsTrue(emp.name);
+                  setBooking({ ...booking, empID: emp._id });
+                }}
+              >
+                <BarberCard name={emp.name} selected={emp.name === isTrue} />
+              </div>
+            );
+          })}
+        </div>
+        <div className="bg-white">
+          <Calendar
+            mode="single"
+            selected={new Date(booking.date)}
+            onSelect={(e) => {
+              if (e)
+                setBooking({
+                  ...booking,
+                  date: format(new Date(e), "yyyy-MM-dd"),
+                });
+            }}
+            className="rounded-md border"
+          />
         </div>
       </div>
     </div>

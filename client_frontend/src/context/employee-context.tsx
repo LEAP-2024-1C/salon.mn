@@ -19,6 +19,8 @@ export interface IEmployee {
       rate: number;
     }
   ];
+  availabledates: [string];
+  unAvailabletime: [string];
 }
 
 interface IContext {
