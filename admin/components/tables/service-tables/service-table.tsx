@@ -27,7 +27,8 @@ export function ServiceTable() {
           <TableHeader>
             <TableRow>
               <TableHead>Нэр</TableHead>
-              <TableHead>Category</TableHead>
+              <TableHead>Категори</TableHead>
+              <TableHead>Дэд категори</TableHead>
               <TableHead>Үнийн дүн</TableHead>
               <TableHead>Хугацаа</TableHead>
               <TableHead>Тайлбар</TableHead>
@@ -38,6 +39,7 @@ export function ServiceTable() {
               <TableRow key={service?._id}>
                 <TableCell>{service?.name}</TableCell>
                 <TableCell>{service?.category?.name}</TableCell>
+                <TableCell>{service?.subCategory?.name}</TableCell>
                 <TableCell>{service?.price}₮</TableCell>
                 <TableCell>{service?.time}</TableCell>
                 <TableCell>{service?.description}</TableCell>

@@ -18,6 +18,7 @@ export interface IEmployee {
     name: string;
     _id: string;
   };
+  subCategory: { _id: string; name: string };
   comment: [
     {
       user: string;
@@ -46,6 +47,7 @@ interface ICreateEm {
   profile_img: string;
   discription: string;
   category: string;
+  subCategory: string;
 }
 interface IContext {
   employees: IEmployee[];
@@ -112,6 +114,7 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
         email,
         password,
         category,
+        subCategory,
         profile_img,
         phoneNumber,
         discription
@@ -126,6 +129,7 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
           email,
           password,
           category,
+          subCategory,
           profile_img,
           phoneNumber,
           discription

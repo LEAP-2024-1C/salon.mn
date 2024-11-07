@@ -3,7 +3,9 @@ import Service from "../models/service.model";
 
 export const getService = async (req: Request, res: Response) => {
   try {
-    const service = await Service.find({}).populate("category");
+    const service = await Service.find({})
+      .populate("category")
+      .populate("subCategory");
     res
       .status(200)
       .json({ message: "success to get all  services", services: service });
@@ -28,7 +30,7 @@ export const getOneService = async (req: Request, res: Response) => {
 };
 
 export const createdService = async (req: Request, res: Response) => {
-  const { name, price, description, time, category } = req.body;
+  const { name, price, description, time, category, subCategory } = req.body;
   try {
     const createdService = await Service.create({
       name,
@@ -36,6 +38,7 @@ export const createdService = async (req: Request, res: Response) => {
       description,
       time,
       category,
+      subCategory,
     });
 
     res
@@ -69,7 +72,7 @@ export const deleteService = async (req: Request, res: Response) => {
 export const updateService = async (req: Request, res: Response) => {
   try {
     const { serviceID } = req.params;
-    const { name, price, description, time, category } = req.body;
+    const { name, price, description, time, category, subCategory } = req.body;
 
     const finded = await Service.findById(serviceID);
     if (!finded) {
@@ -80,6 +83,7 @@ export const updateService = async (req: Request, res: Response) => {
     finded.time = time;
     finded.category = category;
     finded.description = description;
+    finded.subCategory = subCategory;
 
     await finded.save();
 

@@ -12,6 +12,7 @@ export interface IService {
   time: string;
   description: string;
   category: string;
+  subCategory: string;
 }
 
 export interface IServiceArr {
@@ -24,6 +25,7 @@ export interface IServiceArr {
     name: string;
     _id: string;
   };
+  subCategory: { _id: string; name: string };
 }
 
 interface ISubCategory {
@@ -98,7 +100,7 @@ const ServiceProvider = ({ children }: { children: React.ReactNode }) => {
 
   const createdService = async () => {
     try {
-      const { name, price, description, time, category } = service;
+      const { name, price, description, time, category, subCategory } = service;
 
       const res = await axios({
         method: 'post',
@@ -109,7 +111,8 @@ const ServiceProvider = ({ children }: { children: React.ReactNode }) => {
           price,
           description,
           time,
-          category
+          category,
+          subCategory
         }
       });
 
