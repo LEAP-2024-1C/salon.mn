@@ -26,6 +26,19 @@ export interface IServiceArr {
   };
 }
 
+interface ISubCategory {
+  _id: string;
+  name: string;
+  descreption: string;
+  category: string;
+}
+
+interface ICategory {
+  _id: string;
+  name: string;
+  descreption: string;
+}
+
 interface IContext {
   services: IServiceArr[];
   setServices: React.Dispatch<React.SetStateAction<IServiceArr[]>>;
@@ -35,6 +48,12 @@ interface IContext {
 
   createdService: () => void;
   fetchServiceData: () => void;
+
+  category: ICategory[];
+  setCategory: React.Dispatch<React.SetStateAction<ICategory[]>>;
+
+  subCategory: ISubCategory[];
+  setSubCategory: React.Dispatch<React.SetStateAction<ISubCategory[]>>;
 }
 
 export const ServiceContext = createContext<IContext>({
@@ -45,12 +64,20 @@ export const ServiceContext = createContext<IContext>({
   setService: () => {},
 
   createdService: () => {},
-  fetchServiceData: () => {}
+  fetchServiceData: () => {},
+
+  category: [],
+  setCategory: () => {},
+
+  subCategory: [],
+  setSubCategory: () => {}
 });
 
 const ServiceProvider = ({ children }: { children: React.ReactNode }) => {
   const [services, setServices] = useState<IServiceArr[]>([]);
   const [service, setService] = useState<IService>({} as IService);
+  const [category, setCategory] = useState<ICategory[]>([]);
+  const [subCategory, setSubCategory] = useState<ISubCategory[]>([]);
 
   const router = useRouter();
 
@@ -97,8 +124,40 @@ const ServiceProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const fetchCategoryData = async () => {
+    try {
+      const res = await axios({
+        method: 'get',
+        url: 'http://localhost:8008/api/v1/category/get-category'
+      });
+
+      if (res.status === 200) {
+        setCategory(res.data.allCategory);
+      }
+    } catch (error) {
+      toast.error('Category дата татахад алдаа гарлаа.');
+    }
+  };
+
+  const fetchSubCategoryData = async () => {
+    try {
+      const res = await axios({
+        method: 'get',
+        url: 'http://localhost:8008/api/v1/category/get-sub'
+      });
+
+      if (res.status === 200) {
+        setSubCategory(res.data.getSubCategory);
+      }
+    } catch (error) {
+      toast.error('Sub Category дата татахад алдаа гарлаа.');
+    }
+  };
+
   useEffect(() => {
     fetchServiceData();
+    fetchCategoryData();
+    fetchSubCategoryData();
   }, []);
 
   return (
@@ -111,7 +170,12 @@ const ServiceProvider = ({ children }: { children: React.ReactNode }) => {
         setService,
 
         createdService,
-        fetchServiceData
+        fetchServiceData,
+
+        category,
+        setCategory,
+        subCategory,
+        setSubCategory
       }}
     >
       {children}

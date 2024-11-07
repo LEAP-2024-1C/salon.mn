@@ -30,12 +30,12 @@ export interface IEmployee {
 }
 
 interface IBooking {
-  employee: { _id: string };
+  employee: { _id: string; profile_img: string; name: string };
   user: string;
   date: string;
-  firstname: String;
-  phoneNumber: Number;
-  service: String;
+  firstname: string;
+  phoneNumber: number;
+  service: { _id: string; name: string };
 }
 
 interface ICreateEm {

@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
+
 import { EmployeesContext } from '@/app/context/employee-context';
 import { addHours, differenceInHours, format } from 'date-fns';
 import { Button } from '@/components/ui/button';
@@ -25,18 +25,21 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table';
+import { UnAvaiTimeModal } from '@/components/tables/tImeManagment/unAvaibleModal';
+import Image from 'next/image';
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/dashboard' },
-  { title: 'Захиалсан цаг', link: '/dashboard/booking' }
+  { title: 'Цаг тохиргоо', link: '/dashboard/booking' }
 ];
 const Booking = () => {
   const { employees, fetchEmployeeData, booking } =
     useContext(EmployeesContext);
   const [open, setOpen] = useState(false);
+  const [openAvaiTime, setOpenAvaiTime] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [time, setTime] = useState<Date | null>();
-  const [chooseEmployee, setChoosenEmployee] = useState<string>();
+  const [chooseEmployee, setChoosenEmployee] = useState<string | null>('');
 
   const findIndex = employees?.findIndex(
     (employee) => employee?._id === chooseEmployee
@@ -44,7 +47,8 @@ const Booking = () => {
 
   const onConfirm = async () => {
     try {
-      const empID = '6724b6663ef5350bded7339c';
+      const empID = employees[findIndex]._id;
+
       const res = await axios({
         method: 'post',
         url: 'http://localhost:8008/api/v1/employee/controlTime',
@@ -63,6 +67,27 @@ const Booking = () => {
     }
   };
 
+  const onConfirmTime = async (date: any) => {
+    try {
+      const empID = employees[findIndex]._id;
+      const res = await axios({
+        method: 'delete',
+        url: 'http://localhost:8008/api/v1/employee/delete-unavailable-time',
+        data: { date, empID }
+      });
+
+      if (res.status === 200) {
+        await fetchEmployeeData();
+        toast.success('Aжилтны цаг амжилттай идэвхитэй боллоо', {
+          autoClose: 0.8
+        });
+        setOpenAvaiTime(false);
+      }
+    } catch (error) {
+      console.log('UnAvailab le time ustgahad ilgeehd aldaa garlaa');
+    }
+  };
+
   return (
     <PageContainer>
       <TimeModal
@@ -71,6 +96,14 @@ const Booking = () => {
         onConfirm={onConfirm}
         isActive={isActive}
       />
+      <UnAvaiTimeModal
+        isOpen={openAvaiTime}
+        onClose={() => setOpenAvaiTime(false)}
+        id={chooseEmployee}
+        findIndex={findIndex}
+        onConfirmTime={onConfirmTime}
+      />
+
       <div className="space-y-4">
         <Breadcrumbs items={breadcrumbItems} />
         <div className="flex items-start justify-between">
@@ -78,7 +111,6 @@ const Booking = () => {
         </div>
         <Separator />
         <div className="flex gap-5 ">
-          <Input type="date" className="w-40" />
           <Select onValueChange={(Value) => setChoosenEmployee(Value)}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Ажилтаны нэр " />
@@ -92,6 +124,16 @@ const Booking = () => {
                 );
               })}
             </SelectContent>
+            {chooseEmployee ? (
+              <Button
+                className="bg-gray-200 hover:bg-slate-300"
+                onClick={() => setOpenAvaiTime(true)}
+              >
+                Цаг тохируулах /цагийг идэвхитэй болгох/
+              </Button>
+            ) : (
+              ''
+            )}
           </Select>
         </div>
         <Table>
@@ -107,7 +149,7 @@ const Booking = () => {
                 <TableCell className="font-bold">
                   {format(new Date(a?.startDate), 'yyyy-MM-dd')}
                 </TableCell>
-                <TableCell className="ml-5">
+                <TableCell className=" flex gap-5">
                   {new Array(
                     differenceInHours(
                       new Date(a?.endDate),
@@ -151,12 +193,38 @@ const Booking = () => {
                       </Button>
                     ))}
                 </TableCell>
-
-                {/* <div>BT: {format(bookedDates[0], 'yyyy-MM-dd hh:mm')}</div> */}
               </TableRow>
             ))}
           </TableBody>
         </Table>
+
+        <div className="w-full">
+          <p>Захиалсан цаг</p>
+          <div className="flex flex-wrap justify-center gap-5">
+            {booking?.sort().map((book, i) => {
+              return (
+                <div
+                  key={`book ${i}`}
+                  className="relative h-60 w-40  rounded-lg  border bg-black"
+                >
+                  <Image
+                    fill={true}
+                    src={book?.employee?.profile_img}
+                    alt="productIMG"
+                    className="h-auto w-auto object-cover opacity-35 "
+                  />
+                  <div className="absolute bottom-1  pl-5 text-white">
+                    <p>{book?.phoneNumber}</p>
+                    <p>{format(new Date(book?.date), 'yyyy-MM-dd')} </p>
+                    <p>{format(new Date(book?.date), ' HH-mm')} цаг</p>
+                    <p>Artist:{book?.employee?.name}</p>
+                    <p>{book?.service?.name}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </PageContainer>
   );

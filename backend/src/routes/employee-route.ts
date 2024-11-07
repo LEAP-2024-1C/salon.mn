@@ -4,6 +4,7 @@ import {
   createAvailableDates,
   createdEmloyee,
   deleteEmployee,
+  deleteUnAvailableTime,
   getAllEmployee,
   getEmployee,
   updateEmployee,
@@ -17,5 +18,6 @@ router.route("/update-employee/:employeeID").put(updateEmployee);
 router.route("/delete-employee/:employeeID").delete(deleteEmployee);
 router.route("/create-available-dates/:employeeID").post(createAvailableDates);
 router.route("/controlTime").post(addunAvailableTime);
+router.route("/delete-unavailable-time").delete(deleteUnAvailableTime);
 
 export default router;

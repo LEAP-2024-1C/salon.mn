@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Employee from "../models/employees.model";
+import { error } from "console";
 
 export const createdEmloyee = async (req: Request, res: Response) => {
   try {
@@ -62,17 +63,45 @@ export const getEmployee = async (req: Request, res: Response) => {
 export const updateEmployee = async (req: Request, res: Response) => {
   try {
     const { employeeID } = req.params;
+    const {
+      name,
+      email,
+      password,
+      category,
+      profile_img,
+      phoneNumber,
+      discription,
+    } = req.body;
 
-    const findedEmployee = await Employee.findByIdAndUpdate(
-      employeeID,
-      ...req.body
-    );
+    // const findedEmployee = await Employee.findByIdAndUpdate(
+    //   employeeID,
+    //   ...req.body
+    // );
+
+    const findedEmployee = await Employee.findOne({ _id: employeeID });
+
+    if (!findedEmployee) {
+      return res.status(400).json({ message: "Employee oldsongui" });
+    }
+
+    findedEmployee.name = name;
+    findedEmployee.email = email;
+    findedEmployee.password = password;
+    findedEmployee.category = category;
+    findedEmployee.profile_img = profile_img;
+    findedEmployee.phoneNumber = phoneNumber;
+    findedEmployee.discription = discription;
+
+    await findedEmployee.save();
 
     res
       .status(200)
       .json({ message: "Employee: Update success ", employee: findedEmployee });
   } catch (error) {
-    res.status(400).json({ message: "Employee update hiihed aldaa garlaa" });
+    console.log("Employee update hiihed aldaa garlaa", error);
+    res
+      .status(400)
+      .json({ message: "Employee update hiihed aldaa garlaa", error });
   }
 };
 
@@ -84,6 +113,7 @@ export const deleteEmployee = async (req: Request, res: Response) => {
 
     res.status(200).json({
       message: "Employee deleted success",
+      find,
     });
   } catch (error) {
     res.status(400).json({ message: "Ajiltan ustgahad aldaa garlaa" });
@@ -112,6 +142,7 @@ export const createAvailableDates = async (req: Request, res: Response) => {
       .json({ message: "Ажилтаны цагийн хуваар үүсгэхэд алдаа гарлаа " });
   }
 };
+
 export const addunAvailableTime = async (req: Request, res: Response) => {
   const { date, empID } = req.body;
   try {
@@ -120,7 +151,29 @@ export const addunAvailableTime = async (req: Request, res: Response) => {
     const updatedTime = await employee?.save();
     res.status(200).json({ message: "success", updatedTime });
   } catch (error: any) {
-    console.log("====> comment section aldaa", error);
-    res.status(400).json({ message: "aldaa garlaa", error: error.message });
+    res.status(400).json({ message: "aldaa garlaa", error });
+  }
+};
+export const deleteUnAvailableTime = async (req: Request, res: Response) => {
+  const { date, empID } = req.body;
+  try {
+    const deleteUnAvailableTimeEmp = await Employee.findOne({ _id: empID });
+    const findIndex = deleteUnAvailableTimeEmp?.unAvailableTime.findIndex(
+      (d) => {
+        d === date;
+      }
+    );
+    if (!findIndex) {
+      return res.status(401).json({ message: "Unavailable time oldsongu" });
+    }
+    deleteUnAvailableTimeEmp?.unAvailableTime.splice(findIndex, 1);
+    await deleteUnAvailableTimeEmp?.save();
+    res
+      .status(200)
+      .json({ message: "success", data: deleteUnAvailableTimeEmp });
+  } catch (error: any) {
+    res
+      .status(400)
+      .json({ message: " deleteUnAvailableTime  aldaa garlaa", error });
   }
 };

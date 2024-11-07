@@ -60,7 +60,6 @@ export const EmployeeForm = () => {
       const res = await axios({
         method: 'put',
         url: `http://localhost:8008/api/v1/employee/update-employee/${employeeID}`,
-        headers: {},
         data: {
           name,
           email,
@@ -87,6 +86,7 @@ export const EmployeeForm = () => {
   useEffect(() => {
     getEmployee();
   }, [employeeID]);
+  console.log('employee', employee);
 
   return (
     <div className=" flex flex-col gap-10">
