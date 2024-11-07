@@ -30,7 +30,7 @@ export function ServiceTable() {
               <TableHead>Категори</TableHead>
               <TableHead>Дэд категори</TableHead>
               <TableHead>Үнийн дүн</TableHead>
-              <TableHead>Хугацаа</TableHead>
+              <TableHead>Хугацаа (мин)</TableHead>
               <TableHead>Тайлбар</TableHead>
             </TableRow>
           </TableHeader>
