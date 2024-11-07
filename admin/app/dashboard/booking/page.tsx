@@ -17,7 +17,15 @@ import { Button } from '@/components/ui/button';
 import { TimeModal } from '@/components/tables/tImeManagment/modal';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { Value } from '@radix-ui/react-select';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '@/components/ui/table';
+
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/dashboard' },
   { title: 'Захиалсан цаг', link: '/dashboard/booking' }
@@ -55,8 +63,6 @@ const Booking = () => {
     }
   };
 
-  console.log('Avaible time', time);
-  console.log('orson tsag', new Date('2024-11-06T13:03:49.316+00:00'));
   return (
     <PageContainer>
       <TimeModal
@@ -88,50 +94,69 @@ const Booking = () => {
             </SelectContent>
           </Select>
         </div>
-        {employees[findIndex]?.availableDates.map((a, i) => (
-          <div key={i}>
-            <p className="font-bold">
-              {format(new Date(a?.startDate), 'yyyy-MM-dd')}
-            </p>
-            <p className="ml-5">
-              {new Array(
-                differenceInHours(new Date(a?.endDate), new Date(a.startDate)) +
-                  1
-              )
-                .fill(0)
-                .map((n, key) => (
-                  <Button
-                    key={key}
-                    disabled={
-                      employees[0].unAvailableTime.findIndex(
-                        (b) =>
-                          format(new Date(b), 'yyy-MM-dd HH:mm') ===
-                          format(
-                            addHours(new Date(a.startDate), key),
-                            'yyyy-MM-dd HH:mm'
-                          )
-                      ) !== -1
-                    }
-                    onClick={() => {
-                      setOpen(true), setIsActive(true);
-                      setTime(new Date(addHours(new Date(a.startDate), key)));
-                      console.log(
-                        'click time',
-                        new Date(addHours(new Date(a.startDate), key))
-                      );
-                    }}
-                    // className={`${booking.findIndex(
-                    //   (book) => book.employee._id
-                    // )}`}
-                  >
-                    {format(addHours(new Date(a.startDate), key), 'hh:mm')}
-                  </Button>
-                ))}
-            </p>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[]">Огноо</TableHead>
+              <TableHead className="w-[]">Time manage</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {employees[findIndex]?.availableDates.map((a, i) => (
+              <TableRow key={i}>
+                <TableCell className="font-bold">
+                  {format(new Date(a?.startDate), 'yyyy-MM-dd')}
+                </TableCell>
+                <TableCell className="ml-5">
+                  {new Array(
+                    differenceInHours(
+                      new Date(a?.endDate),
+                      new Date(a.startDate)
+                    ) + 1
+                  )
+                    .fill(0)
+                    .map((n, key) => (
+                      <Button
+                        key={key}
+                        disabled={
+                          employees[findIndex].unAvailableTime.findIndex(
+                            (b) =>
+                              format(new Date(b), 'yyy-MM-dd HH:mm') ===
+                              format(
+                                addHours(new Date(a.startDate), key),
+                                'yyyy-MM-dd HH:mm'
+                              )
+                          ) !== -1
+                        }
+                        onClick={() => {
+                          setOpen(true), setIsActive(true);
+                          setTime(
+                            new Date(addHours(new Date(a.startDate), key))
+                          );
+                        }}
+                        className={`${
+                          booking?.findIndex(
+                            (book) =>
+                              book?.employee?._id === chooseEmployee &&
+                              book?.date ===
+                                new Date(
+                                  addHours(new Date(a.startDate), key)
+                                ).toJSON()
+                          ) === -1
+                            ? 'bg-blue-300'
+                            : 'bg-green-300'
+                        }`}
+                      >
+                        {format(addHours(new Date(a.startDate), key), 'HH:mm')}
+                      </Button>
+                    ))}
+                </TableCell>
 
-            {/* <div>BT: {format(bookedDates[0], 'yyyy-MM-dd hh:mm')}</div> */}
-          </div>
-        ))}
+                {/* <div>BT: {format(bookedDates[0], 'yyyy-MM-dd hh:mm')}</div> */}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </PageContainer>
   );

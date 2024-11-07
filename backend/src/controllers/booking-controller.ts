@@ -9,7 +9,7 @@ export const getBooking = async (req: Request, res: Response) => {
       .populate("service")
       .populate("employee")
       .populate("user");
-    res.status(201).json({ message: "success", data: allBooking });
+    res.status(201).json({ message: "success", booking: allBooking });
   } catch (error) {
     res.status(400).json("aldaa garlaa booking data fetch");
   }
