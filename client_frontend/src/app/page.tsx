@@ -17,16 +17,16 @@ export default function Home() {
           fill={true}
           alt="Logo"
           src="/images/home.jpg"
-          className=" size-full bg-white object-cover absolute "
+          className=" size-full bg-white object-cover absolute  "
         />
-        <div className="  absolute  p-10 h-full flex flex-col justify-end items-center gap-10 ">
+        <div className="  absolute  p-10 h-full flex flex-col justify-end items-center gap-10  ">
           <div className="flex ">
             <div className="flex flex-col gap-5  max-sm:w-full ">
               <p className="bg-gray-600 text-white text-lg rounded-2xl py-2 px-4">
                 <span className="text-red-700 max-sm:text-sm">New!</span>{" "}
                 Together and feel a better
               </p>
-              <h1 className=" bg-gradient-to-r from-red-700 via-red-100 to-blue-800 inline-block text-transparent bg-clip-text  font-black text-[38px] max-sm:text-lg max-sm:w-full ">
+              <h1 className=" bg-gradient-to-r from-red-700 via-red-100 to-blue-800 inline-block text-transparent bg-clip-text  font-black text-[38px] max-sm:text-lg max-sm:w-full  ">
                 First Great <br />
                 Better <br /> Best
               </h1>
