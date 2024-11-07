@@ -10,10 +10,10 @@ import { useContext } from "react";
 import { UserContext } from "@/context/user-booking-context";
 import Link from "next/link";
 import { TbArrowLeftFromArc } from "react-icons/tb";
-
+import { GoDotFill } from "react-icons/go";
 const menuList: IMenu = [
   // { menuId: "Id01", label: "Home", link: "/" },
-  { menuId: "Id02", label: "Бидний тухай", link: "/" },
+  // { menuId: "Id02", label: "Бидний тухай", link: "/" },
   { menuId: "Id03", label: "Үйлчилгээ", link: "ourService" },
   { menuId: "Id04", label: "Артист", link: "artists" },
   { menuId: "Id06", label: "Book now", link: "booknow" },
@@ -31,14 +31,16 @@ const Header = () => {
   };
   return (
     <div className="w-full bg-[#101828] border-b-2">
-      <header className="flex items-center justify-between w-[90%] m-auto   px-4 py-4 bg-[#101828] md:px-20 ">
-        <Image height={250} src="/images/logo.png" alt="photo" width={200} />
+      <header className="flex items-center justify-between w-[90%] m-auto   px-2 py-2 bg-[#101828] md:px-20 ">
+        <Link href="/">
+          <Image height={250} src="/images/logo.png" alt="photo" width={200} />
+        </Link>
 
         <div className="flex justify-between items-center max-sm:hidden">
           <ul className={` flex gap-4 font-medium text-[16px] text-white `}>
             {menuList.map((menu) => (
-              <li key={menu.menuId} className="flex items-center gap-1">
-                <TbArrowLeftFromArc className=" text-lg text-gray-400" />
+              <li key={menu.menuId} className="flex items-center ">
+                <GoDotFill className="text-lg text-green-500" />
                 <a className="text-lg" href={menu.link}>
                   {menu.label}
                 </a>
