@@ -8,6 +8,8 @@ import HistorybyYear from "@/components/about/historybyYear";
 import Comment from "@/components/about/comment";
 import BestArtist from "@/components/about/bestArtist";
 import Link from "next/link";
+import CalendarList from "@/components/cards/day-list";
+
 
 export default function Home() {
   return (
@@ -63,6 +65,7 @@ export default function Home() {
         <HistorybyYear />
         <Comment />
       </div>
+      <CalendarList/>
     </div>
   );
 }
