@@ -377,6 +377,12 @@ export const navItems: NavItem[] = [
     label: 'user'
   },
   {
+    title: 'Категор',
+    href: '/dashboard/category',
+    icon: 'spinner',
+    label: 'user'
+  },
+  {
     title: 'Бүтээгдэхүүн',
     href: '/dashboard/product',
     icon: 'product',
