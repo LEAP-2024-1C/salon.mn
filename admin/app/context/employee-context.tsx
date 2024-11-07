@@ -25,7 +25,18 @@ export interface IEmployee {
       rate: number;
     }
   ];
-  availableDates: [{ startDate: string; endDate: string; _id: string }];
+  availableDates: [{ startDate: Date; endDate: Date; _id: string }];
+  unAvailableTime: [Date];
+}
+
+interface IBooking {
+  employee: { _id: string };
+  time: string;
+  user: string;
+  date: Date;
+  firstname: String;
+  phoneNumber: Number;
+  service: String;
 }
 
 interface ICreateEm {
@@ -45,6 +56,10 @@ interface IContext {
   setEmployee: React.Dispatch<React.SetStateAction<ICreateEm>>;
   createdEmployee: () => void;
   fetchEmployeeData: () => void;
+  getBooking: () => void;
+
+  booking: IBooking[];
+  setBooking: React.Dispatch<React.SetStateAction<IBooking[]>>;
 }
 
 export const EmployeesContext = createContext<IContext>({
@@ -54,12 +69,16 @@ export const EmployeesContext = createContext<IContext>({
   employee: {} as ICreateEm,
   setEmployee: () => {},
   createdEmployee: () => {},
-  fetchEmployeeData: () => {}
+  fetchEmployeeData: () => {},
+  getBooking: () => {},
+  booking: [],
+  setBooking: () => {}
 });
 
 const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
   const [employees, setEmployees] = useState<IEmployee[]>([]);
   const [employee, setEmployee] = useState<ICreateEm>({} as ICreateEm);
+  const [booking, setBooking] = useState<IBooking[]>([]);
   // {
   //   name: '',
   //   email: '',
@@ -125,6 +144,21 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const getBooking = async () => {
+    try {
+      const res = await axios({
+        method: 'get',
+        url: 'http://localhost:8008/api/v1/booking'
+      });
+
+      if (res.status === 200) {
+        setBooking(res.data.data);
+      }
+    } catch (error) {
+      toast.error('Booking дата татахад алдаа гарлаа.');
+    }
+  };
+
   useEffect(() => {
     fetchEmployeeData();
   }, []);
@@ -137,7 +171,10 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
         employee,
         setEmployee,
         createdEmployee,
-        fetchEmployeeData
+        fetchEmployeeData,
+        getBooking,
+        booking,
+        setBooking
       }}
     >
       {children}

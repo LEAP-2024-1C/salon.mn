@@ -1,7 +1,7 @@
 // Uka bagsh Dates
 
 'use client';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import {
   Table,
   TableBody,
@@ -28,6 +28,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { date } from 'zod';
 import { Button } from '@/components/ui/button';
+import { EmployeesContext } from '../context/employee-context';
 
 const EmployeeTime = () => {
   //   const day = addDays(new Date(), 1);
@@ -105,11 +106,14 @@ const EmployeeTime = () => {
     }[]
   >([{ startDate: new Date(), endDate: new Date() }]);
 
-  const [bookedDates, setBookedDates] = useState<Date[]>([
-    new Date('2024-11-08T11:00'),
-    new Date('2024-11-08T12:00')
-  ]);
+  // const [bookedDates, setBookedDates] = useState<Date[]>([
+  //   new Date('2024-11-08T11:00'),
+  //   new Date('2024-11-08T12:00')
+  // ]);
 
+  const { employees } = useContext(EmployeesContext);
+  // const bookedDates = ['2024-11-05T05:00:00.000Z', '2024-11-06T05:00:00.000Z'];
+  const bookedDates = employees[0]?.unAvailableTime;
   const changeDateInput = (e: ChangeEvent<HTMLInputElement>) => {
     console.log('ST', e.target.name);
     console.log('ST', e.target.value);
@@ -227,24 +231,24 @@ const EmployeeTime = () => {
             <div key={i}>
               <p className="font-bold">{format(a.startDate, 'yyyy-MM-dd')}</p>
               <p className="ml-5">
-                {new Array(differenceInHours(a.endDate, a.startDate))
-                  .fill(0)
-                  .map((n, i) => (
-                    <Button
-                      key={i}
-                      disabled={
-                        bookedDates.findIndex(
-                          (b) =>
-                            format(b, 'yyy-MM-dd hh:mm') ===
-                            format(addHours(a.startDate, i), 'yyyy-MM-dd hh:mm')
-                        ) !== -1
-                      }
-                    >
-                      {format(addHours(choosenDates.startDate, i), 'HH:mm')}
-                    </Button>
-                  ))}
+                {new Array(9).fill(0).map((n, i) => (
+                  <Button
+                    key={i}
+                    disabled={
+                      bookedDates?.findIndex(
+                        (b: any) =>
+                          format(new Date(b), 'yyy-MM-dd hh:mm') ===
+                          format(addHours(a.startDate, i), 'yyyy-MM-dd hh:mm')
+                      ) !== -1
+                    }
+                  >
+                    {format(addHours(choosenDates.startDate, i), 'HH:mm')}
+                  </Button>
+                ))}
               </p>
-              <div>BT: {format(bookedDates[0], 'yyyy-MM-dd hh:mm')}</div>
+              <div>
+                {/* BT: {format(new Date(bookedDates[0]), 'yyyy-MM-dd hh:mm')} */}
+              </div>
             </div>
           ))}
         </div>
