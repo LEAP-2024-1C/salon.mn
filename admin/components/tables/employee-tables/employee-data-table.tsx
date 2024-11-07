@@ -29,7 +29,8 @@ export function EmployeeDataTable() {
               <TableHead>Зураг</TableHead>
               <TableHead>Нэр</TableHead>
               <TableHead>Утсны дугаар</TableHead>
-              <TableHead>Category</TableHead>
+              <TableHead>Категори</TableHead>
+              <TableHead>Дэд категори</TableHead>
               <TableHead>Тайлбар</TableHead>
               <TableHead>Имэйл</TableHead>
               <TableHead>Password</TableHead>
@@ -50,6 +51,7 @@ export function EmployeeDataTable() {
                 <TableCell>{user?.name}</TableCell>
                 <TableCell>{user?.phoneNumber}</TableCell>
                 <TableCell>{user?.category?.name}</TableCell>
+                <TableCell>{user?.subCategory?.name}</TableCell>
                 <TableCell>{user?.discription}</TableCell>
                 <TableCell>{user?.email}</TableCell>
                 <TableCell>{user?.password}</TableCell>

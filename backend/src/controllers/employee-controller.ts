@@ -9,13 +9,14 @@ export const createdEmloyee = async (req: Request, res: Response) => {
       email,
       password,
       category,
+      subCategory,
       profile_img,
       phoneNumber,
       discription,
       availableDates,
     } = req.body;
 
-    if (!name || !email || !category || !phoneNumber) {
+    if (!name || !email || !category || !phoneNumber || !subCategory) {
       res.status(401).json({ message: "Хоосон утга байж болохгүй" });
       return;
     }
@@ -25,6 +26,7 @@ export const createdEmloyee = async (req: Request, res: Response) => {
       email,
       password,
       category,
+      subCategory,
       profile_img,
       phoneNumber,
       discription,
@@ -41,7 +43,9 @@ export const createdEmloyee = async (req: Request, res: Response) => {
 
 export const getAllEmployee = async (req: Request, res: Response) => {
   try {
-    const getAll = await Employee.find({}).populate("category");
+    const getAll = await Employee.find({})
+      .populate("category")
+      .populate("subCategory");
     res.status(200).json({ message: "All employees", allEmployee: getAll });
   } catch (error) {
     res.status(400).json({ messeage: "Niit ajiltan harahad aldaa garlaa" });
@@ -68,6 +72,7 @@ export const updateEmployee = async (req: Request, res: Response) => {
       email,
       password,
       category,
+      subCategory,
       profile_img,
       phoneNumber,
       discription,
@@ -88,6 +93,7 @@ export const updateEmployee = async (req: Request, res: Response) => {
     findedEmployee.email = email;
     findedEmployee.password = password;
     findedEmployee.category = category;
+    findedEmployee.subCategory = subCategory;
     findedEmployee.profile_img = profile_img;
     findedEmployee.phoneNumber = phoneNumber;
     findedEmployee.discription = discription;

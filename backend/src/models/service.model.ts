@@ -4,6 +4,7 @@ interface IService {
   name: string;
   price: Number;
   category: Schema.Types.ObjectId;
+  subCategory: Schema.Types.ObjectId;
   time: String;
   description: String;
 }
@@ -17,6 +18,11 @@ const serviceSchema = new Schema<IService>({
     type: Schema.Types.ObjectId,
     required: true,
     ref: "Category",
+  },
+  subCategory: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "SubCategory",
   },
   name: {
     type: String,

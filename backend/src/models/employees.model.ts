@@ -8,6 +8,7 @@ interface IEmployee {
   profile_img: String;
   discription: string;
   category: Schema.Types.ObjectId;
+  subCategory: Schema.Types.ObjectId;
   comment: [
     {
       user: Schema.Types.ObjectId;
@@ -50,6 +51,11 @@ const employeeSchema = new Schema<IEmployee>({
     type: Schema.Types.ObjectId,
     required: true,
     ref: "Category",
+  },
+  subCategory: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "SubCategory",
   },
   comment: [
     {

@@ -24,8 +24,14 @@ export const ServiceForm = () => {
 
   const router = useRouter();
 
-  const { service, setService, fetchServiceData, createdService } =
-    useContext(ServiceContext);
+  const {
+    service,
+    setService,
+    fetchServiceData,
+    createdService,
+    category,
+    subCategory
+  } = useContext(ServiceContext);
 
   const getService = async () => {
     try {
@@ -79,7 +85,7 @@ export const ServiceForm = () => {
 
   return (
     <div className=" flex flex-col gap-10">
-      <div className="grid-row-3 grid   grid-flow-col gap-5 ">
+      <div className="grid grid-cols-2   gap-5 ">
         <div className="grid w-full max-w-sm items-center gap-1.5 ">
           <Label>Нэр</Label>
           <Input
@@ -113,6 +119,19 @@ export const ServiceForm = () => {
           />
         </div>
 
+        <div className=" row-span-4 w-full max-w-sm  items-start gap-1.5">
+          <Label>Тайлбар</Label>
+          <Input
+            onChange={(e) =>
+              setService({ ...service, description: e.target.value })
+            }
+            type="text"
+            placeholder="Үйлчилгээний дэлгэрэнгүйг бичнэ үү"
+            className="h-full "
+            value={service?.description}
+          />
+        </div>
+
         <div className="grid w-full max-w-sm items-center gap-1.5">
           <Label>Category select</Label>
           <Select
@@ -125,29 +144,38 @@ export const ServiceForm = () => {
               <SelectValue placeholder="Category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectGroup>
-                <SelectItem value="6721a4727300f88d42793b76">Barber</SelectItem>
-                <SelectItem value="6720654be0eb8fa8d9b935c8">
-                  Nail art
-                </SelectItem>
-                <SelectItem value="6721a4837300f88d42793b78">
-                  Beauty artist
-                </SelectItem>
-              </SelectGroup>
+              {category?.map((cat) => {
+                return (
+                  <SelectGroup key={cat?._id}>
+                    <SelectItem value={cat?._id}>{cat?.name}</SelectItem>
+                  </SelectGroup>
+                );
+              })}
             </SelectContent>
           </Select>
         </div>
-        <div className=" row-span-4 w-full max-w-sm  items-start gap-1.5">
-          <Label>Тайлбар</Label>
-          <Input
-            onChange={(e) =>
-              setService({ ...service, description: e.target.value })
+
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label>Sub Category select</Label>
+          <Select
+            onValueChange={(value) =>
+              setService({ ...service, subCategory: value })
             }
-            type="text"
-            placeholder="Үйлчилгээний дэлгэрэнгүйг бичнэ үү"
-            className="h-full "
-            value={service?.description}
-          />
+            defaultValue={service?.category}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Category" />
+            </SelectTrigger>
+            <SelectContent>
+              {subCategory?.map((cat) => {
+                return (
+                  <SelectGroup key={cat?._id}>
+                    <SelectItem value={cat?._id}>{cat?.name}</SelectItem>
+                  </SelectGroup>
+                );
+              })}
+            </SelectContent>
+          </Select>
         </div>
       </div>
       <Button onClick={serviceID === 'create' ? createdService : updateService}>
