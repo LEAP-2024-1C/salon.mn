@@ -5,9 +5,9 @@ import { TbArrowLeftFromArc } from "react-icons/tb";
 
 const BestArtist = () => {
   const img: string[] = [
-    "https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/elementor/thumbs/portrait-of-handsome-caucasian-male-barber-with-fa-2021-09-03-20-46-18-utc-e1663215745876-pus732rly23aeampf1j41e95li055alz1gdzn0x5i0.jpg",
-    "https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/elementor/thumbs/a-man-with-crossed-arms-dressed-in-a-blue-fleece-2021-08-29-12-11-47-utc-e1663216195255-pus7etqzdi6bitkat4d87fikww3bd396nlyhljhzq0.jpg",
-    "https://elementorkits.nathatype.com/barber97/wp-content/uploads/sites/30/elementor/thumbs/bearded-male-with-crossed-arms-2021-08-29-09-58-27-utc-e1663215777361-pus73wug0r8gptf0jej696nwltvvzlxdtl9izvojyw.jpg",
+    "/images/employ1.png",
+    "/images/employ2.png",
+    "/images/employ3.png",
   ];
   return img.map((i, key2) => {
     return (
@@ -20,21 +20,26 @@ const BestArtist = () => {
           className="rounded-2xl"
         />
         <p className="text-wrap">
-          Mauris donec leo, gravida phasellus luctus. Adipiscing tellus in odio
-          sed. Nam ut quis mi nisl orci, vitae. Ligula commodo et vitae.
+          Эрэгтэй үйлчлүүлэгчдэд үс засалт, өнгө шинэчлэл, үс засалтын зөвлөгөө
+          өгөх. Үсийг зөв арчлах, засах болон илүү гоо сайхан болж харагдах
+          зөвлөгөө өгөх. Багийн гишүүдтэй хамтран ажиллах, үйлчилгээний чанарыг
+          сайжруулах, шинэ үйлчлүүлэгчдийг татах.
         </p>
 
         <div className="flex gap-3 items-center">
           <TbArrowLeftFromArc className=" text-lg" />
-          <p>Scelerisque nunc, at nisl non. Est.</p>
+          <p>Үйлчлүүлэгчдийн 90% нь ахин үйлчлүүлэхээр эргэж ирдэг.</p>
         </div>
         <div className="flex gap-3">
           <TbArrowLeftFromArc className=" text-lg" />
-          <p>Scelerisque nunc, at nisl non. Est.</p>
+          <p>
+            Үс засалт, өнгө, хэв маягийн чиг хандлагыг судлан, трэнд
+            тодорхойлдог.
+          </p>
         </div>
         <div className="flex gap-3">
           <TbArrowLeftFromArc className=" text-lg" />
-          <p>Scelerisque nunc, at nisl non. Est.</p>
+          <p>Үйлчилгээний чанарыг үргэлж сайжруулахыг эрмэлздэг</p>
         </div>
       </div>
     );
