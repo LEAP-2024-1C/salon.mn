@@ -26,7 +26,7 @@ export const signin = async (req: Request, res: Response) => {
       await user.save();
     }
 
-    // await sendPhoneNum(phoneNumber, otp);
+    await sendPhoneNum(phoneNumber, otp);
     res
       .status(200)
       .json({ message: `${phoneNumber} дугаар луу OTP код илгээлээ` });

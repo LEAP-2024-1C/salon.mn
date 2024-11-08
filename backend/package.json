@@ -18,7 +18,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.6.3",
     "nodemailer": "^6.9.15",
-    "resend": "^4.0.0"
+    "resend": "^4.0.0",
+    "twilio": "^5.3.5"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

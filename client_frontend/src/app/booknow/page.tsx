@@ -3,15 +3,7 @@
 import { RxScissors } from "react-icons/rx";
 import * as React from "react";
 import { useState } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-// import {
+
 //   Popover,
 //   PopoverContent,
 //   PopoverTrigger,
@@ -37,7 +29,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 const BookNow = () => {
   const [open, setOpen] = useState(false);
-  const [openAvaiTime, setOpenAvaiTime] = useState(false);
+  // const [openAvaiTime, setOpenAvaiTime] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [time, setTime] = useState<Date | null>();
   const [isTrue, setIsTrue] = useState("");
@@ -61,30 +53,30 @@ const BookNow = () => {
   //   (date) => format(new Date(date.startDate), "yyyy-MM-dd") === filterDate
   // );
 
-  const bookNow = async () => {
-    const { firstname, phoneNumber, time, date, service, empID } = booking;
+  // const bookNow = async () => {
+  //   const { firstname, phoneNumber, time, date, service, empID } = booking;
 
-    try {
-      const response = await axios.post(
-        `http://localhost:8008/api/v1/booking`,
-        {
-          firstname,
-          phoneNumber,
-          date,
-          time,
-          empID,
-          service,
-        }
-      );
-      if (response.status === 201) {
-        toast.success("successfull to book now");
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("failed to book now");
-    }
-  };
-  console.log(booking);
+  //   try {
+  //     const response = await axios.post(
+  //       `http://localhost:8008/api/v1/booking`,
+  //       {
+  //         firstname,
+  //         phoneNumber,
+  //         date,
+  //         time,
+  //         empID,
+  //         service,
+  //       }
+  //     );
+  //     if (response.status === 201) {
+  //       toast.success("successfull to book now");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("failed to book now");
+  //   }
+  // };
+  console.log(booking, isActive, time);
   return (
     <div className="bg-[#101828]">
       <div className="bg-[#101828] p-2 pt-10 flex flex-col gap-10 md:m-auto md:container">
