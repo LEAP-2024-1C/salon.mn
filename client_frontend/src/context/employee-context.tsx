@@ -19,8 +19,8 @@ export interface IEmployee {
       rate: number;
     }
   ];
-  availabledates: [string];
-  unAvailabletime: [string];
+  availableDates: [{ startDate: Date; endDate: Date; _id: string }];
+  unAvailableTime: [Date];
 }
 
 interface IContext {
