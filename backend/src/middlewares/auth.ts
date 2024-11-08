@@ -7,11 +7,7 @@ import { decodeToken } from "../utils/jwt";
 declare global {
   namespace Express {
     interface Request {
-      user: {
-        id: string;
-        iat: number;
-        exp: number;
-      };
+      user: any;
     }
   }
 } //global bga inteface oorcloh gej bn
