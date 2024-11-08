@@ -19,8 +19,8 @@ import { useState } from "react";
 //   SelectValue,
 // } from "@/components/ui/select";
 import Image from "next/image";
-import { toast } from "react-toastify";
-import axios from "axios";
+// import { toast } from "react-toastify";
+// import axios from "axios";
 import BarberCard from "@/components/cards/barber-card";
 import { EmployeesContext } from "@/context/employee-context";
 import { Calendar } from "@/components/ui/calendar";
@@ -76,7 +76,7 @@ const BookNow = () => {
   //     toast.error("failed to book now");
   //   }
   // };
-  console.log(booking, isActive, time);
+  console.log(booking, isActive, time, open);
   return (
     <div className="bg-[#101828]">
       <div className="bg-[#101828] p-2 pt-10 flex flex-col gap-10 md:m-auto md:container">
