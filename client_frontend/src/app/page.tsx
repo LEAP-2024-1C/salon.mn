@@ -5,7 +5,6 @@ import { BsBoxArrowUpRight } from "react-icons/bs";
 import Image from "next/image";
 
 import HistorybyYear from "@/components/about/historybyYear";
-import Comment from "@/components/about/comment";
 import BestArtist from "@/components/about/bestArtist";
 import Link from "next/link";
 
