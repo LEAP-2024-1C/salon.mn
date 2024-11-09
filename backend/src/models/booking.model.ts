@@ -7,7 +7,7 @@ interface IBooking {
   date: Date;
   firstname: String;
   phoneNumber: Number;
-  service: Schema.Types.ObjectId; //uschin => eregtei emegtei ys zasal
+  service: string;
 }
 
 const bookingSchema = new Schema<IBooking>({
@@ -39,9 +39,8 @@ const bookingSchema = new Schema<IBooking>({
     required: true,
   },
   service: {
-    type: Schema.Types.ObjectId,
-    ref: "Service",
-    required: false,
+    type: String,
+    required: true,
   },
 });
 

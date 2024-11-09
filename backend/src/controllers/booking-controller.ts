@@ -16,20 +16,21 @@ export const getBooking = async (req: Request, res: Response) => {
 };
 export const createBooking = async (req: Request, res: Response) => {
   try {
-    const { firstname, phoneNumber, date, user, employee, service } = req.body;
+    const { firstname, phoneNumber, date, time, user, service, empID } =
+      req.body;
 
-    if (!firstname || !phoneNumber || !date || !employee || !service) {
+    if (!firstname || !phoneNumber || !date || !empID || !service || !time) {
       return res.status(400).json({ message: "Fields cannot be empty." });
     }
 
     const newBook = await Booking.create({
       firstname,
       phoneNumber,
-
-      date,
-      employee,
+      date: `${date}T${time}`,
+      employee: empID,
       user,
       service,
+      empID,
     });
     res.status(201).json({ message: "Success", booking: newBook });
   } catch (error) {

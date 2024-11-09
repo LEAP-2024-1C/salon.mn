@@ -9,15 +9,15 @@ import { useState } from "react";
 //   PopoverTrigger,
 // } from "@/components/ui/popover";
 
-// import {
-//   Select,
-//   SelectContent,
-//   SelectGroup,
-//   SelectItem,
-//   SelectLabel,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import Image from "next/image";
 // import { toast } from "react-toastify";
 // import axios from "axios";
@@ -27,14 +27,19 @@ import { Calendar } from "@/components/ui/calendar";
 import { addHours, differenceInHours, format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { Value } from "@radix-ui/react-select";
+
 const BookNow = () => {
   const [open, setOpen] = useState(false);
-  // const [openAvaiTime, setOpenAvaiTime] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [time, setTime] = useState<Date | null>();
   const [isTrue, setIsTrue] = useState("");
   const { employees } = React.useContext(EmployeesContext);
   const [filterDate, setFilterDate] = useState("");
+  const [mainCat, setMainCat] = useState("");
+  const [service, setService] = useState("");
   const [booking, setBooking] = useState({
     firstname: "",
     phoneNumber: "",
@@ -43,40 +48,59 @@ const BookNow = () => {
     service: "",
     empID: "",
   });
+  const [subCategory, setSubCategory] = useState([
+    {
+      name: "",
+      category: { name: "" },
+    },
+  ]);
   const [chooseEmployee, setChoosenEmployee] = useState<string | null>("");
 
   const findIndex = employees?.findIndex(
     (employee) => employee?._id === chooseEmployee
   );
+  const getSubcategory = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8008/api/v1/category/get-sub`
+      );
+      if (res.status === 200) {
+        console.log(res.data);
+        setSubCategory(res.data.getSubCategory);
+        toast.success("amjilttai");
+      }
+    } catch (error: any) {
+      console.log(error.message);
+      toast.error("Error subcategory");
+    }
+  };
+  const bookNow = async () => {
+    const { firstname, phoneNumber, time, date, service, empID } = booking;
 
-  // const findIndexDate = employees[findIndex].availableDates.findIndex(
-  //   (date) => format(new Date(date.startDate), "yyyy-MM-dd") === filterDate
-  // );
-
-  // const bookNow = async () => {
-  //   const { firstname, phoneNumber, time, date, service, empID } = booking;
-
-  //   try {
-  //     const response = await axios.post(
-  //       `http://localhost:8008/api/v1/booking`,
-  //       {
-  //         firstname,
-  //         phoneNumber,
-  //         date,
-  //         time,
-  //         empID,
-  //         service,
-  //       }
-  //     );
-  //     if (response.status === 201) {
-  //       toast.success("successfull to book now");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     toast.error("failed to book now");
-  //   }
-  // };
-  console.log(booking, isActive, time, open);
+    try {
+      const response = await axios.post(
+        `http://localhost:8008/api/v1/booking`,
+        {
+          firstname,
+          phoneNumber,
+          date,
+          time,
+          empID,
+          service,
+        }
+      );
+      if (response.status === 201) {
+        toast.success("successfull to book now");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("failed to book now");
+    }
+  };
+  console.log(booking);
+  React.useEffect(() => {
+    getSubcategory();
+  }, []);
   return (
     <div className="bg-[#101828]">
       <div className="bg-[#101828] p-2 pt-10 flex flex-col gap-10 md:m-auto md:container">
@@ -114,6 +138,66 @@ const BookNow = () => {
               Гоо сайхан
             </div>
           </div>
+        </div>
+        <div className="flex gap-10">
+          <Input
+            placeholder="Enter your name"
+            type="text"
+            onChange={(e) => {
+              setBooking({ ...booking, firstname: e.target.value });
+            }}
+          />
+          <Input
+            placeholder="Enter your phonenumber"
+            type="number"
+            onChange={(e) => {
+              setBooking({ ...booking, phoneNumber: e.target.value });
+            }}
+          />
+          <Select
+            onValueChange={(value) => {
+              setMainCat(value);
+            }}
+          >
+            <SelectTrigger className="w-[800px]">
+              <SelectValue placeholder="Үйлчилгээгээ сонгоно уу" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Үйлчилгээ</SelectLabel>
+                <SelectItem value="nail artist">nail artist</SelectItem>
+                <SelectItem value="barber">barber</SelectItem>
+                <SelectItem value="beautician">beautician</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <Select
+            onValueChange={(value) => {
+              setService(value);
+              setBooking({ ...booking, service: value });
+            }}
+          >
+            <SelectTrigger className="w-[800px]">
+              <SelectValue placeholder="Үйлчилгээгээ сонгоно уу" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Үйлчилгээ</SelectLabel>
+                {subCategory
+                  ?.filter((subCat) => subCat?.category.name === mainCat)
+                  .map((subCat, idx) => {
+                    return (
+                      <SelectItem
+                        key={`subcat` + idx}
+                        value={subCat.name ? subCat.name : "value"}
+                      >
+                        {subCat.name}
+                      </SelectItem>
+                    );
+                  })}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
         <div className="flex justify-center gap-10">
           {employees?.map((emp, idx) => {
@@ -199,10 +283,7 @@ const BookNow = () => {
                   </div>
                 ))}
             </div>
-          </div>
-          <div className="flex flex-col gap-3">
-            <Input placeholder="Enter your name" type="text" />
-            <Input placeholder="Enter your phonenumber" type="number" />
+            <Button onClick={bookNow}>Цаг захиалах</Button>
           </div>
         </div>
       </div>
@@ -210,3 +291,4 @@ const BookNow = () => {
   );
 };
 export default BookNow;
+// filter((emp) => emp.subCategory.name === service)

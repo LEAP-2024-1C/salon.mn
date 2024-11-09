@@ -12,6 +12,7 @@ export interface IEmployee {
   profile_img: string;
   discription: string;
   category: string;
+  subCategory: { name: string };
   comment: [
     {
       user: string;
