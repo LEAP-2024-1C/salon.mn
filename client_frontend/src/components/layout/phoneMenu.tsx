@@ -32,7 +32,7 @@ const PhoneMenu = ({
       <section className="sm:hidden text-white">
         {show ? (
           <div className="bg-gray-800 absolute z-20 top-0 left-0 w-full h-screen">
-            <div className="bg-[#101828] w-10/12 h-screen ml-auto text-white  px-4 py-6">
+            <div className=" w-10/12 h-screen ml-auto text-white  px-4 py-6">
               <div className="flex justify-between items-center  px-4 py-6 border-b">
                 <h1 className="text-3xl font-black">First Great </h1>
                 <RxCross2
@@ -68,7 +68,6 @@ const PhoneMenu = ({
                     className="bg-black p-0 hover:bg-black text-lg"
                     onClick={signout}
                   >
-                    {" "}
                     <CiPower className="text-gray-400 font-extrabold" />
                   </Button>
                 </div>
