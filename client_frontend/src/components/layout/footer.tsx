@@ -16,7 +16,7 @@ const menuList: IMenu = [
 ];
 const Footer: React.FC = () => {
   return (
-    <div className="border-t-2">
+    <div className="border-t-2 bg-[#241520]">
       <div className="text-white w-[90%] flex flex-col  m-auto">
         <div className="flex justify-between mb-[20px] max-sm:flex-col">
           <Image

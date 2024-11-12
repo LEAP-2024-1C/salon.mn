@@ -62,11 +62,9 @@ const BookNow = () => {
       if (res.status === 200) {
         console.log(res.data);
         setSubCategory(res.data.getSubCategory);
-        toast.success("amjilttai");
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error subcategory");
     }
   };
   const bookNow = async () => {
@@ -97,8 +95,8 @@ const BookNow = () => {
     getSubcategory();
   }, []);
   return (
-    <div className="bg-[#101828]">
-      <div className="bg-[#101828] p-2 pt-10 flex flex-col gap-10 md:m-auto md:container">
+    <div className="bg-white">
+      <div className="bg-white p-2 pt-10 flex flex-col gap-10 md:m-auto md:container">
         {/* <div className="flex flex-row gap-3">
           <p className="font-bold text-4xl text-red-400">Logo</p>
 
@@ -194,7 +192,7 @@ const BookNow = () => {
               </SelectContent>
             </Select>
             <Button
-              className="bg-slate-700"
+              className="hover:bg-[#BA7894] hover:text-white bg-white  border border-[#BA7894] text-[#BA7894]"
               onClick={() => {
                 setStep(1);
               }}
@@ -225,7 +223,7 @@ const BookNow = () => {
             </div>
             <div className="flex justify-center ">
               <Button
-                className="bg-slate-700"
+                className="hover:bg-[#BA7894] hover:text-white  bg-white  border border-[#BA7894] text-[#BA7894]"
                 onClick={() => {
                   setStep(2);
                 }}
@@ -300,7 +298,7 @@ const BookNow = () => {
                   ))}
               </div>
               <Button
-                className="bg-slate-700"
+                className="hover:bg-[#BA7894] hover:text-white  bg-white  border border-[#BA7894] text-[#BA7894]"
                 onClick={() => {
                   setStep(3);
                 }}
@@ -318,6 +316,7 @@ const BookNow = () => {
               alt="Picture of the author"
             />
             <Button
+              className="hover:bg-[#BA7894] hover:text-white  bg-white  border border-[#BA7894] text-[#BA7894]"
               onClick={() => {
                 setStep(4);
               }}
@@ -326,7 +325,9 @@ const BookNow = () => {
             </Button>
           </div>
         ) : (
-          <Button onClick={bookNow}>Цаг захиалах</Button>
+          <Button className="w-96" onClick={bookNow}>
+            Цаг захиалах
+          </Button>
         )}
       </div>
     </div>
