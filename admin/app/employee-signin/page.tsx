@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Signin from '@/components/handmade/signin';
+import EmplyeeSingin from '@/components/handmade/employee-signin';
 
 export const metadata: Metadata = {
   title: 'Authentication',
@@ -12,7 +13,7 @@ export default function AuthenticationPage() {
       <div className="relative hidden h-full w-full flex-col bg-[url('/adminbg.avif')] bg-cover bg-left p-10 lg:flex dark:border-r"></div>
 
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-        <Signin />
+        <EmplyeeSingin />
       </div>
     </div>
   );

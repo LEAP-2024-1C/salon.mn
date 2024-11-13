@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Employee from "../models/employees.model";
-import { error } from "console";
+import bcrypt from "bcrypt";
+import { generateToken } from "../utils/jwt";
 
 export const createdEmloyee = async (req: Request, res: Response) => {
   try {
@@ -61,6 +62,30 @@ export const getEmployee = async (req: Request, res: Response) => {
       .json({ message: "Id aar employee harah amjilttai bolloo", employee });
   } catch (error) {
     res.status(400).json({ message: "Id aar employee harah amjiltgui bolloo" });
+  }
+};
+
+export const loginArtist = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+    const user = await Employee.findOne({ email });
+    // console.log("id", user);
+    if (!user) {
+      res.status(400).json({ message: "Burtgelgui hereglegch baina" });
+    } else {
+      const isCheck = bcrypt.compareSync(password, user?.password);
+      if (!isCheck) {
+        res.status(400).json({
+          message: "hereglegchiin email esvel nuuts ug buruu baina",
+        });
+      } else {
+        const token = generateToken({ id: user._id.toString() });
+        res.status(200).json({ message: "success", token: token , id : user._id });
+      }
+    }
+  } catch (error: any) {
+    // console.log(error.message);
+    res.status(404).json({ message: "error", user: error.message });
   }
 };
 

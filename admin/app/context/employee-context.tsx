@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import React, { useContext, useState, createContext, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { any } from 'zod';
 
 export interface IEmployee {
   _id: string;
@@ -52,7 +53,8 @@ interface ICreateEm {
 interface IContext {
   employees: IEmployee[];
   setEmployees: React.Dispatch<React.SetStateAction<IEmployee[]>>;
-
+  artId: string;
+  setArtId: (id: string) => void;
   employee: ICreateEm;
   setEmployee: React.Dispatch<React.SetStateAction<ICreateEm>>;
   createdEmployee: () => void;
@@ -66,7 +68,8 @@ interface IContext {
 export const EmployeesContext = createContext<IContext>({
   employees: [],
   setEmployees: () => {},
-
+  artId: '',
+  setArtId: () => {},
   employee: {} as ICreateEm,
   setEmployee: () => {},
   createdEmployee: () => {},
@@ -80,6 +83,7 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
   const [employees, setEmployees] = useState<IEmployee[]>([]);
   const [employee, setEmployee] = useState<ICreateEm>({} as ICreateEm);
   const [booking, setBooking] = useState<IBooking[]>([]);
+  const [artId, setArtId] = useState<string>('');
   // {
   //   name: '',
   //   email: '',
@@ -178,7 +182,9 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
         fetchEmployeeData,
         getBooking,
         booking,
-        setBooking
+        setBooking,
+        artId,
+        setArtId
       }}
     >
       {children}
