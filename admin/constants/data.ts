@@ -365,11 +365,19 @@ export const navItems: NavItem[] = [
   },
 
   {
-    title: 'Booking',
+    title: 'Unavailable time setting',
     href: '/dashboard/booking',
-    icon: 'post',
+    icon: 'settings',
     label: 'user'
   },
+
+  {
+    title: 'Касс',
+    href: '/dashboard/cash',
+    icon: 'settings',
+    label: 'user'
+  },
+
   {
     title: 'Үйлчилгээ',
     href: '/dashboard/service',

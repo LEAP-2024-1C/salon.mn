@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 
 import {
   Table,
@@ -20,7 +19,7 @@ import { format } from 'date-fns';
 
 export function TimeTable() {
   const { employees } = useContext(EmployeesContext);
-  console.log('first', employees);
+
   return (
     <>
       <ScrollArea className="h-[calc(80vh-220px)] rounded-md border-[2px]">
