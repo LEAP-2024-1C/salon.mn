@@ -157,7 +157,7 @@ const BookNow = () => {
               }}
             >
               <SelectTrigger className="">
-                <SelectValue placeholder="Үйлчилгээгээ сонгоно уу" />
+                <SelectValue placeholder="Үйлчилгээний төрөл сонгоно уу" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
