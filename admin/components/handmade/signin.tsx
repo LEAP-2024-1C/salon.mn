@@ -28,6 +28,7 @@ function Signin() {
         const { token } = res.data;
         localStorage.setItem('token', token);
         setToken(token);
+
         router.push('/dashboard');
       }
     } catch (error: any) {

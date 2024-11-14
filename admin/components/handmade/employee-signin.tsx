@@ -9,8 +9,8 @@ import { AdminContext } from '@/app/context/admin-context';
 import { EmployeesContext } from '@/app/context/employee-context';
 
 function EmplyeeSingin() {
-  const { setToken } = useContext(AdminContext);
-  const { setArtId } = useContext(EmployeesContext);
+  const { setToken } = useContext(EmployeesContext);
+  const { setArtistData } = useContext(EmployeesContext);
   const router = useRouter();
   const [userData, setUserData] = useState({
     email: '',
@@ -33,14 +33,16 @@ function EmplyeeSingin() {
       if (res.status === 200) {
         toast.success('Амжилттай нэвтэрлээ', { autoClose: 1000 });
         const { token } = res.data;
-        const { id } = res.data;
-        setArtId(id);
+        console.log('firstlogin,', token);
+        const { user } = res.data;
         localStorage.setItem('token', token);
+        setArtistData(user);
         setToken(token);
-        router.push('/employee');
+        router.push('/artist');
       }
     } catch (error: any) {
       console.log('There was an error signing in:', error);
+
       toast.error('nevtrehed aldaa garlaa');
     }
   };
