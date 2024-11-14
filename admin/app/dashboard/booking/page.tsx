@@ -197,34 +197,6 @@ const Booking = () => {
             ))}
           </TableBody>
         </Table>
-
-        <div className="w-full">
-          <p>Захиалсан цаг</p>
-          <div className="flex flex-wrap justify-center gap-5">
-            {booking?.sort().map((book, i) => {
-              return (
-                <div
-                  key={`book ${i}`}
-                  className="relative h-60 w-40  rounded-lg  border bg-black"
-                >
-                  <Image
-                    fill={true}
-                    src={book?.employee?.profile_img}
-                    alt="productIMG"
-                    className="h-auto w-auto object-cover opacity-35 "
-                  />
-                  <div className="absolute bottom-1  pl-5 text-white">
-                    <p>{book?.phoneNumber}</p>
-                    <p>{format(new Date(book?.date), 'yyyy-MM-dd')} </p>
-                    <p>{format(new Date(book?.date), ' HH-mm')} цаг</p>
-                    <p>Artist:{book?.employee?.name}</p>
-                    <p>{book?.service?.name}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
       </div>
     </PageContainer>
   );
