@@ -28,8 +28,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const BookNow = () => {
+  const router = useRouter();
   const [step, setStep] = useState(0);
   const [isTrue, setIsTrue] = useState("");
   const { employees } = React.useContext(EmployeesContext);
@@ -83,6 +85,7 @@ const BookNow = () => {
         }
       );
       if (response.status === 201) {
+        setStep(4);
         toast.success("successfull to book now");
       }
     } catch (error) {
@@ -95,8 +98,8 @@ const BookNow = () => {
     getSubcategory();
   }, []);
   return (
-    <div className="bg-white">
-      <div className="bg-white p-2 pt-10 flex flex-col gap-10 md:m-auto md:container">
+    <div className={step === 3 ? "" : "h-[478px]"}>
+      <div className="p-2 pt-10 flex flex-col gap-10 md:m-auto md:container ">
         {/* <div className="flex flex-row gap-3">
           <p className="font-bold text-4xl text-red-400">Logo</p>
 
@@ -266,6 +269,7 @@ const BookNow = () => {
                           .fill(0)
                           .map((n, key) => (
                             <Button
+                              className="hover:bg-[#BA7894] hover:text-white bg-white  border border-[#BA7894] text-[#BA7894]"
                               key={key}
                               disabled={
                                 employees[findIndex].unAvailableTime.findIndex(
@@ -308,26 +312,80 @@ const BookNow = () => {
             </div>
           </div>
         ) : step === 3 ? (
-          <div className="m-auto w-96 flex flex-col gap-5 bg-white p-4">
+          <div className="m-auto flex flex-col justify-center items-center gap-5 bg-white p-4">
+            <p className="text-xl font-bold">Цаг баталгаажуулах төлбөр</p>
             <Image
-              src="/images/qr.png "
-              width={500}
-              height={500}
+              src="/images/qr.png"
+              width={300}
+              height={300}
               alt="Picture of the author"
             />
+            <p>Төлөх боломжтой банкууд:</p>
+            <div className="flex gap-5">
+              <Image
+                src="/images/golomt.jpg "
+                width={50}
+                height={50}
+                alt="Picture of the author"
+              />
+              <Image
+                src="/images/khas.jpg "
+                width={50}
+                height={50}
+                alt="Picture of the author"
+              />
+              <Image
+                src="/images/socialpay.png "
+                width={50}
+                height={50}
+                alt="Picture of the author"
+              />
+              <Image
+                src="/images/tdb.png"
+                width={50}
+                height={50}
+                alt="Picture of the author"
+              />
+              <Image
+                src="/images/khan.jpg "
+                width={50}
+                height={50}
+                alt="Picture of the author"
+              />
+            </div>
             <Button
               className="hover:bg-[#BA7894] hover:text-white  bg-white  border border-[#BA7894] text-[#BA7894]"
-              onClick={() => {
-                setStep(4);
-              }}
+              onClick={bookNow}
             >
-              Дараагийн алхам
+              Цаг захиалах
             </Button>
           </div>
         ) : (
-          <Button className="w-96" onClick={bookNow}>
-            Цаг захиалах
-          </Button>
+          <div className="m-auto">
+            <div className="border border-gray-200 w-[450px] shadow-xl p-5 flex flex-col justify-center items-center gap-5">
+              <Image
+                src="/images/Correct.jpg"
+                width={100}
+                height={100}
+                alt="Picture of the author"
+              />
+              <h1 className="text-xl">Цаг амжилттай захиалагдлаа 😄😄😄</h1>
+              <p>
+                Хугацаа: {booking.date}-{booking.time}
+                <br />
+                Хаяг: Хан-Уул дүүрэгийн 15-р хороо Энхтайвний гүүрний зүүн урд
+                талд Наадам центр 2 давхарт Great Salon
+              </p>
+              <Button
+                className="hover:bg-[#BA7894] hover:text-white  bg-white  border border-[#BA7894] text-[#BA7894]"
+                onClick={() => {
+                  router.push("/");
+                }}
+              >
+                Done
+              </Button>
+            </div>
+          </div>
         )}
       </div>
     </div>
