@@ -129,10 +129,11 @@ const OurServices = () => {
                 </div>
                 <div className="flex-1 h-[600px]  relative">
                   <div className=" absolute bg-red-400 w-[600px] h-[600px]">
-                    {images?.map((image) => {
-                      if (sub.name === image.name)
+                    {images?.map((image, i) => {
+                      if (sub?.name === image?.name)
                         return (
                           <Image
+                            key={i}
                             layout="fill"
                             objectFit=" cover"
                             alt="Logo"
