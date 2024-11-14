@@ -6,9 +6,11 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { AdminContext } from '@/app/context/admin-context';
-import Link from 'next/link';
-function Signin() {
-  const { setToken } = useContext(AdminContext);
+import { EmployeesContext } from '@/app/context/employee-context';
+
+function EmplyeeSingin() {
+  const { setToken } = useContext(EmployeesContext);
+  const { setArtistData } = useContext(EmployeesContext);
   const router = useRouter();
   const [userData, setUserData] = useState({
     email: '',
@@ -17,32 +19,40 @@ function Signin() {
 
   const signin = async () => {
     const { email, password } = userData;
+    console.log('values', email);
+    console.log('values', password);
     try {
-      const res = await axios.post(`http://localhost:8008/api/v1/admin/login`, {
-        email,
-        password
-      });
+      const res = await axios.post(
+        `http://localhost:8008/api/v1/employee/artist`,
+        {
+          email,
+          password
+        }
+      );
 
       if (res.status === 200) {
         toast.success('Амжилттай нэвтэрлээ', { autoClose: 1000 });
         const { token } = res.data;
+        console.log('firstlogin,', token);
+        const { user } = res.data;
         localStorage.setItem('token', token);
+        setArtistData(user);
         setToken(token);
-
-        router.push('/dashboard');
+        router.push('/artist');
       }
     } catch (error: any) {
-      // console.log('There was an error signing in:', error.message);
+      console.log('There was an error signing in:', error);
+
       toast.error('nevtrehed aldaa garlaa');
     }
   };
   return (
     <div>
       <div className="flex flex-col gap-2">
-        <p className="m-auto">Admen</p>
+        <p className="m-auto">Ажилтан</p>
         <Input
           type="email"
-          placeholder="Нэвтрэх нэрээ оруул"
+          placeholder="Артист нэрээ оруул"
           value={userData.email}
           onChange={(e) => setUserData({ ...userData, email: e.target.value })}
         />
@@ -54,18 +64,10 @@ function Signin() {
             setUserData({ ...userData, password: e.target.value })
           }
         />
-        <Button onClick={signin}>Нэвтрэх</Button>
-        <Link
-          href="/employee-signin"
-          className={
-            'absolute right-4 top-4  rounded-xl border border-red-500 p-2 md:right-8 md:top-8'
-          }
-        >
-          Ажилтан
-        </Link>
+        <Button onClick={signin}>Sign In</Button>
       </div>
     </div>
   );
 }
 
-export default Signin;
+export default EmplyeeSingin;

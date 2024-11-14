@@ -7,6 +7,7 @@ interface IEmployee {
   password: string;
   profile_img: String;
   discription: string;
+  role: string;
   category: Schema.Types.ObjectId;
   subCategory: Schema.Types.ObjectId;
   comment: [
@@ -27,6 +28,12 @@ const employeeSchema = new Schema<IEmployee>({
   },
   email: {
     type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    enum: ["admin", "artist"],
+    default: "artist",
     required: true,
   },
   password: {

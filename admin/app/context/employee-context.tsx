@@ -3,8 +3,15 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import React, { useContext, useState, createContext, useEffect } from 'react';
+import React, {
+  useContext,
+  useState,
+  createContext,
+  useEffect,
+  Dispatch
+} from 'react';
 import { useRouter } from 'next/navigation';
+import { any } from 'zod';
 
 export interface IEmployee {
   _id: string;
@@ -52,14 +59,16 @@ interface ICreateEm {
 }
 interface IContext {
   employees: IEmployee[];
-  setEmployees: React.Dispatch<React.SetStateAction<IEmployee[]>>;
-
+  setEmployees: Dispatch<React.SetStateAction<IEmployee[]>>;
+  artistData: IEmployee | null;
+  setArtistData: Dispatch<React.SetStateAction<IEmployee | null>>;
   employee: ICreateEm;
-  setEmployee: React.Dispatch<React.SetStateAction<ICreateEm>>;
+  setEmployee: Dispatch<React.SetStateAction<ICreateEm>>;
   createdEmployee: () => void;
   fetchEmployeeData: () => void;
   getBooking: () => void;
-
+  setToken: Dispatch<React.SetStateAction<string | null>>;
+  token: string | null;
   booking: IBooking[];
   setBooking: React.Dispatch<React.SetStateAction<IBooking[]>>;
 }
@@ -67,20 +76,26 @@ interface IContext {
 export const EmployeesContext = createContext<IContext>({
   employees: [],
   setEmployees: () => {},
-
+  artistData: null,
+  setArtistData: () => {},
   employee: {} as ICreateEm,
   setEmployee: () => {},
   createdEmployee: () => {},
   fetchEmployeeData: () => {},
   getBooking: () => {},
   booking: [],
-  setBooking: () => {}
+  setBooking: () => {},
+  setToken: () => {},
+  token: ''
 });
 
 const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
   const [employees, setEmployees] = useState<IEmployee[]>([]);
   const [employee, setEmployee] = useState<ICreateEm>({} as ICreateEm);
   const [booking, setBooking] = useState<IBooking[]>([]);
+  const [artistData, setArtistData] = useState<IEmployee | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+
   // {
   //   name: '',
   //   email: '',
@@ -90,7 +105,6 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
   //   discription: '',
   //   category: ''
   // },
-
   const router = useRouter();
 
   const fetchEmployeeData = async () => {
@@ -107,6 +121,20 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
       toast.error('Ажилтны дата татахад алдаа гарлаа.');
     }
   };
+  // const getArtist = async () => {
+  //   try {
+  //     const res = await axios({
+  //       method: 'get',
+  //       url: `http://localhost:8008/api/v1/employee/${artId}`
+  //     });
+
+  //     if (res.status === 200) {
+  //       setEmployees(res.data.artist);
+  //     }
+  //   } catch (error) {
+  //     toast.error('Ажилтны дата татахад алдаа гарлаа.');
+  //   }
+  // };
 
   const createdEmployee = async () => {
     try {
@@ -179,7 +207,11 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
         fetchEmployeeData,
         getBooking,
         booking,
-        setBooking
+        setBooking,
+        artistData,
+        setArtistData,
+        setToken,
+        token
       }}
     >
       {children}

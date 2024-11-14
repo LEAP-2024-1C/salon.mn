@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Employee from "../models/employees.model";
-import { error } from "console";
+import bcrypt from "bcrypt";
+import { generateToken } from "../utils/jwt";
 
 export const createdEmloyee = async (req: Request, res: Response) => {
   try {
@@ -64,6 +65,30 @@ export const getEmployee = async (req: Request, res: Response) => {
   }
 };
 
+export const loginArtist = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await Employee.findOne({ email });
+    if (!user) {
+      res.status(400).json({ message: "Burtgelgui hereglegch baina" });
+    } else {
+      const isCheck = await bcrypt.compare(password, user?.password);
+      if (!isCheck) {
+        res.status(401).json({
+          message: "hereglegchiin email esvel nuuts ug buruu baina",
+        });
+      } else {
+        const token = generateToken({ id: user._id.toString() });
+        res.status(200).json({ message: "success", token: token, user });
+      }
+    }
+  } catch (error: any) {
+    console.log(error.message);
+    res.status(404).json({ message: "error", user: error.message });
+  }
+};
+
 export const updateEmployee = async (req: Request, res: Response) => {
   try {
     const { employeeID } = req.params;
@@ -124,6 +149,13 @@ export const deleteEmployee = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).json({ message: "Ajiltan ustgahad aldaa garlaa" });
   }
+};
+
+export const getArtist = async (req: Request, res: Response) => {
+  const { id } = req.user;
+  console.log("req.user", req.user);
+  const findUser = await Employee.findById(id);
+  res.status(200).json({ user: findUser, message: "success" });
 };
 
 export const createAvailableDates = async (req: Request, res: Response) => {
