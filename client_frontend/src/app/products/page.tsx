@@ -21,7 +21,7 @@ const Artists = () => {
     fetchProductsData();
   }, []);
   return (
-    <section className="mt-6 mb-24  bg-[#101828] mx-auto grid grid-cols-4  gap-x-5 sm:grid max-sm:grid-cols-1">
+    <section className="mt-6 mb-24  bg-[#422A3C] mx-auto grid grid-cols-4  gap-x-5 sm:grid max-sm:grid-cols-1">
       {products.map((product, index) => {
         return (
           <>

@@ -11,12 +11,10 @@ import { UserContext } from "@/context/user-booking-context";
 import Link from "next/link";
 
 const menuList: IMenu = [
-  // { menuId: "Id01", label: "Home", link: "/" },
-  // { menuId: "Id02", label: "Бидний тухай", link: "/" },
   { menuId: "Id03", label: "Үйлчилгээ", link: "ourService" },
   { menuId: "Id04", label: "Артист", link: "artists" },
   { menuId: "Id06", label: "Book now", link: "booknow" },
-  { menuId: "Id05", label: "Бүтээгдэхүүн", link: "products" },
+  { menuId: "Id05", label: "gift card", link: "products" },
 ];
 const phoneStyle: string = "flex flex-col px-4 py-6 border-b";
 
@@ -33,10 +31,10 @@ const Header = () => {
       <header className="flex items-center justify-between m-auto px-2 py-2  md:px-20 ">
         <Link href="/">
           <Image
-            height={100}
+            height={150}
             src="/images/logo2.png"
             alt="photo"
-            width={120}
+            width={170}
             className="bg-black"
           />
         </Link>

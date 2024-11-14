@@ -10,9 +10,10 @@ import { auth, authorize } from "../middlewares/auth";
 const router = Router();
 
 router.route("/").post(createCategory);
-router.route("/sub").post(auth, authorize("admin"), createSubCategory);
+router.route("/sub").post(createSubCategory);
 router.route("/get-category").get(getCategory);
 router.route("/get-sub").get(getSubCategory);
 
 export default router;
 // auth, authorize("admin", "artist"),
+// auth, authorize("admin"),
