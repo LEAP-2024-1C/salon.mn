@@ -6,13 +6,15 @@ import { TbArrowLeftFromArc } from "react-icons/tb";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa6";
 import { FaPhone } from "react-icons/fa";
+import { CiLocationOn } from "react-icons/ci";
+import Link from "next/link";
 
 const menuList: IMenu = [
   { menuId: "Id02", label: "Бидний тухай", link: "/" },
   { menuId: "Id03", label: "Үйлчилгээ", link: "ourService" },
   { menuId: "Id04", label: "Артист", link: "artists" },
   { menuId: "Id06", label: "Book now", link: "booknow" },
-  { menuId: "Id05", label: "Бүтээгдэхүүн", link: "products" },
+  { menuId: "Id05", label: "gift card", link: "products" },
 ];
 const Footer: React.FC = () => {
   return (
@@ -48,6 +50,13 @@ const Footer: React.FC = () => {
             <FaFacebookF />
             <FaTwitter />
             <FaPhone />
+            <Link
+              href={
+                "https://www.google.com/maps/place/HUD+-+15+khoroo,+Ulaanbaatar+17011/@47.9018625,106.9200065,16z/data=!3m1!4b1!4m6!3m5!1s0x5d9693cba6e38b29:0xa582049da72a6e4b!8m2!3d47.9012783!4d106.9166411!16s%2Fg%2F11l37gg8hx?entry=ttu&g_ep=EgoyMDI0MTExMS4wIKXMDSoASAFQAw%3D%3D"
+              }
+            >
+              <CiLocationOn />
+            </Link>
           </div>
         </div>
       </div>
