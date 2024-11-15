@@ -11,11 +11,11 @@ import React, { useContext } from "react";
 const Artists = () => {
   const { employees } = useContext(EmployeesContext);
   return (
-    <div className=" my-16 flex flex-wrap gap-10">
+    <div className=" my-16 flex flex-wrap gap-10 h-[65vh] overflow-scroll">
       {employees?.map((employee, key1) => {
         return (
           <Link key={key1} href={employee._id} className="m-auto">
-            <div className="w-[384px] h-[536px] border border-gray-400 rounded-2xl overflow-hidden">
+            <div className="w-[384px] h-[536px] border border-gray-400 rounded-2xl ">
               <div className="h-[274px] overflow-hidden">
                 <Image
                   width={384}

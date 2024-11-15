@@ -66,27 +66,33 @@ const OurServices = () => {
   const images: IImage[] = [
     {
       name: "Эрэгтэй үс засалт",
-      img: "https://media.istockphoto.com/id/1056459872/photo/male-hairdressers-grooming-clients-haircuts-in-barbershop.jpg?s=612x612&w=0&k=20&c=BD5wBbH8rn9OuFRKlKxIN8_O5U3SpB_3rd-2s98eDAQ=",
+      img:
+        "https://media.istockphoto.com/id/1056459872/photo/male-hairdressers-grooming-clients-haircuts-in-barbershop.jpg?s=612x612&w=0&k=20&c=BD5wBbH8rn9OuFRKlKxIN8_O5U3SpB_3rd-2s98eDAQ=",
     },
     {
       name: "Эмэгтэй үс засалт",
-      img: "https://media.istockphoto.com/id/1887700422/photo/hairdresser-creating-a-beautiful-finish-with-drying.webp?a=1&b=1&s=612x612&w=0&k=20&c=S-Jv3YUrEbgy8v84JfeQfHOKX9eGqRI_6QpIKI5dKAA=",
+      img:
+        "https://media.istockphoto.com/id/1887700422/photo/hairdresser-creating-a-beautiful-finish-with-drying.webp?a=1&b=1&s=612x612&w=0&k=20&c=S-Jv3YUrEbgy8v84JfeQfHOKX9eGqRI_6QpIKI5dKAA=",
     },
     {
       name: "органик будаг",
-      img: "https://media.istockphoto.com/id/2096693782/photo/rear-back-behind-view-portrait-of-lovely-woman-dressed-stylish-t-shirt-hands-touching-wavy.jpg?s=612x612&w=0&k=20&c=_-CAQI0vuAb0MUAdCXO5a1JdADDHwp2WWpRkEdVUbwo=",
+      img:
+        "https://media.istockphoto.com/id/2096693782/photo/rear-back-behind-view-portrait-of-lovely-woman-dressed-stylish-t-shirt-hands-touching-wavy.jpg?s=612x612&w=0&k=20&c=_-CAQI0vuAb0MUAdCXO5a1JdADDHwp2WWpRkEdVUbwo=",
     },
     {
       name: "гоо сайхан",
-      img: "https://media.istockphoto.com/id/689027030/photo/one-day-in-the-clinic-of-aesthetic-medicine.jpg?s=612x612&w=0&k=20&c=nYCoX_N--jVhowCKTTSH8hhbruGzgbsjIynAczJFlxs=",
+      img:
+        "https://media.istockphoto.com/id/689027030/photo/one-day-in-the-clinic-of-aesthetic-medicine.jpg?s=612x612&w=0&k=20&c=nYCoX_N--jVhowCKTTSH8hhbruGzgbsjIynAczJFlxs=",
     },
     {
       name: "маникюр",
-      img: "https://media.istockphoto.com/id/1271506997/photo/nails-manicure-with-file.jpg?s=612x612&w=0&k=20&c=BaFLcYc06EN40-fxdAY_2yciqJ5hEwJfCP2lBTyZzqA=",
+      img:
+        "https://media.istockphoto.com/id/1271506997/photo/nails-manicure-with-file.jpg?s=612x612&w=0&k=20&c=BaFLcYc06EN40-fxdAY_2yciqJ5hEwJfCP2lBTyZzqA=",
     },
     {
       name: "waxing",
-      img: "https://media.istockphoto.com/id/1363326948/photo/liquid-sugar-paste-for-hair-removal-in-a-bowl-with-peony-flower-on-white-background.jpg?s=612x612&w=0&k=20&c=kbotNKO1QPIHvetS2QACiKBkUrovKgJGvqR8Ow3HAz0=",
+      img:
+        "https://media.istockphoto.com/id/1363326948/photo/liquid-sugar-paste-for-hair-removal-in-a-bowl-with-peony-flower-on-white-background.jpg?s=612x612&w=0&k=20&c=kbotNKO1QPIHvetS2QACiKBkUrovKgJGvqR8Ow3HAz0=",
     },
   ];
   return (
@@ -113,7 +119,7 @@ const OurServices = () => {
                     return (
                       <div key={`service` + i} className="w-full">
                         {item.subCategory.name === sub?.name ? (
-                          <div className="flex items-center justify-between w-[270px] mx-auto mt-6 text-xs text-white px-4">
+                          <div className="flex items-center justify-between w-[270px] text-xl mx-auto mt-6  text-white px-4">
                             <p className="font-semibold text-white">
                               {item.name}
                             </p>

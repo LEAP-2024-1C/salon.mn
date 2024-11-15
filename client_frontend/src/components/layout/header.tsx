@@ -27,8 +27,8 @@ const Header = () => {
     router.push("/");
   };
   return (
-    <div className="w-full border-b-2 px-40 bg-white">
-      <header className="flex items-center justify-between m-auto px-2 py-2  md:px-20 ">
+    <div className="w-full border-b-2 px-5 md:px-20 bg-white">
+      <header className="flex items-center justify-between m-auto px-2 py-2  ">
         <Link href="/">
           <Image
             height={150}

@@ -91,7 +91,7 @@ const ArtistDetail = () => {
     getSubcategory();
   }, []);
   return (
-    <div className="flex flex-col text-black px-[15px] py-[30px] gap-10 ">
+    <div className="flex flex-col text-black px-[15px] py-[30px] gap-10 container m-auto ">
       <div className="flex flex-col gap-10 md:flex-row md:w-full ">
         <div className="md:w-2/3">
           <h1 className="text-4xl font-extrabold pb-5 md:w-full">Barber men</h1>
@@ -135,7 +135,7 @@ const ArtistDetail = () => {
           </div>
         </div>
 
-        <div className="bg-[#BA7894] text-black shadow-2xl p-5 rounded-md flex flex-col gap-5 md:w-1/3   md:fixed md:max-h-[70vh] md:overflow-hidden md:right-5 md:top-30">
+        <div className="bg-[#BA7894] text-black shadow-2xl p-5 rounded-md flex flex-col gap-5 md:w-1/3   md:fixed md:max-h-[70vh] md:overflow-scroll md:right-5 md:top-30">
           <div className="flex justify-between relative gap-5 ">
             <div className="flex relative gap-5 ">
               <div className=" rounded-lg flex relative w-20 h-20">
@@ -289,7 +289,7 @@ const ArtistDetail = () => {
             </div>
           )}
           {step === 4 && (
-            <div className="flex flex-col gap-5 overflow-hidden">
+            <div className="flex flex-col gap-5 overflow-scroll">
               <p className="text-xl font-extrabold">Үйлчилгээ сонгоно уу</p>
               {services.map((service, i) => {
                 if (service?.category?._id === chooseSubCat)

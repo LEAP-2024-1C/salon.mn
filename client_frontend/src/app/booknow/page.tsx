@@ -98,7 +98,7 @@ const BookNow = () => {
     getSubcategory();
   }, []);
   return (
-    <div className={step === 3 ? "" : "h-[478px]"}>
+    <div className={step === 3 ? "" : "h-[75vh]"}>
       <div className="p-2 pt-10 flex flex-col gap-10 md:m-auto md:container ">
         {/* <div className="flex flex-row gap-3">
           <p className="font-bold text-4xl text-red-400">Logo</p>
