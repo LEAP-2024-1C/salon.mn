@@ -125,7 +125,7 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
   //   try {
   //     const res = await axios({
   //       method: 'get',
-  //       url: `http://localhost:8008/api/v1/employee/${artId}`
+  //       url: `http://localhost:8008/api/v1/employee/get-employee/${artId}`
   //     });
 
   //     if (res.status === 200) {
@@ -173,6 +173,7 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
       }
     } catch (error) {
       toast.error('Ажилтан үүсгэхэд алдаа гарлаа.');
+      console.log('first', error);
     }
   };
 

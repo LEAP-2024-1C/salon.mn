@@ -25,25 +25,25 @@ export interface IEmployee {
 }
 
 interface IContext {
-  employee: IEmployee | null;
-  setEmployee: React.Dispatch<React.SetStateAction<IEmployee | null>>;
+  employee: IEmployee;
+  setEmployee: React.Dispatch<React.SetStateAction<IEmployee>>;
   employees: IEmployee[];
   setEmployees: React.Dispatch<React.SetStateAction<IEmployee[]>>;
+  getEmployee: () => void;
 }
 
 export const EmployeesContext = createContext<IContext>({
   employees: [],
   setEmployees: () => {},
-  employee: null,
+  employee: {} as IEmployee,
   setEmployee: () => {},
+  getEmployee: () => {},
 });
 
 const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
   const [employees, setEmployees] = useState<IEmployee[]>([]);
-  const [employee, setEmployee] = useState<IEmployee | null>(null);
-
+  const [employee, setEmployee] = useState<IEmployee>({} as IEmployee);
   const { employeeID } = useParams();
-
   const fetchEmployeeData = async () => {
     try {
       const res = await axios({
@@ -84,7 +84,13 @@ const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <EmployeesContext.Provider
-      value={{ employees, setEmployees, employee, setEmployee }}
+      value={{
+        employees,
+        setEmployees,
+        employee,
+        setEmployee,
+        getEmployee,
+      }}
     >
       {children}
     </EmployeesContext.Provider>

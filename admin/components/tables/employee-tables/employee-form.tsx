@@ -21,13 +21,13 @@ import { toast } from 'react-toastify';
 import { ServiceContext } from '@/app/context/service-context';
 
 export const EmployeeForm = () => {
-  const { employeeId } = useParams();
-  const employeeID = employeeId;
+  const { employeeID } = useParams();
 
   const router = useRouter();
 
   const { employee, setEmployee, createdEmployee, fetchEmployeeData } =
     useContext(EmployeesContext);
+
   const { category, subCategory } = useContext(ServiceContext);
   const getEmployee = async () => {
     try {
@@ -89,7 +89,6 @@ export const EmployeeForm = () => {
   useEffect(() => {
     getEmployee();
   }, [employeeID]);
-  console.log('employee', employee);
 
   return (
     <div className=" flex flex-col gap-10">

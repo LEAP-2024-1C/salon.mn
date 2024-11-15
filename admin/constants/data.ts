@@ -343,12 +343,12 @@ export const products: Product[] = [
 ];
 
 export const navItems: NavItem[] = [
-  {
-    title: 'Dashboard',
-    href: '/dashboard',
-    icon: 'dashboard',
-    label: 'Dashboard'
-  },
+  // {
+  //   title: 'Dashboard',
+  //   href: '/dashboard',
+  //   icon: 'dashboard',
+  //   label: 'Dashboard'
+  // },
 
   {
     title: 'Ажилтан',
