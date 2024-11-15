@@ -4,7 +4,6 @@ import '@smastrom/react-rating/style.css';
 import { Button } from '@/components/ui/button';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { EmployeesContext } from '@/app/context/employee-context';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';

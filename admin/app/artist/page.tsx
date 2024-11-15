@@ -35,7 +35,6 @@ export default function page() {
 
       if (response.status === 200) {
         setArtistData(response.data.user);
-        // console.log('USER', response.data);
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -96,9 +95,7 @@ export default function page() {
                       <strong>Тайлбар:</strong> {artistData?.discription}
                     </p>
                   </CardContent>
-                  <CardFooter className="flex justify-end">
-                    {/* <CellAction id={artistData?._id} /> */}
-                  </CardFooter>
+                  <CardFooter className="flex justify-end"></CardFooter>
                 </Card>
               </div>
             </DialogContent>
