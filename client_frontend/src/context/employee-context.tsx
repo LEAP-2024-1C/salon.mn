@@ -41,7 +41,6 @@ export const EmployeesContext = createContext<IContext>({
 const EmployeesProvider = ({ children }: { children: React.ReactNode }) => {
   const [employees, setEmployees] = useState<IEmployee[]>([]);
   const [employee, setEmployee] = useState<IEmployee | null>(null);
-
   const { employeeID } = useParams();
 
   const fetchEmployeeData = async () => {

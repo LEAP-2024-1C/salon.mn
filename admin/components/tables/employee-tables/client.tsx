@@ -19,7 +19,7 @@ export const UserClient = () => {
           href={'/dashboard/employees/create'}
           className={cn(buttonVariants({ variant: 'default' }))}
         >
-          <Plus className="mr-2 h-4 w-4" /> Шинэ
+          <Plus className="mr-2 h-4 w-4" /> Шинэ ажилтан
         </Link>
       </div>
       <Separator />

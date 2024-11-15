@@ -4,45 +4,23 @@ import PageContainer from '@/components/layout/page-container';
 import { EmployeesContext } from '../context/employee-context';
 import { useContext, useEffect, useState } from 'react';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '@/components/ui/table';
-import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+
 import {
   Card,
   CardHeader,
   CardContent,
   CardFooter
 } from '../../components/ui/card';
-// import Image from 'next/image';
-import { CellAction } from '../../components/tables/employee-tables/cell-action';
+
 import Image from 'next/image';
 import axios from 'axios';
 import { FaRegUser } from 'react-icons/fa';
-import { Modal } from '@/components/ui/modal';
-import { tree } from 'next/dist/build/templates/app-page';
 
 const breadcrumbItems = [{ title: 'Ажилтан', link: '/employee' }];
 export default function page() {
   const { artistData, setArtistData, token, setToken } =
     useContext(EmployeesContext);
-  const [isOpen, setIsOpen] = useState(false);
 
   const fetchUserData = async () => {
     try {
@@ -57,7 +35,6 @@ export default function page() {
 
       if (response.status === 200) {
         setArtistData(response.data.user);
-        // console.log('USER', response.data);
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -118,9 +95,7 @@ export default function page() {
                       <strong>Тайлбар:</strong> {artistData?.discription}
                     </p>
                   </CardContent>
-                  <CardFooter className="flex justify-end">
-                    {/* <CellAction id={artistData?._id} /> */}
-                  </CardFooter>
+                  <CardFooter className="flex justify-end"></CardFooter>
                 </Card>
               </div>
             </DialogContent>

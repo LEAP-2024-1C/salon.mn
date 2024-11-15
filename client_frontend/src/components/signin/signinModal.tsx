@@ -42,7 +42,7 @@ const SigninModal = () => {
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className=" max-sm:mt-4 bg-white hover:bg-black text-black"
+          className=" max-sm:mt-4 bg-white hover:bg-[#422A3C] hover:text-white text-black"
         >
           Нэвтрэх
         </Button>
@@ -54,14 +54,14 @@ const SigninModal = () => {
         </DialogHeader>
 
         <div className="flex  items-center justify-center gap-11">
-          <Label htmlFor="number" className="text-right ">
+          <Label htmlFor="number" className="text-right  ">
             Утасны дугаар
           </Label>
           <Input
             id="name"
             defaultValue=""
             onChange={handleChangePhone}
-            className="w-1/2  text-white bg-gray-200 "
+            className="w-1/2  text-black bg-gray-200 "
           />
         </div>
 
