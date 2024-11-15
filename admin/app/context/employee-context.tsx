@@ -11,7 +11,7 @@ import React, {
   Dispatch
 } from 'react';
 import { useRouter } from 'next/navigation';
-import { any } from 'zod';
+import { any, string } from 'zod';
 
 export interface IEmployee {
   _id: string;

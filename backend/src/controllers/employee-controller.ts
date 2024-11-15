@@ -73,7 +73,8 @@ export const loginArtist = async (req: Request, res: Response) => {
     if (!user) {
       res.status(400).json({ message: "Burtgelgui hereglegch baina" });
     } else {
-      const isCheck = await bcrypt.compare(password, user?.password);
+      // const isCheck = await bcrypt.compare(password, user?.password);
+      const isCheck = password === user?.password ? true : false;
       if (!isCheck) {
         res.status(401).json({
           message: "hereglegchiin email esvel nuuts ug buruu baina",

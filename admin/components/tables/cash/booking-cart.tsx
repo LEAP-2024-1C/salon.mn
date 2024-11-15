@@ -1,17 +1,14 @@
 'use client';
 import React, { useContext } from 'react';
 import '@smastrom/react-rating/style.css';
-import { Button } from '@/components/ui/button';
-
 import Image from 'next/image';
 import { EmployeesContext } from '@/app/context/employee-context';
 import { format } from 'date-fns';
-import { useRouter } from 'next/navigation';
 import { CellAction } from './cell-action';
 
 const BookingCart = () => {
   const { booking } = useContext(EmployeesContext);
-  const router = useRouter();
+
   return (
     <main>
       <p className="text-3xl font-bold">{`Тооцоо хийх`}</p>
