@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserProvider from "@/context/user-booking-context";
 import EmployeesProvider from "@/context/employee-context";
+import ServiceProvider from "@/context/service-context";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,10 +38,12 @@ export default function RootLayout({
       >
         <EmployeesProvider>
           <UserProvider>
-            <Header />
-            {children}
-            <Footer />
-            <ToastContainer />
+            <ServiceProvider>
+              <Header />
+              {children}
+              <Footer />
+              <ToastContainer />
+            </ServiceProvider>
           </UserProvider>
         </EmployeesProvider>
       </body>

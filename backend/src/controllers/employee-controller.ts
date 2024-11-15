@@ -56,7 +56,7 @@ export const getAllEmployee = async (req: Request, res: Response) => {
 export const getEmployee = async (req: Request, res: Response) => {
   try {
     const { employeeID } = req.params;
-    const employee = await Employee.findById(employeeID);
+    const employee = await Employee.findById({ _id: employeeID });
     res
       .status(200)
       .json({ message: "Id aar employee harah amjilttai bolloo", employee });
@@ -213,5 +213,27 @@ export const deleteUnAvailableTime = async (req: Request, res: Response) => {
     res
       .status(400)
       .json({ message: " deleteUnAvailableTime  aldaa garlaa", error });
+  }
+};
+
+export const createComment = async (req: Request, res: Response) => {
+  const { description, employeeID, rate } = req.body;
+  // console.log("req body", description, userName, userId, productId, rate);
+  try {
+    const findEm = await Employee.findOne({ _id: employeeID });
+    // console.log("Сэтгэгдэл үлдээх бүтээгдэхүүн ", findProduct);
+    if (!findEm) {
+      console.log("Сэтгэгдэл үлдээх бүтээгдэхүүн олдсонгүй");
+      res
+        .status(401)
+        .json({ message: "Сэтгэгдэл үлдээх бүтээгдэхүүн олдсонгүй" });
+    }
+
+    findEm?.comment.push({ rate, description });
+    await findEm?.save();
+    res.status(200).json({ message: "Та сэтгэгдэл үлдээлээ", findEm });
+  } catch (error) {
+    console.log("Сэтгэгдэл үлдээхэд алдаа гарлаа", error);
+    res.status(400).json({ message: "Сэтгэгдэл үлдээхэд алдаа гарлаa", error });
   }
 };

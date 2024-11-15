@@ -12,7 +12,6 @@ interface IEmployee {
   subCategory: Schema.Types.ObjectId;
   comment: [
     {
-      user: Schema.Types.ObjectId;
       description: string;
       rate: number;
     }
@@ -48,7 +47,7 @@ const employeeSchema = new Schema<IEmployee>({
   },
   discription: {
     type: String,
-    default: "Олон улсын аварга шалгаруулах тэмцээний 3 р байрны шагналт",
+    default: "Ажлын туршлага: 3 жил",
   },
   phoneNumber: {
     type: Number,
@@ -66,12 +65,6 @@ const employeeSchema = new Schema<IEmployee>({
   },
   comment: [
     {
-      user: {
-        type: Schema.Types.ObjectId,
-        required: false,
-        ref: "User",
-      },
-
       description: {
         type: String,
         required: false,

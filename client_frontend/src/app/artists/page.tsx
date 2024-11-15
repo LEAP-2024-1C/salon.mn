@@ -34,7 +34,7 @@ const Artists = () => {
                     />
                     <p className="text-sm">5.0</p>
                   </div>
-                  <p>Эрэгтэй Үсчин</p>
+                  <p>{employee?.subCategory.name}</p>
                 </div>
                 <div>
                   <h1 className="text-2xl">{employee?.name}</h1>
