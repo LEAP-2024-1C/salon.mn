@@ -57,7 +57,7 @@ const ArtistDetail = () => {
   };
   const { employeeID } = useParams();
   const bookNow = async () => {
-    const { firstname, phoneNumber, time, date, service, empID } = booking;
+    const { firstname, phoneNumber, time, date, service } = booking;
 
     try {
       const response = await axios.post(
